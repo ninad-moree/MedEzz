@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:medezz/constants/colors.dart';
+import 'package:medezz/screens/notifications/Services/notification_services.dart';
 
 class NotificationForm extends StatefulWidget {
   const NotificationForm({super.key});
@@ -14,20 +15,27 @@ class _NotificationFormState extends State<NotificationForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _medicineNameController = TextEditingController();
   TimeOfDay _selectedTime = TimeOfDay.now();
+  final NotificationService _notificationService = NotificationService();
   int _selectedFrequencyIndex = 0;
-  final List<String> _frequencyOptions = [
-    'Once a week',
-    'Twice a week',
-    'Thrice a week'
-  ];
+  final List<String> _frequencyOptions = ['M', 'Tu', 'W', 'Th', 'F', 'Sa', 'Su'];
 
   void _submitForm() {
-    // Add your logic here for handling form submission
+    _formKey.currentState!.validate();
     String medicineName = _medicineNameController.text;
-    String selectedTime = _selectedTime.format(context);
+    DateTime selectedTime = DateTime(
+      DateTime.now().year,
+      DateTime.now().month,
+      DateTime.now().day,
+      _selectedTime.hour,
+      _selectedTime.minute,
+    );
     String selectedFrequency = _frequencyOptions[_selectedFrequencyIndex];
 
-    // Print or use the collected data as needed
+    _notificationService.showDelayedNotification(
+      schedule: selectedTime,
+      medicationName: medicineName,
+    );
+
     log('Medicine Name: $medicineName');
     log('Selected Time: $selectedTime');
     log('Selected Frequency: $selectedFrequency');
@@ -114,23 +122,28 @@ class _NotificationFormState extends State<NotificationForm> {
                   ),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
-                child: DropdownButtonFormField<int>(
-                  borderRadius: BorderRadius.zero,
-                  value: _selectedFrequencyIndex,
-                  items: List.generate(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: List<Widget>.generate(
                     _frequencyOptions.length,
-                    (index) => DropdownMenuItem<int>(
-                      value: index,
-                      child: Text(_frequencyOptions[index]),
+                    (index) => Container(
+                      height: 40,
+                      width: 40,
+                      padding: const EdgeInsets.all(8.0),
+                      decoration: const BoxDecoration(
+                        color: CustomColors.primaryColor,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Center(
+                        child: Text(
+                          _frequencyOptions[index],
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                  onChanged: (index) {
-                    setState(() {
-                      _selectedFrequencyIndex = index!;
-                    });
-                  },
-                  decoration: const InputDecoration(
-                    labelText: 'Select Frequency',
                   ),
                 ),
               ),

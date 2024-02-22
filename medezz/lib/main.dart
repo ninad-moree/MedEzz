@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:medezz/screens/onboarding/on_boarding.dart';
 
+import 'screens/notifications/Services/notification_services.dart';
+
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  NotificationService().initNotification();
   runApp(const MyApp());
 }
 
