@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medezz/screens/authentication/login_screen.dart';
 
 import 'widget/on_boarding_content.dart';
 
@@ -157,7 +158,14 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     width: 140,
                     child: TextButton(
                       // onPressed: widget.showSignInScreen,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LoginScreen(),
+                          ),
+                        );
+                      },
                       style: const ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(
                           Color.fromARGB(255, 217, 237, 239),
@@ -253,38 +261,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           ),
         ),
       ),
-      // body:  SafeArea(
-      //   child: Padding(
-      //     padding: EdgeInsets.all(20),
-      //     child: Column(
-      //       crossAxisAlignment: CrossAxisAlignment.stretch,
-      //       // crossAxisAlignment: CrossAxisAlignment.center,
-      //       children: [
-      //         // Logo
-      //         Column(
-      //           mainAxisSize: MainAxisSize.min,
-      //           children: [
-      //             Image(
-      //               image: AssetImage("assets/icon_small.png"),
-      //               height: 60,
-      //             ),
-      //           ],
-      //         ),
-
-      //         // App Name
-      //         //app name
-      //         Text(
-      //           'MedEzz',
-      //           style: TextStyle(
-      //             fontSize: 20,
-      //             fontWeight: FontWeight.w600,
-      //             color: Color.fromRGBO(7, 82, 96, 1),
-      //           ),
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // ),
     );
   }
 }
