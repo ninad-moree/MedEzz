@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:medezz/screens/notifications/notification_form.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({
@@ -71,7 +72,14 @@ class LoginForm extends StatelessWidget {
               width: double.infinity,
               height: 55,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const NotificationForm(),
+                    ),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromRGBO(7, 82, 96, 1),
                   shape: RoundedRectangleBorder(
