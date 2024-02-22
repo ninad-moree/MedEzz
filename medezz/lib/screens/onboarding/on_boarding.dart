@@ -231,7 +231,14 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           width: 140,
                           child: FilledButton(
                             // onPressed: widget.showSignInScreen,
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const LoginScreen(),
+                                ),
+                              );
+                            },
                             style: const ButtonStyle(
                               elevation: MaterialStatePropertyAll(2),
                               shape: MaterialStatePropertyAll(
