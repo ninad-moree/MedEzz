@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:medezz/screens/authentication/signup/sign_up_screen.dart';
 import 'package:medezz/screens/notifications/notification_form.dart';
 
 class LoginForm extends StatelessWidget {
@@ -99,7 +100,14 @@ class LoginForm extends StatelessWidget {
               width: double.infinity,
               height: 55,
               child: OutlinedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SignupScreen(),
+                    ),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
