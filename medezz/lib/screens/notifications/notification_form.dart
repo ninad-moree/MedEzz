@@ -16,7 +16,6 @@ class _NotificationFormState extends State<NotificationForm> {
   final TextEditingController _medicineNameController = TextEditingController();
   TimeOfDay _selectedTime = TimeOfDay.now();
   final NotificationService _notificationService = NotificationService();
-  // final int _selectedFrequencyIndex = 5;
   final List<String> _frequencyOptions = [
     'M',
     'Tu',
@@ -43,8 +42,6 @@ class _NotificationFormState extends State<NotificationForm> {
     List<String> selectedDays =
         _selectedDays.map((index) => _frequencyOptions[index]).toList();
 
-    // String selectedFrequency = _frequencyOptions[_selectedFrequencyIndex];
-
     _notificationService.showDelayedNotification(
       schedule: selectedTime,
       medicationName: medicineName,
@@ -52,7 +49,6 @@ class _NotificationFormState extends State<NotificationForm> {
 
     log('Medicine Name: $medicineName');
     log('Selected Time: $selectedTime');
-    // log('Selected Frequency: $selectedFrequency');
     log('Selected Days: $selectedDays');
   }
 
@@ -182,7 +178,7 @@ class _NotificationFormState extends State<NotificationForm> {
 
               const SizedBox(height: 28.0),
 
-              // Submit
+              // Submit Button
               SizedBox(
                 width: double.infinity,
                 height: 55,
