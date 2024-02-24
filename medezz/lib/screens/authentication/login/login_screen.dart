@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:medezz/screens/authentication/widget/login_form.dart';
-import 'package:medezz/screens/authentication/widget/login_header.dart';
+import 'package:medezz/screens/authentication/login/widget/login_form.dart';
+import 'package:medezz/screens/authentication/login/widget/login_header.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

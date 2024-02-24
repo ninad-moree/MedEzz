@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medezz/screens/authentication/login_screen.dart';
+import 'package:medezz/screens/authentication/login/login_screen.dart';
 
 import 'widget/on_boarding_content.dart';
 
