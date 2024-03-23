@@ -39,6 +39,8 @@ dependencies:
   font_awesome_flutter: ^10.5.0
   iconsax: ^0.0.8
 
+  http: any
+
   # ZEGO
   zego_uikit_prebuilt_call: ^3.18.0
   zego_uikit_signaling_plugin: ^2.7.1

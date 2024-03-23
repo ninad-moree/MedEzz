@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-
+import 'dart:developer';
+import '../../../../api/authentication/signup_patient.dart';
 import 'terms_and_conditions_checkbox.dart';
 
 class SignupForm extends StatelessWidget {
@@ -112,7 +113,10 @@ class SignupForm extends StatelessWidget {
             width: double.infinity,
             height: 55,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                log("button pressed");
+                await signUpPatient("Ninad", "ninad@gmail.com", "ninad18");
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromRGBO(7, 82, 96, 1),
                 shape: RoundedRectangleBorder(
