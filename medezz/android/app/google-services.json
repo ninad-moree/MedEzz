@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "639178484796",
+    "project_id": "medezz-38ea0",
+    "storage_bucket": "medezz-38ea0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:639178484796:android:8cca83977002345ebba739",
+        "android_client_info": {
+          "package_name": "com.example.medezz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFzOrKUyEB6UTvM-2IkDDFnvBVBTl29pE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

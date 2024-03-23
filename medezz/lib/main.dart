@@ -31,7 +31,6 @@ class _MyAppState extends State<MyApp> {
         ),
         colorSchemeSeed: const Color.fromRGBO(7, 82, 96, 1),
       ),
-      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       home: const OnBoardingScreen(),
     );
   }
