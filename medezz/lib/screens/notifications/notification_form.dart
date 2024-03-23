@@ -16,8 +16,17 @@ class _NotificationFormState extends State<NotificationForm> {
   final TextEditingController _medicineNameController = TextEditingController();
   TimeOfDay _selectedTime = TimeOfDay.now();
   final NotificationService _notificationService = NotificationService();
-  int _selectedFrequencyIndex = 0;
-  final List<String> _frequencyOptions = ['M', 'Tu', 'W', 'Th', 'F', 'Sa', 'Su'];
+  final List<String> _frequencyOptions = [
+    'M',
+    'Tu',
+    'W',
+    'Th',
+    'F',
+    'Sa',
+    'Su'
+  ];
+
+  final Set<int> _selectedDays = {};
 
   void _submitForm() {
     _formKey.currentState!.validate();
@@ -29,7 +38,9 @@ class _NotificationFormState extends State<NotificationForm> {
       _selectedTime.hour,
       _selectedTime.minute,
     );
-    String selectedFrequency = _frequencyOptions[_selectedFrequencyIndex];
+
+    List<String> selectedDays =
+        _selectedDays.map((index) => _frequencyOptions[index]).toList();
 
     _notificationService.showDelayedNotification(
       schedule: selectedTime,
@@ -38,7 +49,7 @@ class _NotificationFormState extends State<NotificationForm> {
 
     log('Medicine Name: $medicineName');
     log('Selected Time: $selectedTime');
-    log('Selected Frequency: $selectedFrequency');
+    log('Selected Days: $selectedDays');
   }
 
   @override
@@ -107,6 +118,7 @@ class _NotificationFormState extends State<NotificationForm> {
                   },
                 ),
               ),
+
               const SizedBox(height: 16.0),
 
               // Frequency
@@ -126,20 +138,36 @@ class _NotificationFormState extends State<NotificationForm> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: List<Widget>.generate(
                     _frequencyOptions.length,
-                    (index) => Container(
-                      height: 40,
-                      width: 40,
-                      padding: const EdgeInsets.all(8.0),
-                      decoration: const BoxDecoration(
-                        color: CustomColors.primaryColor,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Center(
-                        child: Text(
-                          _frequencyOptions[index],
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+                    (index) => GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          if (_selectedDays.contains(index)) {
+                            _selectedDays.remove(index);
+                          } else {
+                            _selectedDays.add(index);
+                          }
+                        });
+                      },
+                      child: Container(
+                        height: 40,
+                        width: 40,
+                        padding: const EdgeInsets.all(8.0),
+                        decoration: BoxDecoration(
+                          color: _selectedDays.contains(index)
+                              ? CustomColors.primaryColor
+                              : Colors.white,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: Text(
+                            _frequencyOptions[index],
+                            style: TextStyle(
+                              // color: Colors.white,
+                              color: _selectedDays.contains(index)
+                                  ? Colors.white
+                                  : CustomColors.primaryColor,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
@@ -150,7 +178,7 @@ class _NotificationFormState extends State<NotificationForm> {
 
               const SizedBox(height: 28.0),
 
-              // Submit
+              // Submit Button
               SizedBox(
                 width: double.infinity,
                 height: 55,
