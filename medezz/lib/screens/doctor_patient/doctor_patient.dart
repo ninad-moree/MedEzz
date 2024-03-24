@@ -17,7 +17,7 @@ class DoctorPatient extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    'SignUp as a Doctor',
+                    'SignUp as Doctor',
                     style: TextStyle(
                       fontSize: 24,
                       color: CustomColors.primaryColor,
@@ -58,7 +58,7 @@ class DoctorPatient extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    'SignUp as a Patient',
+                    'SignUp as Patient',
                     style: TextStyle(
                       fontSize: 24,
                       color: CustomColors.primaryColor,
