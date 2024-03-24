@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medezz/constants/colors.dart';
+import 'package:medezz/screens/doctor/authentication/login/login_screen_doctor.dart';
 import 'package:medezz/screens/patient/authentication/login/login_screen.dart';
 
 class DoctorPatient extends StatelessWidget {
@@ -34,7 +35,14 @@ class DoctorPatient extends StatelessWidget {
                     width: MediaQuery.of(context).size.width * 0.3,
                     height: 55,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LoginScreenDoctor(),
+                          ),
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromRGBO(7, 82, 96, 1),
                         shape: RoundedRectangleBorder(
@@ -76,7 +84,7 @@ class DoctorPatient extends StatelessWidget {
                     height: 55,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushReplacement(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => const LoginScreenPatient(),
