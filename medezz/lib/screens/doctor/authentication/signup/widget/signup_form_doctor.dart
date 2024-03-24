@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:medezz/api/doctor/authentication/signup_doctor.dart';
 import 'dart:developer';
-import '../../../../../api/patient/authentication/signup_patient.dart';
 import '../../../../../widgets/custom_snackbar.dart';
 
 class SignupFormDoctor extends StatefulWidget {
@@ -85,7 +85,7 @@ class _SignupFormDoctorState extends State<SignupFormDoctor> {
                 log(passwordController.text);
                 log(emailController.text);
 
-                int res = await signUpPatient(
+                int res = await signUpDoctor(
                   usernameController.text,
                   emailController.text,
                   passwordController.text,

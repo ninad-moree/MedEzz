@@ -43,4 +43,10 @@ class _MyAppState extends State<MyApp> {
   [log] ninad18@gmail.com - gmail
   [log] Patient Registered Succesfully
   [log] {"_id":"66002b220d379f3ff1d6cfff","email":"ninad18@gmail.com"}
+
+  [log] doctor2
+  [log] doctor123
+  [log] doc@gmail.com
+  [log] Doctor Registered Succesfully
+  [log] {"_id":"66004b950cafd24689cebb09","email":"doc@gmail.com"}
 */
