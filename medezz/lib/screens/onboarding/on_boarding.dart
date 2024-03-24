@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medezz/screens/authentication/login/login_screen.dart';
+import 'package:medezz/screens/doctor_patient/doctor_patient.dart';
 
 import 'widget/on_boarding_content.dart';
 
@@ -159,10 +159,16 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     child: TextButton(
                       // onPressed: widget.showSignInScreen,
                       onPressed: () {
+                        // Navigator.pushReplacement(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => const LoginScreen(),
+                        //   ),
+                        // );
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const LoginScreen(),
+                            builder: (context) => const DoctorPatient(),
                           ),
                         );
                       },
@@ -232,10 +238,16 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           child: FilledButton(
                             // onPressed: widget.showSignInScreen,
                             onPressed: () {
+                              // Navigator.pushReplacement(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) => const LoginScreen(),
+                              //   ),
+                              // );
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const LoginScreen(),
+                                  builder: (context) => const DoctorPatient(),
                                 ),
                               );
                             },

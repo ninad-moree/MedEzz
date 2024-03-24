@@ -6,14 +6,14 @@ import 'dart:developer';
 import '../../../../api/patient/authentication/signup_patient.dart';
 import '../../../../widgets/custom_snackbar.dart';
 
-class SignupForm extends StatefulWidget {
-  const SignupForm({super.key});
+class SignupFormPatient extends StatefulWidget {
+  const SignupFormPatient({super.key});
 
   @override
-  State<SignupForm> createState() => _SignupFormState();
+  State<SignupFormPatient> createState() => _SignupFormPatientState();
 }
 
-class _SignupFormState extends State<SignupForm> {
+class _SignupFormPatientState extends State<SignupFormPatient> {
   @override
   Widget build(BuildContext context) {
     bool isObscured = true;

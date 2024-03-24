@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'widget/sign_up_form.dart';
 
-class SignupScreen extends StatelessWidget {
-  const SignupScreen({super.key});
+class SignupScreenPatient extends StatelessWidget {
+  const SignupScreenPatient({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class SignupScreen extends StatelessWidget {
               const SizedBox(height: 32),
 
               // FORM
-              const SignupForm(),
+              const SignupFormPatient(),
             ],
           ),
         ),

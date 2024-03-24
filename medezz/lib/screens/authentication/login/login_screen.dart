@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:medezz/screens/authentication/login/widget/login_form.dart';
 import 'package:medezz/screens/authentication/login/widget/login_header.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class LoginScreenPatient extends StatefulWidget {
+  const LoginScreenPatient({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<LoginScreenPatient> createState() => _LoginScreenPatientState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenPatientState extends State<LoginScreenPatient> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -42,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 LoginHeader(),
 
                 // Login Form
-                LoginForm(),
+                LoginFormPatient(),
               ],
             ),
           ),

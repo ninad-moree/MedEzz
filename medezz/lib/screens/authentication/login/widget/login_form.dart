@@ -9,8 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../widgets/custom_snackbar.dart';
 import '../../../notifications/notification_form.dart';
 
-class LoginForm extends StatelessWidget {
-  const LoginForm({
+class LoginFormPatient extends StatelessWidget {
+  const LoginFormPatient({
     super.key,
   });
 
@@ -141,7 +141,7 @@ class LoginForm extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const SignupScreen(),
+                      builder: (context) => const SignupScreenPatient(),
                     ),
                   );
                 },
