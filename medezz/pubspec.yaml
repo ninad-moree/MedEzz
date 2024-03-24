@@ -41,6 +41,8 @@ dependencies:
 
   http: any
 
+  shared_preferences: ^2.2.0
+
   # ZEGO
   zego_uikit_prebuilt_call: ^3.18.0
   zego_uikit_signaling_plugin: ^2.7.1

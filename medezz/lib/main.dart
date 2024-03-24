@@ -38,11 +38,9 @@ class _MyAppState extends State<MyApp> {
 
 
 /*
-  [log] button pressed
-  [log] ninad183more - username
-  [log] ninad183 - pwd
-  [log] ninad183@gmail.com - email
+  [log] ninadM - username
+  [log] ninad18 - pwd
+  [log] ninad18@gmail.com - gmail
   [log] Patient Registered Succesfully
-  [log] {"_id":"6600231938e760e407da8e8f","email":"ninad183@gmail.com "}
-  [log] 201
+  [log] {"_id":"66002b220d379f3ff1d6cfff","email":"ninad18@gmail.com"}
 */

@@ -159,7 +159,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     child: TextButton(
                       // onPressed: widget.showSignInScreen,
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                             builder: (context) => const LoginScreen(),
@@ -232,7 +232,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           child: FilledButton(
                             // onPressed: widget.showSignInScreen,
                             onPressed: () {
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => const LoginScreen(),

@@ -1,7 +1,13 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:medezz/api/patient/authentication/login_patient.dart';
 import 'package:medezz/screens/authentication/signup/sign_up_screen.dart';
-import 'package:medezz/screens/notifications/notification_form.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../../widgets/custom_snackbar.dart';
+import '../../../notifications/notification_form.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({
@@ -10,6 +16,14 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+
+    void storeToken(String token) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('token', token);
+    }
+
     return Form(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 32),
@@ -17,6 +31,7 @@ class LoginForm extends StatelessWidget {
           children: [
             // EMAIL
             TextFormField(
+              controller: emailController,
               decoration: InputDecoration(
                 prefixIcon: const Icon(Iconsax.direct_right),
                 labelText: "E-Mail",
@@ -29,6 +44,7 @@ class LoginForm extends StatelessWidget {
 
             // PASSWORD
             TextFormField(
+              controller: passwordController,
               decoration: InputDecoration(
                 labelText: "Password",
                 prefixIcon: const Icon(Iconsax.password_check),
@@ -45,27 +61,27 @@ class LoginForm extends StatelessWidget {
             const SizedBox(height: 8),
 
             // REMEMBER ME, FORGET PASSWORD
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // REMEMBER ME
-                Row(
-                  children: [
-                    Checkbox(
-                      value: false,
-                      onChanged: (value) {},
-                    ),
-                    const Text("Remember Me"),
-                  ],
-                ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     // REMEMBER ME
+            //     Row(
+            //       children: [
+            //         Checkbox(
+            //           value: false,
+            //           onChanged: (value) {},
+            //         ),
+            //         const Text("Remember Me"),
+            //       ],
+            //     ),
 
-                // FORGET PASSWORD
-                TextButton(
-                  onPressed: () {}, // to forgot pwd screen
-                  child: const Text("Forgot Password"),
-                ),
-              ],
-            ),
+            //     // FORGET PASSWORD
+            //     TextButton(
+            //       onPressed: () {}, // to forgot pwd screen
+            //       child: const Text("Forgot Password"),
+            //     ),
+            //   ],
+            // ),
             const SizedBox(height: 32),
 
             // SIGN IN BUTTON
@@ -73,13 +89,34 @@ class LoginForm extends StatelessWidget {
               width: double.infinity,
               height: 55,
               child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const NotificationForm(),
-                    ),
+                onPressed: () async {
+                  Map<String, dynamic> res = await loginPatient(
+                    emailController.text,
+                    passwordController.text,
                   );
+
+                  int statusCode = res['statusCode'];
+                  if (statusCode == 200 || statusCode == 201) {
+                    storeToken(res['accessToken']);
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const NotificationForm(),
+                      ),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: ShowCustomSnackBar(
+                        title: "Something Went Wrong",
+                        label: 'Wrong Information Provided. Try Again',
+                        color: Colors.red,
+                        icon: Icons.warning_rounded,
+                      ),
+                      behavior: SnackBarBehavior.floating,
+                      elevation: 0,
+                      backgroundColor: Colors.transparent,
+                    ));
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromRGBO(7, 82, 96, 1),
