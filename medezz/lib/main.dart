@@ -35,3 +35,14 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+
+
+/*
+  [log] button pressed
+  [log] ninad183more - username
+  [log] ninad183 - pwd
+  [log] ninad183@gmail.com - email
+  [log] Patient Registered Succesfully
+  [log] {"_id":"6600231938e760e407da8e8f","email":"ninad183@gmail.com "}
+  [log] 201
+*/

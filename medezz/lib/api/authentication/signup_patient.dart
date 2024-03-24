@@ -12,7 +12,8 @@ Future<dynamic> signUpPatient(
   };
 
   final http.Response response = await http.post(
-    Uri.parse("http://localhost:5000/user/register"),
+    Uri.parse("https://healthlink-backend.onrender.com/user/register"),
+    headers: {'Content-Type': 'application/json'},
     body: jsonEncode(requestBody),
   );
 
