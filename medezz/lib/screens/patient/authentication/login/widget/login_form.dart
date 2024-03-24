@@ -3,10 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:medezz/api/patient/authentication/login_patient.dart';
-import 'package:medezz/screens/authentication/signup/sign_up_screen.dart';
+import 'package:medezz/screens/patient/authentication/signup/sign_up_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../widgets/custom_snackbar.dart';
+import '../../../../../widgets/custom_snackbar.dart';
 import '../../../notifications/notification_form.dart';
 
 class LoginFormPatient extends StatelessWidget {

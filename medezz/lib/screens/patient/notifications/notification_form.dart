@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:medezz/constants/colors.dart';
-import 'package:medezz/screens/notifications/Services/notification_services.dart';
+import 'package:medezz/screens/patient/notifications/Services/notification_services.dart';
 
 class NotificationForm extends StatefulWidget {
   const NotificationForm({super.key});

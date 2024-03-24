@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medezz/constants/colors.dart';
-import 'package:medezz/screens/authentication/login/login_screen.dart';
+import 'package:medezz/screens/patient/authentication/login/login_screen.dart';
 
 class DoctorPatient extends StatelessWidget {
   const DoctorPatient({super.key});

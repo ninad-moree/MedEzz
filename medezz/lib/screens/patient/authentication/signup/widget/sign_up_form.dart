@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'dart:developer';
-import '../../../../api/patient/authentication/signup_patient.dart';
-import '../../../../widgets/custom_snackbar.dart';
+import '../../../../../api/patient/authentication/signup_patient.dart';
+import '../../../../../widgets/custom_snackbar.dart';
 
 class SignupFormPatient extends StatefulWidget {
   const SignupFormPatient({super.key});
