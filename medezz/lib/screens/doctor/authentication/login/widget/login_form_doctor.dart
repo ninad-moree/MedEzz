@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:medezz/api/patient/authentication/login_patient.dart';
+import 'package:medezz/api/doctor/authentication/login_doctor.dart';
 import 'package:medezz/screens/doctor/authentication/signup/signup_screen_doctor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -20,7 +20,7 @@ class LoginFormDoctor extends StatelessWidget {
 
     void storeToken(String token) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString('token', token);
+      prefs.setString('docToken', token);
     }
 
     return Form(
@@ -65,7 +65,7 @@ class LoginFormDoctor extends StatelessWidget {
               height: 55,
               child: ElevatedButton(
                 onPressed: () async {
-                  Map<String, dynamic> res = await loginPatient(
+                  Map<String, dynamic> res = await loginDoctor(
                     emailController.text,
                     passwordController.text,
                   );

@@ -26,6 +26,4 @@ Future<Map<String, dynamic>> loginPatient(String email, String password) async {
   } else {
     return {'statusCode': response.statusCode};
   }
-
-  // return response.statusCode;
 }
