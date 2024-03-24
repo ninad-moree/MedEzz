@@ -1,53 +1,32 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'dart:developer';
 import '../../../../api/authentication/signup_patient.dart';
-import 'terms_and_conditions_checkbox.dart';
+import '../../../../widgets/custom_snackbar.dart';
 
-class SignupForm extends StatelessWidget {
+class SignupForm extends StatefulWidget {
   const SignupForm({super.key});
 
   @override
+  State<SignupForm> createState() => _SignupFormState();
+}
+
+class _SignupFormState extends State<SignupForm> {
+  @override
   Widget build(BuildContext context) {
+    bool isObscured = true;
+    TextEditingController usernameController = TextEditingController();
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+
     return Form(
       child: Column(
         children: [
-          // FIRST NAME AND LASTNAME
-          Row(
-            children: [
-              Expanded(
-                child: TextFormField(
-                  expands: false,
-                  decoration: InputDecoration(
-                    labelText: "First Name",
-                    prefixIcon: const Icon(Iconsax.user),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: TextFormField(
-                  expands: false,
-                  decoration: InputDecoration(
-                    labelText: "Last Name",
-                    prefixIcon: const Icon(Iconsax.user),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
-            ],
-          ),
-
-          const SizedBox(height: 32),
-
           //USERNAME
           TextFormField(
+            controller: usernameController,
             expands: false,
             decoration: InputDecoration(
               labelText: "Username",
@@ -62,6 +41,7 @@ class SignupForm extends StatelessWidget {
 
           //EMAIl
           TextFormField(
+            controller: emailController,
             decoration: InputDecoration(
               labelText: "Email",
               prefixIcon: const Icon(Iconsax.direct),
@@ -73,21 +53,10 @@ class SignupForm extends StatelessWidget {
 
           const SizedBox(height: 32),
 
-          //PHONE NUMBER
-          TextFormField(
-            decoration: InputDecoration(
-              labelText: "Phone Number",
-              prefixIcon: const Icon(Iconsax.call),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-            ),
-          ),
-
-          const SizedBox(height: 32),
-
           //PASSWORD
           TextFormField(
+            controller: passwordController,
+            obscureText: isObscured,
             decoration: InputDecoration(
               labelText: "Password",
               prefixIcon: const Icon(Iconsax.password_check),
@@ -95,16 +64,18 @@ class SignupForm extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8.0),
               ),
               suffixIcon: IconButton(
-                onPressed: () {},
-                icon: const Icon(Iconsax.eye_slash),
+                onPressed: () {
+                  // log("pressed");
+                  // setState(() {
+                  //   isObscured = !isObscured;
+                  // });
+                },
+                icon: Icon(
+                  isObscured == true ? Iconsax.eye_slash : Iconsax.eye,
+                ),
               ),
             ),
           ),
-
-          const SizedBox(height: 32),
-
-          //TERMS AND CONDITIONS CHECKBOX
-          const TermsAndConditionsCheckBox(),
 
           const SizedBox(height: 32),
 
@@ -115,7 +86,41 @@ class SignupForm extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () async {
                 log("button pressed");
-                await signUpPatient("Ninad", "ninad@gmail.com", "ninad18");
+                log(usernameController.text);
+                log(passwordController.text);
+                log(emailController.text);
+
+                int res = await signUpPatient(
+                  usernameController.text,
+                  emailController.text,
+                  passwordController.text,
+                );
+
+                if (res == 200 || res == 201) {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: ShowCustomSnackBar(
+                      title: "Account Created",
+                      label: 'Go Back and Login.',
+                      color: Colors.green,
+                      icon: Icons.done_outlined,
+                    ),
+                    behavior: SnackBarBehavior.floating,
+                    elevation: 0,
+                    backgroundColor: Colors.transparent,
+                  ));
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: ShowCustomSnackBar(
+                      title: "Something Went Wrong",
+                      label: 'User Already Exists or Wrong Information',
+                      color: Colors.red,
+                      icon: Icons.warning_rounded,
+                    ),
+                    behavior: SnackBarBehavior.floating,
+                    elevation: 0,
+                    backgroundColor: Colors.transparent,
+                  ));
+                }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromRGBO(7, 82, 96, 1),
