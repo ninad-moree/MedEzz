@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:medezz/screens/patient/authentication/login/login_screen.dart';
 
-import '../../../api/patient/profile/view_profile.dart';
 import '../../../constants/colors.dart';
+import '../authentication/login/login_screen.dart';
+import 'widget/info_tile.dart';
 
 class ProfileScreenPatient extends StatelessWidget {
   const ProfileScreenPatient({super.key});
@@ -18,26 +18,75 @@ class ProfileScreenPatient extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
           children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const LoginScreenPatient(),
+            Align(
+              alignment: Alignment.center,
+              child: Container(
+                margin: const EdgeInsets.only(top: 20),
+                child: const ClipOval(
+                  child: CircleAvatar(
+                    backgroundColor: Colors.transparent,
+                    radius: 60,
+                    child: Image(
+                      image: AssetImage("assets/images/user2.jpg"),
+                    ),
                   ),
-                  (route) => false,
-                );
-              },
-              child: const Text("Logout"),
+                ),
+              ),
             ),
-            ElevatedButton(
-              onPressed: () async {
-                await viewProfile();
-              },
-              child: const Text("User Info"),
+            const InfoTile(
+              tileName: "First name :",
+              content: "Ninad",
+              icon: Icons.person,
+            ),
+            const InfoTile(
+              tileName: "Last name :",
+              content: "More",
+              icon: Icons.person,
+            ),
+            const InfoTile(
+              tileName: "Email :",
+              content: "ninad18@gmail.com",
+              icon: Icons.email,
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: 10,
+              ),
+              height: 60,
+              width: double.infinity,
+              color: Colors.grey,
+              child: Container(
+                color: Colors.white,
+                padding: const EdgeInsets.all(10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Logout",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LoginScreenPatient(),
+                          ),
+                          (route) => false,
+                        );
+                      },
+                      child: const Icon(
+                        Icons.logout,
+                        color: CustomColors.primaryColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ],
         ),
