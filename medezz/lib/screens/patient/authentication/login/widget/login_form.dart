@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:medezz/api/patient/authentication/login_patient.dart';
 import 'package:medezz/screens/patient/authentication/signup/sign_up_screen.dart';
+import 'package:medezz/screens/patient/main_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../widgets/custom_snackbar.dart';
-import '../../../notifications/notification_form.dart';
 
 class LoginFormPatient extends StatelessWidget {
   const LoginFormPatient({
@@ -98,11 +98,12 @@ class LoginFormPatient extends StatelessWidget {
                   int statusCode = res['statusCode'];
                   if (statusCode == 200 || statusCode == 201) {
                     storeToken(res['accessToken']);
-                    Navigator.pushReplacement(
+                    Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const NotificationForm(),
+                        builder: (context) => const MainPage(),
                       ),
+                      (route) => false,
                     );
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
