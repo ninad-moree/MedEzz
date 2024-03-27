@@ -47,10 +47,7 @@ class _DoctorDetailPageState extends State<DoctorDetailPage> {
                     const SizedBox(height: 8),
                     Row(
                       children: [
-                        const Icon(
-                          Icons.location_on,
-                          size: 14,
-                        ),
+                        const Icon(Icons.location_on, size: 14),
                         const SizedBox(width: 4),
                         Text(
                           widget.doctor.address,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medezz/screens/patient/authentication/login/login_screen.dart';
 
+import '../../../api/patient/profile/view_profile.dart';
 import '../../../constants/colors.dart';
 
 class ProfileScreenPatient extends StatelessWidget {
@@ -18,17 +19,27 @@ class ProfileScreenPatient extends StatelessWidget {
         ),
       ),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const LoginScreenPatient(),
-              ),
-              (route) => false,
-            );
-          },
-          child: const Text("Logout"),
+        child: Column(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LoginScreenPatient(),
+                  ),
+                  (route) => false,
+                );
+              },
+              child: const Text("Logout"),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await viewProfile();
+              },
+              child: const Text("User Info"),
+            ),
+          ],
         ),
       ),
     );

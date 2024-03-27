@@ -24,6 +24,11 @@ class LoginFormPatient extends StatelessWidget {
       prefs.setString('token', token);
     }
 
+    void storePatientId(String id) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('patientId', id);
+    }
+
     return Form(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 32),
