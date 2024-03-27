@@ -20,6 +20,8 @@ class _SignupFormDoctorState extends State<SignupFormDoctor> {
     TextEditingController usernameController = TextEditingController();
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
+    TextEditingController cityController = TextEditingController();
+    TextEditingController specializationController = TextEditingController();
 
     return Form(
       child: Column(
@@ -45,6 +47,34 @@ class _SignupFormDoctorState extends State<SignupFormDoctor> {
             decoration: InputDecoration(
               labelText: "Email",
               prefixIcon: const Icon(Iconsax.direct),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 32),
+
+          // CITY
+          TextFormField(
+            controller: cityController,
+            decoration: InputDecoration(
+              labelText: "City",
+              prefixIcon: const Icon(Iconsax.location),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 32),
+
+          // SPECIALIZATION
+          TextFormField(
+            controller: specializationController,
+            decoration: InputDecoration(
+              labelText: "Specialization",
+              prefixIcon: const Icon(Iconsax.book),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.0),
               ),
@@ -84,11 +114,15 @@ class _SignupFormDoctorState extends State<SignupFormDoctor> {
                 log(usernameController.text);
                 log(passwordController.text);
                 log(emailController.text);
+                log(cityController.text);
+                log(specializationController.text);
 
                 int res = await signUpDoctor(
                   usernameController.text,
                   emailController.text,
                   passwordController.text,
+                  cityController.text,
+                  specializationController.text,
                 );
 
                 if (res == 200 || res == 201) {

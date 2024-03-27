@@ -4,11 +4,18 @@ import 'dart:developer';
 import 'package:http/http.dart' as http;
 
 Future<dynamic> signUpDoctor(
-    String username, String email, String password) async {
+  String username,
+  String email,
+  String password,
+  String address,
+  String specialization,
+) async {
   Map<String, dynamic> requestBody = {
     'username': username,
     'email': email,
     'password': password,
+    'address': address,
+    'specialization ': specialization,
   };
 
   final http.Response response = await http.post(
@@ -21,6 +28,7 @@ Future<dynamic> signUpDoctor(
     log("Doctor Registered Succesfully");
   }
 
+  log(response.statusCode.toString());
   log(response.body);
   return response.statusCode;
 }
