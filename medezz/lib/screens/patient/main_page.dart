@@ -34,9 +34,7 @@ class _MainPageState extends State<MainPage> {
       const NotificationForm(),
     ];
     return Scaffold(
-      body: Center(
-        child: widgetOptions.elementAt(_selectedIndex),
-      ),
+      body: Center(child: widgetOptions.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: Colors.grey,
         fixedColor: Colors.white,
