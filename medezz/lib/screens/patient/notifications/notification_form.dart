@@ -56,9 +56,11 @@ class _NotificationFormState extends State<NotificationForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.white),
+        backgroundColor: CustomColors.primaryColor,
         title: const Text(
           'Medicine Form',
-          style: TextStyle(color: CustomColors.primaryColor),
+          style: TextStyle(color: Colors.white),
         ),
       ),
       body: Padding(
