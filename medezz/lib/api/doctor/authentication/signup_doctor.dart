@@ -9,8 +9,10 @@ Future<dynamic> signUpDoctor(
   String password,
   String address,
   String specialization,
+  String name,
 ) async {
   Map<String, dynamic> requestBody = {
+    'name': name,
     'username': username,
     'email': email,
     'password': password,

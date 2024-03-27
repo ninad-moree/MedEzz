@@ -17,6 +17,7 @@ class _SignupFormDoctorState extends State<SignupFormDoctor> {
   @override
   Widget build(BuildContext context) {
     bool isObscured = true;
+    TextEditingController nameController = TextEditingController();
     TextEditingController usernameController = TextEditingController();
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
@@ -26,6 +27,21 @@ class _SignupFormDoctorState extends State<SignupFormDoctor> {
     return Form(
       child: Column(
         children: [
+          //NAME
+          TextFormField(
+            controller: nameController,
+            expands: false,
+            decoration: InputDecoration(
+              labelText: "Name",
+              prefixIcon: const Icon(Iconsax.user),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 32),
+
           //USERNAME
           TextFormField(
             controller: usernameController,
@@ -118,6 +134,7 @@ class _SignupFormDoctorState extends State<SignupFormDoctor> {
                 log(specializationController.text);
 
                 int res = await signUpDoctor(
+                  nameController.text,
                   usernameController.text,
                   emailController.text,
                   passwordController.text,
