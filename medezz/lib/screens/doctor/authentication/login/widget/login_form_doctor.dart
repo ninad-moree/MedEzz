@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:medezz/api/doctor/authentication/login_doctor.dart';
 import 'package:medezz/screens/doctor/authentication/signup/signup_screen_doctor.dart';
+import 'package:medezz/screens/doctor/main_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../widgets/custom_snackbar.dart';
@@ -73,12 +74,13 @@ class LoginFormDoctor extends StatelessWidget {
                   int statusCode = res['statusCode'];
                   if (statusCode == 200 || statusCode == 201) {
                     storeToken(res['accessToken']);
-                    // Navigator.pushReplacement(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => const NotificationForm(),
-                    //   ),
-                    // );
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MainPage(),
+                      ),
+                      (route) => false,
+                    );
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: ShowCustomSnackBar(

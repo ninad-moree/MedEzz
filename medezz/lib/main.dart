@@ -49,4 +49,7 @@ class _MyAppState extends State<MyApp> {
   [log] doc@gmail.com - gmail
   [log] Doctor Registered Succesfully
   [log] {"_id":"66004b950cafd24689cebb09","email":"doc@gmail.com"}
+
+  "email": "dr_kumar@example.com",
+  "password": "securepass789",
 */
