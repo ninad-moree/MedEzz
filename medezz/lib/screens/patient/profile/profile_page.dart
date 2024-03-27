@@ -28,7 +28,7 @@ class ProfileScreenPatient extends StatelessWidget {
               (route) => false,
             );
           },
-          child: Text("Logout"),
+          child: const Text("Logout"),
         ),
       ),
     );

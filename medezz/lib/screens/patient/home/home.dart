@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medezz/api/patient/doctors/fetchdoctors.dart';
 import 'package:medezz/constants/colors.dart';
+import 'package:medezz/screens/patient/doctor_profile/doctor_detail_page.dart';
 import 'package:medezz/screens/patient/profile/profile_page.dart';
 
 class HomeScreenPatient extends StatefulWidget {
@@ -63,9 +64,10 @@ class _HomeScreenPatientState extends State<HomeScreenPatient> {
                 return Padding(
                   padding: const EdgeInsets.all(10),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 10,
-                      horizontal: 8,
+                    padding: const EdgeInsets.only(
+                      top: 10,
+                      bottom: 10,
+                      right: 8,
                     ),
                     decoration: BoxDecoration(
                       border: Border.all(
@@ -75,15 +77,15 @@ class _HomeScreenPatientState extends State<HomeScreenPatient> {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         // IMAGE
-                        const Icon(Icons.person, size: 60),
-                        // Image(
-                        //   image: AssetImage("assets/images/doctors/doc1.jpg"),
-                        //   width: 70,
-                        //   height: 70,
-                        // ),
+                        // const Icon(Icons.person, size: 60),
+                        const Image(
+                          image: AssetImage("assets/images/doctors/doc3.png"),
+                          width: 100,
+                          height: 70,
+                        ),
 
                         // DOCTOR INFO
                         Expanded(
@@ -112,6 +114,15 @@ class _HomeScreenPatientState extends State<HomeScreenPatient> {
                             ),
                             const SizedBox(height: 16),
                             GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        DoctorDetailPage(doctor: doc),
+                                  ),
+                                );
+                              },
                               child: Container(
                                 height: 20,
                                 width: 80,

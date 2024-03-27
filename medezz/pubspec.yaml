@@ -38,6 +38,8 @@ dependencies:
   flutter_local_notifications: 
   font_awesome_flutter: ^10.5.0
   iconsax: ^0.0.8
+  shape_of_view: ^1.0.2
+  readmore: ^1.0.0
 
   http: any
 
@@ -71,9 +73,6 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
 
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
