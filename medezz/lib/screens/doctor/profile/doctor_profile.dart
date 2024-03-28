@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medezz/api/doctor/profile/doctor_profile.dart';
 import 'package:medezz/screens/doctor_patient/doctor_patient.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../constants/colors.dart';
 import '../../patient/profile/widget/info_tile.dart';
@@ -26,6 +27,11 @@ class _ProfileScreenDoctorState extends State<ProfileScreenDoctor> {
     setState(() {
       profile = prof;
     });
+  }
+
+  void _removeToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('docToken');
   }
 
   @override
@@ -91,6 +97,7 @@ class _ProfileScreenDoctorState extends State<ProfileScreenDoctor> {
                   ),
                   GestureDetector(
                     onTap: () {
+                      _removeToken();
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
