@@ -4,8 +4,23 @@ import 'package:medezz/screens/doctor/profile/doctor_profile.dart';
 import '../../../api/doctor/appointments/get_appointments.dart';
 import '../../../constants/colors.dart';
 
-class AppointmentsScreen extends StatelessWidget {
+enum States { loading, noAppointments, loaded }
+
+class AppointmentsScreen extends StatefulWidget {
   const AppointmentsScreen({super.key});
+
+  @override
+  State<AppointmentsScreen> createState() => _AppointmentsScreenState();
+}
+
+class _AppointmentsScreenState extends State<AppointmentsScreen> {
+  final States _state = States.loading;
+
+  @override
+  void initState() {
+    getAppointments();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +48,28 @@ class AppointmentsScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Center(
-        child: ElevatedButton(
-          child: const Text("Appt"),
-          onPressed: () async {
-            await getAppointments();
-          },
-        ),
+      body: Builder(
+        builder: (context) {
+          if (_state == States.loading) {
+            return const Center(
+              child: CircularProgressIndicator(
+                color: CustomColors.primaryColor,
+              ),
+            );
+          } else if (_state == States.noAppointments) {
+            return const Center(
+              child: Text("No appointments"),
+            );
+          } else if (_state == States.loaded) {
+            return const CircularProgressIndicator(
+              color: Colors.red,
+            );
+          } else {
+            return const CircularProgressIndicator(
+              color: Colors.red,
+            );
+          }
+        },
       ),
     );
   }

@@ -7,6 +7,7 @@ import 'package:medezz/api/patient/doctors/fetchdoctors.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 
 import '../../../../constants/colors.dart';
+import '../../book_appointment/pages/book_appointment.dart';
 
 class CallButton extends StatelessWidget {
   const CallButton({super.key, required this.doctor});
@@ -204,7 +205,9 @@ class CallButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(14),
           ),
           child: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: ((context) => BookAppointmentPage(doctorId: doctor.id))));
+            },
             icon: const Icon(
               Iconsax.calendar,
               size: 40,
