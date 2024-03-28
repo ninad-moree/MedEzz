@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medezz/constants/colors.dart';
+import 'package:medezz/screens/patient/chatbot/chatbot.dart';
 import 'package:medezz/screens/patient/home/home.dart';
 import 'package:medezz/screens/patient/notifications/notification_form.dart';
 
@@ -32,6 +33,7 @@ class _MainPageState extends State<MainPage> {
     final List<Widget> widgetOptions = <Widget>[
       const HomeScreenPatient(),
       const NotificationForm(),
+      const ChatBot(),
     ];
     return Scaffold(
       body: Center(child: widgetOptions.elementAt(_selectedIndex)),
@@ -57,6 +59,13 @@ class _MainPageState extends State<MainPage> {
               size: 35,
             ),
             label: 'Notification',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.chat,
+              size: 35,
+            ),
+            label: 'Chatbot',
           ),
         ],
         currentIndex: _selectedIndex,

@@ -11,15 +11,19 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # UI
   cupertino_icons: ^1.0.2
   flutter_local_notifications: 
   font_awesome_flutter: ^10.5.0
   iconsax: ^0.0.8
   flutter_styled_toast: ^2.2.1
-
+  flutter_markdown: any
+  
+  # API and STORAGE
   http: any
-
   shared_preferences: ^2.2.0
+  flutter_gemini: ^2.0.3
+  google_generative_ai: any
 
   # ZEGO
   zego_uikit_prebuilt_call: ^3.18.0
