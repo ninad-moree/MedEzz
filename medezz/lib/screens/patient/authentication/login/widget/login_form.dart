@@ -1,5 +1,4 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:medezz/api/patient/authentication/login_patient.dart';
@@ -7,6 +6,8 @@ import 'package:medezz/screens/patient/authentication/signup/sign_up_screen.dart
 import 'package:medezz/screens/patient/main_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../../api/patient/profile/view_profile.dart';
+import '../../../../../services/zego_login_services.dart';
 import '../../../../../widgets/custom_snackbar.dart';
 
 class LoginFormPatient extends StatelessWidget {
@@ -24,10 +25,10 @@ class LoginFormPatient extends StatelessWidget {
       prefs.setString('token', token);
     }
 
-    void storePatientId(String id) async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString('patientId', id);
-    }
+    // void storePatientId(String id) async {
+    //   SharedPreferences prefs = await SharedPreferences.getInstance();
+    //   prefs.setString('patientId', id);
+    // }
 
     return Form(
       child: Padding(
@@ -103,6 +104,15 @@ class LoginFormPatient extends StatelessWidget {
                   int statusCode = res['statusCode'];
                   if (statusCode == 200 || statusCode == 201) {
                     storeToken(res['accessToken']);
+
+                    PatientProfile prof = await viewProfile();
+
+                    onUserLogin(
+                      myUserId: prof.id,
+                      myUserName: prof.username,
+                      context: context,
+                    );
+
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(

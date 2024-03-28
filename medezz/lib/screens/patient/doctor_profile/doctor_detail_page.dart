@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 
 import '../../../api/patient/doctors/fetchdoctors.dart';
 import '../../../constants/colors.dart';
+import 'widget/call_button.dart';
 import 'widget/detail_cell.dart';
 
 class DoctorDetailPage extends StatefulWidget {
@@ -80,41 +80,8 @@ class _DoctorDetailPageState extends State<DoctorDetailPage> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    Row(
-                      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: CustomColors.primaryColor,
-                            borderRadius: BorderRadius.circular(14),
-                          ),
-                          child: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.call,
-                              size: 40,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 20),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: CustomColors.primaryColor,
-                            borderRadius: BorderRadius.circular(14),
-                          ),
-                          child: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Iconsax.calendar,
-                              size: 40,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    // Call Button
+                    CallButton(doctor: widget.doctor),
                     const SizedBox(height: 20),
                     const Text(
                       'Dr. Albert Alexanderis a Renal Physician who has comprehensive expertise in the fields of Renal Medicine and Internal Medicine. While Dr Ho specializes in dialysis and critical care nephrology, years of extensive training have also equipped him with skills to effectively handle a wide range of other kidney diseases, including kidney impairment, inflammation, infection and transplantation.',

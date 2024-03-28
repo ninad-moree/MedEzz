@@ -3,8 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:medezz/api/doctor/authentication/login_doctor.dart';
+import 'package:medezz/api/doctor/profile/doctor_profile.dart';
 import 'package:medezz/screens/doctor/authentication/signup/signup_screen_doctor.dart';
 import 'package:medezz/screens/doctor/main_page.dart';
+import 'package:medezz/services/zego_login_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../widgets/custom_snackbar.dart';
@@ -74,6 +76,15 @@ class LoginFormDoctor extends StatelessWidget {
                   int statusCode = res['statusCode'];
                   if (statusCode == 200 || statusCode == 201) {
                     storeToken(res['accessToken']);
+
+                    DoctorProfile docProfile = await viewDoctorProfile();
+
+                    onUserLogin(
+                      myUserId: docProfile.id,
+                      myUserName: docProfile.username,
+                      context: context,
+                    );
+
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(

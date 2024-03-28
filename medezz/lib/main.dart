@@ -1,28 +1,61 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:medezz/api/patient/profile/view_profile.dart';
 import 'package:medezz/screens/onboarding/on_boarding.dart';
+import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
+import 'package:zego_uikit_signaling_plugin/zego_uikit_signaling_plugin.dart';
 
+import 'firebase_options.dart';
 import 'screens/patient/notifications/Services/notification_services.dart';
 
-void main() {
+final navigatorKey = GlobalKey<NavigatorState>();
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   NotificationService().initNotification();
-  runApp(const MyApp());
+
+  ZegoUIKitPrebuiltCallInvitationService().setNavigatorKey(navigatorKey);
+
+  ZegoUIKit().initLog().then((value) {
+    ZegoUIKitPrebuiltCallInvitationService().useSystemCallingUI(
+      [ZegoUIKitSignalingPlugin()],
+    );
+
+    runApp(MyApp(navigatorKey: navigatorKey));
+  });
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  // runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+  const MyApp({
+    super.key,
+    required this.navigatorKey,
+  });
+
+  final GlobalKey<NavigatorState> navigatorKey;
 
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  // This widget is the root of your application
+  late PatientProfile patientProfile =
+      PatientProfile(username: '', email: '', id: '');
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'MedEzz',
+      navigatorKey: widget.navigatorKey,
       theme: ThemeData(
         useMaterial3: true,
         scaffoldBackgroundColor: const Color.fromRGBO(241, 250, 251, 1),
@@ -31,7 +64,23 @@ class _MyAppState extends State<MyApp> {
         ),
         colorSchemeSeed: const Color.fromRGBO(7, 82, 96, 1),
       ),
-      home: const OnBoardingScreen(),
+      // home: const OnBoardingScreen(),
+      initialRoute: '/',
+      routes: {'/': (context) => const OnBoardingScreen()},
+      builder: (BuildContext context, Widget? child) {
+        return Stack(
+          children: [
+            child!,
+
+            //  support minimizing
+            ZegoUIKitPrebuiltCallMiniOverlayPage(
+              contextQuery: () {
+                return widget.navigatorKey.currentState!.context;
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
