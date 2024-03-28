@@ -1,9 +1,30 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future<dynamic> viewProfile() async {
+class PatientProfile {
+  final String username;
+  final String email;
+  final String id;
+
+  PatientProfile({
+    required this.username,
+    required this.email,
+    required this.id,
+  });
+
+  factory PatientProfile.fromJson(Map<String, dynamic> json) {
+    return PatientProfile(
+      username: json['username'] ?? '',
+      email: json['email'] ?? '',
+      id: json['id'] ?? '',
+    );
+  }
+}
+
+Future<PatientProfile> viewProfile() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString('token');
 
@@ -19,9 +40,21 @@ Future<dynamic> viewProfile() async {
     log("View Profile Success");
     log(response.statusCode.toString());
     log(response.body);
+
+    final Map<String, dynamic> jsonResponse = json.decode(response.body);
+    return PatientProfile.fromJson(jsonResponse);
   } else {
     log("View Profile Failure");
     log(response.statusCode.toString());
     log(response.body);
+    return PatientProfile(username: '', email: '', id: '');
   }
 }
+
+/*
+  {
+    "username":"ninadM",
+    "email":"ninad18@gmail.com",
+    "id":"66002b220d379f3ff1d6cfff"
+  }
+*/

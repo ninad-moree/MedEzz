@@ -1,11 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:medezz/api/patient/profile/view_profile.dart';
 import 'package:medezz/screens/doctor_patient/doctor_patient.dart';
 
 import '../../../constants/colors.dart';
 import 'widget/info_tile.dart';
 
-class ProfileScreenPatient extends StatelessWidget {
+class ProfileScreenPatient extends StatefulWidget {
   const ProfileScreenPatient({super.key});
+
+  @override
+  State<ProfileScreenPatient> createState() => _ProfileScreenPatientState();
+}
+
+class _ProfileScreenPatientState extends State<ProfileScreenPatient> {
+  late PatientProfile profile = PatientProfile(username: '', email: '', id: '');
+
+  @override
+  void initState() {
+    super.initState();
+    loadProfile();
+  }
+
+  Future<void> loadProfile() async {
+    PatientProfile prof = await viewProfile();
+    setState(() {
+      profile = prof;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,19 +56,19 @@ class ProfileScreenPatient extends StatelessWidget {
               ),
             ),
           ),
-          const InfoTile(
-            tileName: "First name :",
-            content: "Ninad",
+          InfoTile(
+            tileName: "User name :",
+            content: profile.username,
             icon: Icons.person,
           ),
-          const InfoTile(
-            tileName: "Last name :",
-            content: "More",
-            icon: Icons.person,
-          ),
-          const InfoTile(
+          // const InfoTile(
+          //   tileName: "Last name :",
+          //   content: "More",
+          //   icon: Icons.person,
+          // ),
+          InfoTile(
             tileName: "Email :",
-            content: "ninad18@gmail.com",
+            content: profile.email,
             icon: Icons.email,
           ),
           Container(
@@ -65,7 +86,7 @@ class ProfileScreenPatient extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
-                    "Logout",
+                    "L O G O U T",
                     style: TextStyle(color: Colors.black),
                   ),
                   GestureDetector(
