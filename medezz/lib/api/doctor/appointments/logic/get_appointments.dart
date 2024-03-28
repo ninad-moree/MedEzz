@@ -24,4 +24,6 @@ Future<dynamic> getAppointments() async {
     log(response.statusCode.toString());
     log(response.body);
   }
+
+  return response;
 }

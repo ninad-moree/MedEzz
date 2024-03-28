@@ -1,10 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:medezz/screens/doctor/profile/doctor_profile.dart';
+import 'dart:convert';
+import 'dart:developer';
 
-import '../../../api/doctor/appointments/get_appointments.dart';
+import 'package:flutter/material.dart';
+import 'package:medezz/api/doctor/appointments/widgets/appointment_list_tile.dart';
+import 'package:medezz/screens/doctor/profile/doctor_profile.dart';
+import 'package:http/http.dart' as http;
+import '../../../api/doctor/appointments/logic/get_appointments.dart';
+import '../../../api/doctor/model/appointment.dart';
 import '../../../constants/colors.dart';
 
-enum States { loading, noAppointments, loaded }
+enum States { loading, noAppointments, loaded, error }
 
 class AppointmentsScreen extends StatefulWidget {
   const AppointmentsScreen({super.key});
@@ -14,12 +19,33 @@ class AppointmentsScreen extends StatefulWidget {
 }
 
 class _AppointmentsScreenState extends State<AppointmentsScreen> {
-  final States _state = States.loading;
+  States _state = States.loading;
+  List<Appointment> appointments = [];
 
   @override
   void initState() {
-    getAppointments();
+    getAppointmentsData();
     super.initState();
+  }
+
+  void getAppointmentsData() async {
+    http.Response response = await getAppointments();
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      setState(() {
+        appointments =
+            (jsonDecode(response.body) as List).map((e) => Appointment.fromJson(e)).toList();
+        if (appointments.isEmpty) {
+          _state = States.noAppointments;
+        } else {
+          _state = States.loaded;
+        }
+      });
+      log(appointments.toString());
+    } else {
+      setState(() {
+        _state = States.error;
+      });
+    }
   }
 
   @override
@@ -61,8 +87,13 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
               child: Text("No appointments"),
             );
           } else if (_state == States.loaded) {
-            return const CircularProgressIndicator(
-              color: Colors.red,
+            return ListView.builder(
+              itemCount: appointments.length,
+              itemBuilder: (context, index) {
+                return Card(
+                  child: AppointmentListTile(appointment: appointments[index]),
+                );
+              },
             );
           } else {
             return const CircularProgressIndicator(
