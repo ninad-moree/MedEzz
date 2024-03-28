@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 Future<dynamic> getAppointments() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  String? token = prefs.getString('token');
+  String? token = prefs.getString('docToken');
 
   final http.Response response = await http.get(
     Uri.parse("https://healthlink-backend.onrender.com/doctor/appointment"),
