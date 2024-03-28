@@ -1,6 +1,6 @@
 class ZegoConstants {
   static String appSign =
-      '512d8810b932538573dbcdab14612a4c03a04a0cccf32db772c3ce34f6859fb8';
+      '3979ae449a9a7da916e88aa6a722dbe708ec2306b8a4011fd67cc4cba128ed92';
 
-  static int appId = 1597543383;
+  static int appId = 303405109;
 }
