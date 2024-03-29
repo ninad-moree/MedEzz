@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medezz/api/doctor/appointments_details/appointement_details.dart';
 
+import '../../../api/doctor/profile/doctor_profile.dart';
 import '../../../constants/colors.dart';
 
 class PatientAppointmentDetails extends StatefulWidget {
@@ -89,16 +90,26 @@ class _PatientAppointmentDetailsState extends State<PatientAppointmentDetails> {
     analyticsThresholds: {},
   );
 
+  late DoctorProfile profile = DoctorProfile(username: '', email: '', id: '');
+
   @override
   void initState() {
     super.initState();
     loadProfile();
+    loadPatientDetailsProfile();
   }
 
-  Future<void> loadProfile() async {
+  Future<void> loadPatientDetailsProfile() async {
     Patient pat = await viewPatientProfileDoctor(widget.patientId);
     setState(() {
       patientDetails = pat;
+    });
+  }
+
+  Future<void> loadProfile() async {
+    DoctorProfile prof = await viewDoctorProfile();
+    setState(() {
+      profile = prof;
     });
   }
 
@@ -217,12 +228,15 @@ class _PatientAppointmentDetailsState extends State<PatientAppointmentDetails> {
   }
 
   Widget _buildAppointments() {
+    List<Appointment> filteredAppointments = patientDetails.appointments
+        .where((appointment) => appointment.doctor == profile.id)
+        .toList();
     return Card(
       elevation: 2,
       child: Column(
-        children: patientDetails.appointments.map((appointment) {
+        children: filteredAppointments.map((appointment) {
           return ListTile(
-            title: Text('Doctor: ${appointment.doctor}'),
+            title: Text('Doctor: ${profile.username}'),
             subtitle: Text(
               'Date: ${appointment.date}\nNotes: ${appointment.notes}',
             ),
