@@ -1,4 +1,7 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import 'package:medezz/api/patient/profile/check_profile_exist.dart';
 import 'package:medezz/api/fitness/screens/fitness_page.dart';
 import 'package:medezz/api/patient/profile/view_profile.dart';
 import 'package:medezz/screens/doctor_patient/doctor_patient.dart';
@@ -6,6 +9,8 @@ import 'package:medezz/services/zego_login_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../constants/colors.dart';
+import '../patient_form/paitent_form_put.dart';
+import '../patient_form/patient_form.dart';
 import 'widget/info_tile.dart';
 
 class ProfileScreenPatient extends StatefulWidget {
@@ -70,15 +75,35 @@ class _ProfileScreenPatientState extends State<ProfileScreenPatient> {
             content: profile.username,
             icon: Icons.person,
           ),
-          // const InfoTile(
-          //   tileName: "Last name :",
-          //   content: "More",
-          //   icon: Icons.person,
-          // ),
           InfoTile(
             tileName: "Email :",
             content: profile.email,
             icon: Icons.email,
+          ),
+          GestureDetector(
+            onTap: () async {
+              bool res = await checkProfileExist();
+              if (res == true) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const PatientFormPut(),
+                  ),
+                );
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const PatientFormScreen(),
+                  ),
+                );
+              }
+            },
+            child: const InfoTile(
+              tileName: "Profile Details :",
+              content: "Enter Profile Details",
+              icon: Icons.details,
+            ),
           ),
           Container(
             margin: const EdgeInsets.symmetric(

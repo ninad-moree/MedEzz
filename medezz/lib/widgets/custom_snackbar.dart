@@ -33,7 +33,8 @@ class ShowCustomSnackBar extends StatelessWidget {
           const SizedBox(width: 6),
           Expanded(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   title,

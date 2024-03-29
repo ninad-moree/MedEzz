@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison, use_build_context_synchronously
+
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -131,13 +133,13 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () async {
-                _selectedDate = _selectedDate
-                    .add(Duration(hours: _selectedTime.hour, minutes: _selectedTime.minute));
+                _selectedDate = _selectedDate.add(Duration(
+                    hours: _selectedTime.hour, minutes: _selectedTime.minute));
                 log('Date: $_selectedDate');
                 log('Duration: $_durationInMinutes minutes');
                 log('Is Online: $_isOnline');
-                int response = await bookAppointment(
-                    widget.doctorId, _selectedDate, _durationInMinutes, _isOnline);
+                int response = await bookAppointment(widget.doctorId,
+                    _selectedDate, _durationInMinutes, _isOnline);
                 if (response == 200 || response == 201) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(

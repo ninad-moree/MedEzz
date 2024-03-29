@@ -18,6 +18,7 @@ dependencies:
   iconsax: ^0.0.8
   flutter_styled_toast: ^2.2.1
   flutter_markdown: any
+  rive: ^0.13.1
   
   # API and STORAGE
   http: any
@@ -58,4 +59,6 @@ flutter:
     - assets/icon_small.png
     - assets/icon.png
     - assets/user.png
+    - assets/
     - assets/images/doctors/
+    - assets/images/doctor_categories/
