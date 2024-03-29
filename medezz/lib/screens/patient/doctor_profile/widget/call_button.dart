@@ -206,7 +206,14 @@ class CallButton extends StatelessWidget {
           ),
           child: IconButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: ((context) => BookAppointmentPage(doctorId: doctor.id))));
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: ((context) => BookAppointmentPage(
+                        doctorId: doctor.id,
+                      )),
+                ),
+              );
             },
             icon: const Icon(
               Iconsax.calendar,
