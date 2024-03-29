@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -41,7 +43,8 @@ class _LoginScreenPatientState extends State<LoginScreenPatient> {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
-      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
 
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth?.accessToken,
@@ -51,7 +54,7 @@ class _LoginScreenPatientState extends State<LoginScreenPatient> {
       return await FirebaseAuth.instance.signInWithCredential(credential);
     } on Exception catch (e) {
       // TODO
-      print('exception->$e');
+      log('exception->$e');
     }
     return null;
   }
@@ -122,33 +125,34 @@ class _LoginScreenPatientState extends State<LoginScreenPatient> {
 
                       if (status.isGranted) {
                         // Permission is already granted
-                        print('Activity recognition permission is granted.');
+                        log('Activity recognition permission is granted.');
                       } else {
                         // Permission is not granted, request it
-                        var result = await Permission.activityRecognition.request();
+                        var result =
+                            await Permission.activityRecognition.request();
 
                         if (result.isGranted) {
                           // Permission granted
-                          print('Activity recognition permission is granted.');
+                          log('Activity recognition permission is granted.');
                         } else {
                           // Permission denied
-                          print('Activity recognition permission is denied.');
+                          log('Activity recognition permission is denied.');
                         }
                       }
 
                       if (status1.isGranted) {
                         // Permission is already granted
-                        print('Activity recognition permission is granted.');
+                        log('Activity recognition permission is granted.');
                       } else {
                         // Permission is not granted, request it
                         var result = await Permission.sensorsAlways.request();
 
                         if (result.isGranted) {
                           // Permission granted
-                          print('Activity recognition permission is granted.');
+                          log('Activity recognition permission is granted.');
                         } else {
                           // Permission denied
-                          print('Activity recognition permission is denied.');
+                          log('Activity recognition permission is denied.');
                         }
                       }
                     } else {
