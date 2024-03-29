@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:medezz/api/patient/doctors/fetchdoctors.dart';
-import 'package:medezz/screens/patient/home/home.dart';
 
+import '../../../api/patient/doctors/fetchdoctors.dart';
 import '../../../constants/colors.dart';
+import '../home/widget/doctor_list_view.dart';
 
 class DoctorListScreen extends StatelessWidget {
   const DoctorListScreen(
