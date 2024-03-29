@@ -231,16 +231,21 @@ class _PatientAppointmentDetailsState extends State<PatientAppointmentDetails> {
     List<Appointment> filteredAppointments = patientDetails.appointments
         .where((appointment) => appointment.doctor == profile.id)
         .toList();
+
     return Card(
       elevation: 2,
       child: Column(
         children: filteredAppointments.map((appointment) {
+          bool isPastAppointment = appointment.date.isBefore(DateTime.now());
           return Padding(
             padding: const EdgeInsets.all(10),
             child: SizedBox(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  isPastAppointment
+                      ? const Text("Prev")
+                      : const Text("Upcoming"),
                   Text("Doctor: ${profile.username}"),
                   Text("Date: ${appointment.date}"),
                   appointment.notes == ""
