@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:medezz/api/doctor/appointments/widgets/appointment_list_tile.dart';
+import 'package:medezz/screens/doctor/patient_appointment_details/patient_appointment_details.dart';
 import 'package:medezz/screens/doctor/profile/doctor_profile.dart';
 import 'package:http/http.dart' as http;
 import '../../../api/doctor/appointments/logic/get_appointments.dart';
@@ -32,8 +33,9 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
     http.Response response = await getAppointments();
     if (response.statusCode == 200 || response.statusCode == 201) {
       setState(() {
-        appointments =
-            (jsonDecode(response.body) as List).map((e) => Appointment.fromJson(e)).toList();
+        appointments = (jsonDecode(response.body) as List)
+            .map((e) => Appointment.fromJson(e))
+            .toList();
         if (appointments.isEmpty) {
           _state = States.noAppointments;
         } else {
@@ -91,7 +93,9 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
               itemCount: appointments.length,
               itemBuilder: (context, index) {
                 return Card(
-                  child: AppointmentListTile(appointment: appointments[index]),
+                  child: AppointmentListTile(
+                    appointment: appointments[index],
+                  ),
                 );
               },
             );
