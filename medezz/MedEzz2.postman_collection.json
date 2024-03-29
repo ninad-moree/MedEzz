@@ -1,0 +1,460 @@
+{
+	"info": {
+		"_postman_id": "97704675-d9d1-4c52-bde9-b1d8e486d977",
+		"name": "MedEzz",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24023330"
+	},
+	"item": [
+		{
+			"name": "Patient",
+			"item": [
+				{
+					"name": "Get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/patient",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"patient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/patient/65d77be2b0113d9f2c1d212d",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"patient",
+								"65d77be2b0113d9f2c1d212d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Patient",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"John\",\r\n  \"lastName\": \"Doe\",\r\n  \"dateOfBirth\": \"1990-05-15\",\r\n  \"gender\": \"Male\",\r\n  \"contactNumber\": \"123-456-7890\",\r\n  \"email\": \"johndoe@example.com\",\r\n  \"address\": {\r\n    \"street\": \"123 Main St\",\r\n    \"city\": \"Anytown\",\r\n    \"state\": \"CA\",\r\n    \"zipCode\": \"12345\"\r\n  },\r\n  \"healthConditions\": [\"Hypertension\", \"Diabetes\"],\r\n  \"medications\": [\r\n    {\r\n      \"name\": \"Medicine A\",\r\n      \"dosage\": \"10mg\",\r\n      \"frequency\": \"Twice daily\",\r\n      \"issuedOn\": \"2024-02-22\"\r\n    },\r\n    {\r\n      \"name\": \"Medicine B\",\r\n      \"dosage\": \"20mg\",\r\n      \"frequency\": \"Once daily\",\r\n      \"issuedOn\": \"2024-02-22\"\r\n    }\r\n  ],\r\n  \"appointments\": [],\r\n  \"reminder\": [\r\n    {\r\n      \"medicine\": \"Medicine A\",\r\n      \"timing\": [\"Morning\", \"Evening\"],\r\n      \"startDate\": \"2024-02-22\",\r\n      \"endDate\": \"2024-03-22\",\r\n      \"declinedOn\": []\r\n    }\r\n  ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/patient",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"patient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update By Id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Varad\",\r\n  \"lastName\": \"Pundlik\",\r\n  \"dateOfBirth\": \"2003-05-31\",\r\n  \"gender\": \"Male\",\r\n  \"contactNumber\": \"123-456-7890\",\r\n  \"email\": \"johndoe@example.com\",\r\n  \"address\": {\r\n    \"street\": \"123 Main St\",\r\n    \"city\": \"Anytown\",\r\n    \"state\": \"CA\",\r\n    \"zipCode\": \"12345\"\r\n  },\r\n  \"healthConditions\": [\"Hypertension\", \"Diabetes\"],\r\n  \"medications\": [\r\n    {\r\n      \"name\": \"Medicine A\",\r\n      \"dosage\": \"10mg\",\r\n      \"frequency\": \"Twice daily\",\r\n      \"issuedOn\": \"2024-02-22\"\r\n    },\r\n    {\r\n      \"name\": \"Medicine B\",\r\n      \"dosage\": \"20mg\",\r\n      \"frequency\": \"Once daily\",\r\n      \"issuedOn\": \"2024-02-22\"\r\n    }\r\n  ],\r\n  \"appointments\": [],\r\n  \"reminder\": [\r\n    {\r\n      \"medicine\": \"Medicine A\",\r\n      \"timing\": [\"Morning\", \"Evening\"],\r\n      \"startDate\": \"2024-02-22\",\r\n      \"endDate\": \"2024-03-22\",\r\n      \"declinedOn\": []\r\n    }\r\n  ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/patient/65d77be2b0113d9f2c1d212d",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"patient",
+								"65d77be2b0113d9f2c1d212d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/patient/65f46eaed301d4614edc86f7",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"patient",
+								"65f46eaed301d4614edc86f7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Book appointment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\":\"2024-03-29\",\r\n    \"doctor\":\"6603f3b4cfb8c73ac8b32efc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/patient/6603f30db70ff9543c1d3aaf/appointment",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"patient",
+								"6603f30db70ff9543c1d3aaf",
+								"appointment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add medicines",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"medication\":[\r\n        {\r\n            \"name\":\"medicine 111\",\r\n            \"days\":3,\r\n            \"dosage\":\"30ml\",\r\n            \"frequency\":\"3\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/patient/65f46eaed301d4614edc86f7/medication",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"patient",
+								"65f46eaed301d4614edc86f7",
+								"medication"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Register patient",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"varadpundlik\",\r\n  \"email\": \"varadpundlik@gmail.com\",\r\n  \"password\": \"12345678\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/user/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoidmFyYWRwdW5kbGlrIiwiZW1haWwiOiJ2YXJhZHB1bmRsaWtAZ21haWwuY29tIiwiaWQiOiI2NjAzZmIzYWMxNGIwMzU5MjY1MjFkMzcifSwiaWF0IjoxNzExNTM2OTYwLCJleHAiOjE3MTE1Mzc4NjB9.-4CiNTVgZwP0UUa70avI3LtPUHPe9ai-fDvSmSSlQgA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/user/current",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"user",
+								"current"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login patient",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"varadpundlik@gmail.com\",\r\n    \"password\":\"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/user/login",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Doctor",
+			"item": [
+				{
+					"name": "http://localhost:5000/doctor/login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"doctor123@example.com\",\r\n  \"password\": \"doctor123\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/doctor/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"doctor",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:5000/doctor/register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"Doctor 2\",\r\n  \"email\": \"doctor123@example.com\",\r\n  \"password\": \"doctor123\",\r\n  \"specialization\":\"general\",\r\n  \"address\":\"Pune\",\r\n  \"name\":\"Doctor\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/doctor/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"doctor",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all appoinments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoiRG9jdG9yIDIiLCJlbWFpbCI6ImRvY3RvcjEyM0BleGFtcGxlLmNvbSIsImlkIjoiNjYwM2YzYjRjZmI4YzczYWM4YjMyZWZjIn0sImlhdCI6MTcxMTUzNTY2NywiZXhwIjoxNzExNTM2NTY3fQ.tDezRxua0cvh8WkhQo1JNuP0l73LNFIrh-hYD_Osa9s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/doctor/appointment",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"doctor",
+								"appointment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoiRG9jdG9yIDIiLCJlbWFpbCI6ImRvY3RvcjEyM0BleGFtcGxlLmNvbSIsImlkIjoiNjYwM2YzYjRjZmI4YzczYWM4YjMyZWZjIn0sImlhdCI6MTcxMTUzNTY2NywiZXhwIjoxNzExNTM2NTY3fQ.tDezRxua0cvh8WkhQo1JNuP0l73LNFIrh-hYD_Osa9s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/doctor/current",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"doctor",
+								"current"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"appointmentId\":\"6603f3c1cfb8c73ac8b32f03\",\r\n    \"notes\":\"Patient is all right take given medicines\",\r\n    \"patientId\":\"6603f30db70ff9543c1d3aaf\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/doctor/appointment-notes",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"doctor",
+								"appointment-notes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
