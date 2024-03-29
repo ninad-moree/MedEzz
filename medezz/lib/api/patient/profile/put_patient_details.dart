@@ -4,30 +4,23 @@ import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future<int> addPatientDetails(
-  String firstName,
-  String lastName,
-  String gender,
+Future<int> putPatientDetails(
+  String id,
   int age,
   String number,
-  String email,
   List<String> healthCondition,
 ) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString('token');
 
   Map<String, dynamic> requestBody = {
-    'firstName': firstName,
-    'lastName': lastName,
     'age': age,
-    'gender': gender,
     'contactNumber': number,
-    'email': email,
     'healthConditions': healthCondition,
   };
 
-  final http.Response response = await http.post(
-    Uri.parse("https://healthlink-backend.onrender.com/patient"),
+  final http.Response response = await http.put(
+    Uri.parse("https://healthlink-backend.onrender.com/patient/$id"),
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $token',
@@ -36,9 +29,10 @@ Future<int> addPatientDetails(
   );
 
   if (response.statusCode == 200 || response.statusCode == 201) {
-    log("Add Patient Details");
+    log("Put Patient Details");
   }
 
+  log(response.statusCode.toString());
   log(response.body);
   return response.statusCode;
 }

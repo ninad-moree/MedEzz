@@ -4,27 +4,24 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:medezz/api/patient/profile/add_patient_details.dart';
 
+import '../../../api/patient/profile/put_patient_details.dart';
 import '../../../api/patient/profile/view_profile.dart';
 import '../../../constants/colors.dart';
 import '../../../widgets/custom_snackbar.dart';
 
-class PatientFormScreen extends StatefulWidget {
-  const PatientFormScreen({super.key});
+class PatientFormPut extends StatefulWidget {
+  const PatientFormPut({super.key});
 
   @override
-  State<PatientFormScreen> createState() => _PatientFormScreenState();
+  State<PatientFormPut> createState() => _PatientFormPutState();
 }
 
-class _PatientFormScreenState extends State<PatientFormScreen> {
+class _PatientFormPutState extends State<PatientFormPut> {
   late PatientProfile profile = PatientProfile(username: '', email: '', id: '');
 
   final _formKey = GlobalKey<FormState>();
 
-  late String _firstName;
-  late String _lastName;
-  late String _gender;
   late int _age;
   late String _number;
   late List<String> _healthCondition = [];
@@ -60,72 +57,6 @@ class _PatientFormScreenState extends State<PatientFormScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        labelText: "First Name",
-                        prefixIcon: const Icon(Iconsax.user_edit),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your first name';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        _firstName = value!;
-                      },
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: TextFormField(
-                      // decoration: const InputDecoration(labelText: 'Last Name'),
-                      decoration: InputDecoration(
-                        labelText: "Last Name",
-                        prefixIcon: const Icon(Iconsax.user_edit),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your last name';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        _lastName = value!;
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              TextFormField(
-                decoration: InputDecoration(
-                  labelText: "Gender",
-                  prefixIcon: const Icon(Iconsax.user_edit),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your gender';
-                  }
-                  return null;
-                },
-                onSaved: (value) {
-                  _gender = value!;
-                },
-              ),
-              const SizedBox(height: 16),
               TextFormField(
                 decoration: InputDecoration(
                   labelText: "Age",
@@ -198,21 +129,16 @@ class _PatientFormScreenState extends State<PatientFormScreen> {
                       _formKey.currentState!.save();
                       // Handle form submission here
                       log('Form submitted!');
-                      log('First Name: $_firstName');
-                      log('Last Name: $_lastName');
-                      log('Gender: $_gender');
+
                       log('Age: $_age');
                       log('Number: $_number');
                       log('Email: ${profile.email}');
                       log('Health Condition: $_healthCondition');
 
-                      int res = await addPatientDetails(
-                        _firstName,
-                        _lastName,
-                        _gender,
+                      int res = await putPatientDetails(
+                        profile.id,
                         _age,
                         _number,
-                        profile.email,
                         _healthCondition,
                       );
 
@@ -257,59 +183,6 @@ class _PatientFormScreenState extends State<PatientFormScreen> {
                   ),
                 ),
               ),
-              // ElevatedButton(
-              //   onPressed: () async {
-              //     if (_formKey.currentState!.validate()) {
-              //       _formKey.currentState!.save();
-              //       // Handle form submission here
-              //       log('Form submitted!');
-              //       log('First Name: $_firstName');
-              //       log('Last Name: $_lastName');
-              //       log('Gender: $_gender');
-              //       log('Age: $_age');
-              //       log('Number: $_number');
-              //       log('Email: ${profile.email}');
-              //       log('Health Condition: $_healthCondition');
-
-              //       int res = await addPatientDetails(
-              //         _firstName,
-              //         _lastName,
-              //         _gender,
-              //         _age,
-              //         _number,
-              //         profile.email,
-              //         _healthCondition,
-              //       );
-
-              //       if (res == 200 || res == 201) {
-              //         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              //           content: ShowCustomSnackBar(
-              //             title: "Patient Details Added",
-              //             label: "",
-              //             color: Colors.green,
-              //             icon: Icons.done_outlined,
-              //           ),
-              //           behavior: SnackBarBehavior.floating,
-              //           elevation: 0,
-              //           backgroundColor: Colors.transparent,
-              //         ));
-              //       } else {
-              //         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              //           content: ShowCustomSnackBar(
-              //             title: "Something Went Wrong",
-              //             label: "",
-              //             color: Colors.red,
-              //             icon: Icons.warning_rounded,
-              //           ),
-              //           behavior: SnackBarBehavior.floating,
-              //           elevation: 0,
-              //           backgroundColor: Colors.transparent,
-              //         ));
-              //       }
-              //     }
-              //   },
-              //   child: const Text('Submit'),
-              // ),
             ],
           ),
         ),

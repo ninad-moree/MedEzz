@@ -3,7 +3,6 @@ import 'package:medezz/constants/colors.dart';
 import 'package:medezz/screens/patient/chatbot/chatbot.dart';
 import 'package:medezz/screens/patient/home/home.dart';
 import 'package:medezz/screens/patient/notifications/notification_form.dart';
-import 'package:medezz/screens/patient/patient_form/patient_form.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key, this.index = 0});
@@ -32,7 +31,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> widgetOptions = <Widget>[
-      const PatientFormScreen(),
+      // const PatientFormScreen(),
       const HomeScreenPatient(),
       const NotificationForm(),
       const ChatBot(),
@@ -48,13 +47,13 @@ class _MainPageState extends State<MainPage> {
         selectedLabelStyle: const TextStyle(color: CustomColors.primaryColor),
         unselectedLabelStyle: const TextStyle(color: Colors.grey),
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.note_add,
-              size: 35,
-            ),
-            label: 'Patient Form',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(
+          //     Icons.note_add,
+          //     size: 35,
+          //   ),
+          //   label: 'Patient Form',
+          // ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.home,
