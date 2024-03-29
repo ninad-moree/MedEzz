@@ -5,13 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:medezz/screens/patient/authentication/login/widget/login_form.dart';
 import 'package:medezz/screens/patient/authentication/login/widget/login_header.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../api/patient/authentication/login_patient.dart';
 import '../../../../api/patient/profile/view_profile.dart';
 import '../../../../services/zego_login_services.dart';
 import '../../../../widgets/custom_snackbar.dart';
-import '../../../doctor/main_page.dart';
+import '../../main_page.dart';
 
 class LoginScreenPatient extends StatefulWidget {
   const LoginScreenPatient({super.key});
@@ -93,6 +94,9 @@ class _LoginScreenPatientState extends State<LoginScreenPatient> {
                     if (statusCode == 200 || statusCode == 201) {
                       storeToken(res['accessToken']);
 
+                      log('Access Token:');
+                      log(res['accessToken']);
+
                       PatientProfile prof = await viewProfile();
 
                       onUserLogin(
@@ -108,6 +112,42 @@ class _LoginScreenPatientState extends State<LoginScreenPatient> {
                         ),
                         (route) => false,
                       );
+
+                      var status = await Permission.activityRecognition.status;
+                      var status1 = await Permission.sensorsAlways.status;
+
+                      if (status.isGranted) {
+                        // Permission is already granted
+                        print('Activity recognition permission is granted.');
+                      } else {
+                        // Permission is not granted, request it
+                        var result = await Permission.activityRecognition.request();
+
+                        if (result.isGranted) {
+                          // Permission granted
+                          print('Activity recognition permission is granted.');
+                        } else {
+                          // Permission denied
+                          print('Activity recognition permission is denied.');
+                        }
+                      }
+
+                      if (status.isGranted) {
+                        // Permission is already granted
+                        print('Activity recognition permission is granted.');
+                      } else {
+                        // Permission is not granted, request it
+                        var result = await Permission.activityRecognition.request();
+
+                        if (result.isGranted) {
+                          // Permission granted
+                          print('Activity recognition permission is granted.');
+                        } else {
+                          // Permission denied
+                          print('Activity recognition permission is denied.');
+                        }
+                      }
+
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: ShowCustomSnackBar(

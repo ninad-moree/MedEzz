@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import '../model/footsteps.dart';
@@ -8,5 +10,7 @@ class HomeController {
   final steps = ValueNotifier(<FootSteps>[]);
   Future<void> getData() async {
     steps.value = await repository.getFootSteep();
+    log("Step count:");
+    log(steps.value.toString());
   }
 }
