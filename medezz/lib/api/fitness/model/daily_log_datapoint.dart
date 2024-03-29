@@ -1,39 +1,47 @@
 class DailyLogDatapoint {
-  int steps;
-  double caloriesBurnt;
-  double? calorieIntake;
-  double? waterIntake;
-  double? weight;
-  double? bloodSugarLevel;
+  DateTime date;
+  int stepsWalked;
+  double caloriesBurned;
+  double? caloriesIntake = 0;
+  double? waterIntake = 0;
+  double? weight = 0;
+  double? sugarLevel = 0;
+  bool medicineTaken;
 
   DailyLogDatapoint({
-    required this.steps,
-    required this.caloriesBurnt,
-    this.calorieIntake,
+    required this.date,
+    required this.stepsWalked,
+    required this.caloriesBurned,
+    required this.medicineTaken,
+    this.caloriesIntake,
     this.waterIntake,
     this.weight,
-    this.bloodSugarLevel,
+    this.sugarLevel,
   });
 
   factory DailyLogDatapoint.fromJson(Map<String, dynamic> json) {
     return DailyLogDatapoint(
-      steps: json['steps'],
-      caloriesBurnt: json['caloriesBurnt'],
-      calorieIntake: json['calorieIntake'],
+      date: json['date'],
+      stepsWalked: json['stepsWalked'],
+      caloriesBurned: json['caloriesBurned'],
+      caloriesIntake: json['caloriesIntake'],
       waterIntake: json['waterIntake'],
       weight: json['weight'],
-      bloodSugarLevel: json['bloodSugarLevel'],
+      sugarLevel: json['sugarLevel'],
+      medicineTaken: json['medicineTaken'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'steps': steps,
-      'caloriesBurnt': caloriesBurnt,
-      'calorieIntake': calorieIntake,
+      'date': date.toIso8601String(),
+      'stepsWalked': stepsWalked,
+      'caloriesBurned': caloriesBurned,
+      'caloriesIntake': caloriesIntake,
       'waterIntake': waterIntake,
       'weight': weight,
-      'bloodSugarLevel': bloodSugarLevel,
+      'sugarLevel': sugarLevel,
+      'medicineTaken': medicineTaken,
     };
   }
 }

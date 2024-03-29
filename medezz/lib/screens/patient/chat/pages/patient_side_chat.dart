@@ -1,13 +1,15 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:medezz/api/patient/doctors/fetchdoctors.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
+import 'package:medezz/screens/patient/chat/model/message.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../api/patient/profile/view_profile.dart';
 import 'package:web_socket_channel/io.dart';
-import '../model/message.dart';
+
+import '../widgets/message_bubble.dart';
 
 class PatientSideChatPage extends StatefulWidget {
   const PatientSideChatPage({super.key, required this.doctor});
@@ -18,20 +20,15 @@ class PatientSideChatPage extends StatefulWidget {
 }
 
 class _PatientSideChatPageState extends State<PatientSideChatPage> {
-  final channel = IOWebSocketChannel.connect('ws://healthlink-backend.onrender.com/');
+  late IOWebSocketChannel channel;
   TextEditingController controller = TextEditingController();
   late PatientProfile patientProfile = PatientProfile(username: '', email: '', id: '');
-  List<String> messages = [];
+  List<Message> messages = [];
 
   @override
   void initState() {
-    super.initState();
     loadProfile();
-    channel.stream.listen((message) {
-      setState(() {
-        messages.add(message);
-      });
-    });
+    super.initState();
   }
 
   @override
@@ -45,14 +42,72 @@ class _PatientSideChatPageState extends State<PatientSideChatPage> {
     setState(() {
       patientProfile = prof;
     });
+    await getPreviousMessages();
+    setState(() {
+      channel = IOWebSocketChannel.connect(
+          'ws://healthlink-backend.onrender.com/?sender=${patientProfile.id}&receiver=${widget.doctor.id}');
+    });
+    Future.delayed(const Duration(seconds: 2), () {
+      log('init');
+      log("Patient ID: ${patientProfile.id}");
+      log("Doctor ID: ${widget.doctor.id}");
+      channel.sink.add(
+        jsonEncode({
+          'type': 'init',
+          'message': controller.text,
+          'senderId': patientProfile.id,
+          'receiverId': widget.doctor.id,
+        }),
+      );
+      channel.stream.listen((message) {
+        setState(() {
+          messages.add(Message.fromJson(jsonDecode(message)));
+        });
+      });
+    });
+  }
+
+  Future<void> getPreviousMessages() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+
+    final http.Response response = await http.get(
+      Uri.parse("https://healthlink-backend.onrender.com/chat/${widget.doctor.id}"),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      final Map<String, dynamic> jsonResponse = json.decode(response.body);
+      log("Get Previous Messages Success");
+      log(jsonResponse.toString());
+      List<Message> msg = [];
+      jsonResponse['chats'].forEach((e) {
+        msg.add(Message.fromJson(e));
+      });
+      setState(() {
+        messages = msg;
+      });
+      log(messages.length.toString());
+    } else {
+      log("Get Previous Messages Failure");
+      log(response.statusCode.toString());
+      log(response.body);
+    }
   }
 
   void sendMessage() {
     if (controller.text.isNotEmpty) {
-      channel.sink.add({
-        'message': controller.text,
-        'sender': patientProfile.id,
-        'receiver': widget.doctor.id,});
+      channel.sink.add(
+        jsonEncode({
+          'type': 'chat',
+          'message': controller.text,
+          'senderId': patientProfile.id,
+          'receiverId': widget.doctor.id,
+        }),
+      );
       controller.clear();
     }
   }
@@ -61,7 +116,7 @@ class _PatientSideChatPageState extends State<PatientSideChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('WebSocket Example'),
+        title: Text(widget.doctor.name),
       ),
       body: Column(
         children: <Widget>[
@@ -69,9 +124,7 @@ class _PatientSideChatPageState extends State<PatientSideChatPage> {
             child: ListView.builder(
               itemCount: messages.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(messages[index]),
-                );
+                return MessageBubble(message: messages[index], me: patientProfile.id);
               },
             ),
           ),
@@ -82,11 +135,11 @@ class _PatientSideChatPageState extends State<PatientSideChatPage> {
                 Expanded(
                   child: TextField(
                     controller: controller,
-                    decoration: InputDecoration(labelText: 'Send a message'),
+                    decoration: const InputDecoration(labelText: 'Send a message'),
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.send),
+                  icon: const Icon(Icons.send),
                   onPressed: sendMessage,
                 ),
               ],

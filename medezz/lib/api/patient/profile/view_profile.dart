@@ -42,6 +42,8 @@ Future<PatientProfile> viewProfile() async {
     log(response.body);
 
     final Map<String, dynamic> jsonResponse = json.decode(response.body);
+    log("View Profile Success");
+    log(jsonResponse.toString());
     return PatientProfile.fromJson(jsonResponse);
   } else {
     log("View Profile Failure");

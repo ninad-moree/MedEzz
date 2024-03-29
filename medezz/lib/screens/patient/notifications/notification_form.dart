@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:medezz/constants/colors.dart';
 import 'package:medezz/screens/patient/notifications/Services/notification_services.dart';
 
+import '../../../widgets/custom_snackbar.dart';
+
 class NotificationForm extends StatefulWidget {
   const NotificationForm({super.key});
 
@@ -16,15 +18,7 @@ class _NotificationFormState extends State<NotificationForm> {
   final TextEditingController _medicineNameController = TextEditingController();
   TimeOfDay _selectedTime = TimeOfDay.now();
   final NotificationService _notificationService = NotificationService();
-  final List<String> _frequencyOptions = [
-    'M',
-    'Tu',
-    'W',
-    'Th',
-    'F',
-    'Sa',
-    'Su'
-  ];
+  final List<String> _frequencyOptions = ['M', 'Tu', 'W', 'Th', 'F', 'Sa', 'Su'];
 
   final Set<int> _selectedDays = {};
 
@@ -39,8 +33,7 @@ class _NotificationFormState extends State<NotificationForm> {
       _selectedTime.minute,
     );
 
-    List<String> selectedDays =
-        _selectedDays.map((index) => _frequencyOptions[index]).toList();
+    List<String> selectedDays = _selectedDays.map((index) => _frequencyOptions[index]).toList();
 
     _notificationService.showDelayedNotification(
       schedule: selectedTime,
@@ -50,6 +43,22 @@ class _NotificationFormState extends State<NotificationForm> {
     log('Medicine Name: $medicineName');
     log('Selected Time: $selectedTime');
     log('Selected Days: $selectedDays');
+
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: ShowCustomSnackBar(
+        title: "Reminder Added",
+        label: '$medicineName reminder added.',
+        color: Colors.green,
+        icon: Icons.done_outlined,
+      ),
+      behavior: SnackBarBehavior.floating,
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+    ));
+
+    _medicineNameController.clear();
+    _selectedTime = TimeOfDay.now();
+    _selectedDays.clear();
   }
 
   @override
