@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medezz/constants/colors.dart';
 import 'package:medezz/screens/patient/chatbot/chatbot.dart';
+import 'package:medezz/screens/patient/gamification/plant_screen.dart';
 import 'package:medezz/screens/patient/home/home.dart';
 import 'package:medezz/screens/patient/notifications/notification_form.dart';
 
@@ -32,6 +33,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     final List<Widget> widgetOptions = <Widget>[
       // const PatientFormScreen(),
+      const PlantScreen(),
       const HomeScreenPatient(),
       const NotificationForm(),
       const ChatBot(),
@@ -47,13 +49,13 @@ class _MainPageState extends State<MainPage> {
         selectedLabelStyle: const TextStyle(color: CustomColors.primaryColor),
         unselectedLabelStyle: const TextStyle(color: Colors.grey),
         items: const <BottomNavigationBarItem>[
-          // BottomNavigationBarItem(
-          //   icon: Icon(
-          //     Icons.note_add,
-          //     size: 35,
-          //   ),
-          //   label: 'Patient Form',
-          // ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.bubble_chart,
+              size: 35,
+            ),
+            label: 'Patient Form',
+          ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.home,
