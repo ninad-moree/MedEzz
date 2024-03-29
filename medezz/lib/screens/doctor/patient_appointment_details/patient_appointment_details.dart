@@ -59,7 +59,7 @@ class _PatientAppointmentDetailsState extends State<PatientAppointmentDetails> {
       videoCallTime: 0,
       screenTime: 0,
       messageCount: 0,
-      medicineTaken: 0,
+      medicineTaken: false,
       medicineMissed: 0,
     ),
   ];
@@ -235,10 +235,37 @@ class _PatientAppointmentDetailsState extends State<PatientAppointmentDetails> {
       elevation: 2,
       child: Column(
         children: filteredAppointments.map((appointment) {
-          return ListTile(
-            title: Text('Doctor: ${profile.username}'),
-            subtitle: Text(
-              'Date: ${appointment.date}\nNotes: ${appointment.notes}',
+          return Padding(
+            padding: const EdgeInsets.all(10),
+            child: SizedBox(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Doctor: ${profile.username}"),
+                  Text("Date: ${appointment.date}"),
+                  // Text("Notes: ${appointment.notes}"),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      height: 20,
+                      width: 50,
+                      decoration: BoxDecoration(
+                        color: CustomColors.customGrey,
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          'Notes',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         }).toList(),

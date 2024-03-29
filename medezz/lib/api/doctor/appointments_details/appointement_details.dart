@@ -199,23 +199,23 @@ class TestResult {
 
 class AnalyticsData {
   DateTime date;
-  double heartRate;
+  int heartRate;
   String bloodPressure;
   double weight;
   double sugarLevel;
   double temperature;
   double oxygenLevel;
   int stepsWalked;
-  double caloriesBurned;
-  double sleepDuration;
+  int caloriesBurned;
+  int sleepDuration;
   int waterIntake;
   int caloriesIntake;
-  double callTime;
-  double videoCallTime;
-  double screenTime;
-  double messageCount;
-  double medicineTaken;
-  double medicineMissed;
+  int callTime;
+  int videoCallTime;
+  int screenTime;
+  int messageCount;
+  bool medicineTaken;
+  int medicineMissed;
 
   AnalyticsData({
     required this.date,
@@ -242,23 +242,23 @@ class AnalyticsData {
     return AnalyticsData(
       date:
           json['date'] != null ? DateTime.parse(json['date']) : DateTime.now(),
-      heartRate: json['heartRate'] ?? 0.0,
+      heartRate: json['heartRate'] ?? 0,
       bloodPressure: json['bloodPressure'] ?? '',
       weight: json['weight']?.toDouble() ?? 0.0,
       sugarLevel: json['sugarLevel']?.toDouble() ?? 0.0,
       temperature: json['temperature']?.toDouble() ?? 0.0,
       oxygenLevel: json['oxygenLevel']?.toDouble() ?? 0.0,
       stepsWalked: json['stepsWalked'] ?? 0,
-      caloriesBurned: json['caloriesBurned'] ?? 0.0,
-      sleepDuration: json['sleepDuration'] ?? 0.0,
+      caloriesBurned: json['caloriesBurned'] ?? 0,
+      sleepDuration: json['sleepDuration'] ?? 0,
       waterIntake: json['waterIntake'] ?? 0,
       caloriesIntake: json['caloriesIntake'] ?? 0,
-      callTime: json['callTime'] ?? 0.0,
-      videoCallTime: json['videoCallTime'] ?? 0.0,
-      screenTime: json['screenTime'] ?? 0.0,
-      messageCount: json['messageCount'] ?? 0.0,
-      medicineTaken: json['medicineTaken'] ?? 0.0,
-      medicineMissed: json['medicineMissed'] ?? 0.0,
+      callTime: json['callTime'] ?? 0,
+      videoCallTime: json['videoCallTime'] ?? 0,
+      screenTime: json['screenTime'] ?? 0,
+      messageCount: json['messageCount'] ?? 0,
+      medicineTaken: json['medicineTaken'] ?? false,
+      medicineMissed: json['medicineMissed'] ?? 0,
     );
   }
 }
@@ -333,7 +333,7 @@ Future<Patient> viewPatientProfileDoctor(String id) async {
         videoCallTime: 0,
         screenTime: 0,
         messageCount: 0,
-        medicineTaken: 0,
+        medicineTaken: false,
         medicineMissed: 0,
       ),
     ];
