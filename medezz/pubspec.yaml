@@ -14,7 +14,7 @@ dependencies:
   # UI
   cupertino_icons: ^1.0.2
   flutter_local_notifications: 
-  font_awesome_flutter: ^10.5.0
+  font_awesome_flutter: ^10.7.0
   iconsax: ^0.0.8
   flutter_styled_toast: ^2.2.1
   flutter_markdown: any
