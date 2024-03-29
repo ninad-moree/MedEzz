@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:medezz/api/patient/doctors/fetchdoctors.dart';
+import 'package:medezz/screens/patient/chat/pages/patient_side_chat.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 
 import '../../../../constants/colors.dart';
@@ -153,7 +154,7 @@ class CallButton extends StatelessWidget {
                           child: sendCallButton(
                             callId: callId,
                             message: errMsg,
-                            isVideoCall: false,
+                            isVideoCall: true,
                             onCallFinished: onSendCallInvitationFinished,
                           ),
                         ),
@@ -183,7 +184,7 @@ class CallButton extends StatelessWidget {
           ),
           child: IconButton(
             onPressed: () {
-              String callType = "Audio";
+              String callType = "Video";
 
               createCallDialogue(
                 callId: "1234",
@@ -207,16 +208,34 @@ class CallButton extends StatelessWidget {
           child: IconButton(
             onPressed: () {
               Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: ((context) => BookAppointmentPage(doctorId: doctor.id))));
+            },
+            icon: const Icon(
+              Iconsax.calendar,
+              size: 40,
+              color: Colors.white,
+            ),
+          ),
+        ),
+        const SizedBox(width: 20),
+        Container(
+          decoration: BoxDecoration(
+            color: CustomColors.primaryColor,
+            borderRadius: BorderRadius.circular(14),
+          ),
+          child: IconButton(
+            onPressed: () {
+              Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: ((context) => BookAppointmentPage(
-                        doctorId: doctor.id,
-                      )),
+                  builder: ((context) => PatientSideChatPage(doctor: doctor)),
                 ),
               );
             },
             icon: const Icon(
-              Iconsax.calendar,
+              Iconsax.message,
               size: 40,
               color: Colors.white,
             ),
