@@ -206,7 +206,7 @@ class AnalyticsData {
   double temperature;
   double oxygenLevel;
   int stepsWalked;
-  int caloriesBurned;
+  dynamic caloriesBurned;
   int sleepDuration;
   int waterIntake;
   int caloriesIntake;

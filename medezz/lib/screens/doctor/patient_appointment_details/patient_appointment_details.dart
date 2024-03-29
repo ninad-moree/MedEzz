@@ -243,27 +243,9 @@ class _PatientAppointmentDetailsState extends State<PatientAppointmentDetails> {
                 children: [
                   Text("Doctor: ${profile.username}"),
                   Text("Date: ${appointment.date}"),
-                  // Text("Notes: ${appointment.notes}"),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      height: 20,
-                      width: 50,
-                      decoration: BoxDecoration(
-                        color: CustomColors.customGrey,
-                        borderRadius: BorderRadius.circular(2),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          'Notes',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  appointment.notes == ""
+                      ? const Text("No Previous Notes")
+                      : Text("Notes: ${appointment.notes}"),
                 ],
               ),
             ),
