@@ -37,7 +37,7 @@ class _LoginScreenPatientState extends State<LoginScreenPatient> {
     super.dispose();
   }
 
-  Future<dynamic> signInWithGoogle() async {
+  Future<UserCredential?> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
@@ -53,6 +53,7 @@ class _LoginScreenPatientState extends State<LoginScreenPatient> {
       // TODO
       print('exception->$e');
     }
+    return null;
   }
 
   @override
@@ -81,12 +82,12 @@ class _LoginScreenPatientState extends State<LoginScreenPatient> {
 
                 ElevatedButton(
                   onPressed: () async {
-                    var creds = await signInWithGoogle();
+                    UserCredential? creds = await signInWithGoogle();
 
                     log(creds.toString());
 
                     Map<String, dynamic> res = await loginPatient(
-                      "peeyush.kulgude777@gmail.com",
+                      creds!.user!.email ?? "",
                       "12345678",
                     );
 
@@ -132,12 +133,12 @@ class _LoginScreenPatientState extends State<LoginScreenPatient> {
                         }
                       }
 
-                      if (status.isGranted) {
+                      if (status1.isGranted) {
                         // Permission is already granted
                         print('Activity recognition permission is granted.');
                       } else {
                         // Permission is not granted, request it
-                        var result = await Permission.activityRecognition.request();
+                        var result = await Permission.sensorsAlways.request();
 
                         if (result.isGranted) {
                           // Permission granted

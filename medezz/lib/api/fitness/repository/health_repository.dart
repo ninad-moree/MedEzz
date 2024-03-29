@@ -9,8 +9,10 @@ class HealthRepository {
     if (requested) {
       var now = DateTime.now();
       List<HealthDataPoint> healthData = await health.getHealthDataFromTypes(
-          DateTime.now().subtract(const Duration(days: 1)),
-          DateTime.now(),
+          now.subtract(
+        Duration(hours: now.hour, minutes: now.minute, seconds: now.second),
+      ),
+      now,
           [HealthDataType.STEPS]);
       return healthData.map((e) {
         var b = e;
