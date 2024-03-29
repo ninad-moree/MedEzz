@@ -26,8 +26,6 @@ class _PatientAppointmentDetailsState extends State<PatientAppointmentDetails> {
     Medication(name: '', dosage: '', frequency: '', issuedOn: DateTime.now()),
   ];
 
-  // List<DateTime> declined = [DateTime.now()];
-
   List<Reminder> remainders = [
     Reminder(
       medicine: '',
@@ -114,21 +112,201 @@ class _PatientAppointmentDetailsState extends State<PatientAppointmentDetails> {
           'Patient Details',
           style: TextStyle(color: Colors.white),
         ),
-        leading: IconButton(
-          onPressed: () async {
-            await viewPatientProfileDoctor(widget.patientId);
-          },
-          icon: const Icon(
-            Icons.person,
-            color: Colors.white,
-            size: 40,
-          ),
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildSectionTitle('Basic Information'),
+            _buildBasicInfo(),
+            const SizedBox(height: 20),
+            const SizedBox(height: 20),
+            _buildSectionTitle('Health Conditions'),
+            _buildHealthConditions(),
+            const SizedBox(height: 20),
+            _buildSectionTitle('Medications'),
+            _buildMedications(),
+            const SizedBox(height: 20),
+            _buildSectionTitle('Appointments'),
+            _buildAppointments(),
+            const SizedBox(height: 20),
+            _buildSectionTitle('Reminders'),
+            _buildReminders(),
+            const SizedBox(height: 20),
+            _buildSectionTitle('Test Results'),
+            _buildTestResults(),
+            const SizedBox(height: 20),
+            _buildSectionTitle('Analytics Data'),
+            _buildAnalyticsData(),
+          ],
         ),
       ),
-      body: Column(
-        children: [
-          Text(patientDetails.firstName),
-        ],
+    );
+  }
+
+  Widget _buildSectionTitle(String title) {
+    return Text(
+      title,
+      style: const TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+        color: CustomColors.primaryColor,
+      ),
+    );
+  }
+
+  Widget _buildBasicInfo() {
+    return Card(
+      elevation: 2,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Name: ${patientDetails.firstName} ${patientDetails.lastName}',
+            ),
+            const SizedBox(height: 10),
+            Text('Age: ${patientDetails.age}'),
+            const SizedBox(height: 10),
+            Text('Gender: ${patientDetails.gender}'),
+            const SizedBox(height: 10),
+            Text('Contact Number: ${patientDetails.contactNumber}'),
+            const SizedBox(height: 10),
+            Text('Email: ${patientDetails.email}'),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHealthConditions() {
+    return Card(
+      elevation: 2,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: patientDetails.healthConditions.map((condition) {
+            return Text('- $condition');
+          }).toList(),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMedications() {
+    return Card(
+      elevation: 2,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: patientDetails.medications.map((medication) {
+            return ListTile(
+              title: Text('${medication.name} (${medication.dosage})'),
+              subtitle: Text(
+                'Frequency: ${medication.frequency}\nIssued on: ${medication.issuedOn}',
+              ),
+            );
+          }).toList(),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAppointments() {
+    return Card(
+      elevation: 2,
+      child: Column(
+        children: patientDetails.appointments.map((appointment) {
+          return ListTile(
+            title: Text('Doctor: ${appointment.doctor}'),
+            subtitle: Text(
+              'Date: ${appointment.date}\nNotes: ${appointment.notes}',
+            ),
+          );
+        }).toList(),
+      ),
+    );
+  }
+
+  Widget _buildReminders() {
+    return Card(
+      elevation: 2,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: patientDetails.reminders.map((reminder) {
+            return ListTile(
+              title: Text('Medicine: ${reminder.medicine}'),
+              subtitle: Text(
+                'Timing: ${reminder.timing.join(", ")}\nStart Date: ${reminder.startDate}\nEnd Date: ${reminder.endDate}',
+              ),
+            );
+          }).toList(),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTestResults() {
+    return Card(
+      elevation: 2,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: patientDetails.testResults.map((result) {
+            return ListTile(
+              title: Text('Test Name: ${result.testName}'),
+              subtitle: Text(
+                'Test Date: ${result.testDate}\nTest Result: ${result.testResult}',
+              ),
+            );
+          }).toList(),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAnalyticsData() {
+    return Card(
+      elevation: 2,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: patientDetails.analytics.map((data) {
+            return ListTile(
+              title: Text('Date: ${data.date}'),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Heart Rate: ${data.heartRate}'),
+                  Text('Blood Pressure: ${data.bloodPressure}'),
+                  Text('Weight: ${data.weight}'),
+                  Text('Sugar Level: ${data.sugarLevel}'),
+                  Text('Temperature: ${data.temperature}'),
+                  Text('Oxygen Level: ${data.oxygenLevel}'),
+                  Text('Steps Walked: ${data.stepsWalked}'),
+                  Text('Calories Burned: ${data.caloriesBurned}'),
+                  Text('Sleep Duration: ${data.sleepDuration}'),
+                  Text('Water Intake: ${data.waterIntake}'),
+                  Text('Calories Intake: ${data.caloriesIntake}'),
+                  Text('Call Time: ${data.callTime}'),
+                  Text('Video Call Time: ${data.videoCallTime}'),
+                  Text('Screen Time: ${data.screenTime}'),
+                  Text('Message Count: ${data.messageCount}'),
+                  Text('Medicine Taken: ${data.medicineTaken}'),
+                  Text('Medicine Missed: ${data.medicineMissed}'),
+                ],
+              ),
+            );
+          }).toList(),
+        ),
       ),
     );
   }
