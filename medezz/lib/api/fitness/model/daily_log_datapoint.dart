@@ -6,13 +6,13 @@ class DailyLogDatapoint {
   double? waterIntake = 0;
   double? weight = 0;
   double? sugarLevel = 0;
-  bool medicationTaken;
+  bool medicineTaken;
 
   DailyLogDatapoint({
     required this.date,
     required this.stepsWalked,
     required this.caloriesBurned,
-    required this.medicationTaken,
+    required this.medicineTaken,
     this.caloriesIntake,
     this.waterIntake,
     this.weight,
@@ -28,7 +28,7 @@ class DailyLogDatapoint {
       waterIntake: json['waterIntake'],
       weight: json['weight'],
       sugarLevel: json['sugarLevel'],
-      medicationTaken: json['medicationTaken'],
+      medicineTaken: json['medicineTaken'],
     );
   }
 
@@ -41,7 +41,7 @@ class DailyLogDatapoint {
       'waterIntake': waterIntake,
       'weight': weight,
       'sugarLevel': sugarLevel,
-      'medicationTaken': medicationTaken,
+      'medicineTaken': medicineTaken,
     };
   }
 }

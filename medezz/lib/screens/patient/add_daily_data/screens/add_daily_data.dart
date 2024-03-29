@@ -24,7 +24,7 @@ class _DataPageState extends State<DataPage> {
   TextEditingController waterIntake = TextEditingController(text: "0");
   TextEditingController weight = TextEditingController(text: "0");
   TextEditingController bloodSugarLevel = TextEditingController(text: "0");
-  bool medicationTaken = false;
+  bool medicineTaken = false;
 
   final controller = FitnessController();
 
@@ -40,7 +40,7 @@ class _DataPageState extends State<DataPage> {
           date: DateTime.now(),
           stepsWalked: 0,
           caloriesBurned: 0,
-          medicationTaken: false,
+          medicineTaken: false,
         );
     setState(() {
       steps.text = datapoint.stepsWalked.toString();
@@ -72,8 +72,8 @@ class _DataPageState extends State<DataPage> {
           ListTile(
             title: Text("Medication Taken"),
             trailing: Checkbox(
-              value: medicationTaken,
-              onChanged: (value) => setState(() => medicationTaken = value!),
+              value: medicineTaken,
+              onChanged: (value) => setState(() => medicineTaken = value!),
             ),
           ),
           const Divider(),
@@ -91,7 +91,7 @@ class _DataPageState extends State<DataPage> {
                   waterIntake: double.parse(waterIntake.text),
                   weight: double.parse(weight.text),
                   sugarLevel: double.parse(bloodSugarLevel.text),
-                  medicationTaken: medicationTaken,
+                  medicineTaken: medicineTaken,
                 ),
               );
               if (response.statusCode == 200 || response.statusCode == 201) {

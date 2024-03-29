@@ -43,7 +43,7 @@ class FitnessController {
       date: DateTime.now(),
       stepsWalked: totalSteps,
       caloriesBurned: totalCalories,
-      medicationTaken: false,
+      medicineTaken: false,
     );
   }
 }
