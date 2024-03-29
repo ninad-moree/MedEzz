@@ -84,10 +84,10 @@ class _LoginScreenPatientState extends State<LoginScreenPatient> {
                   onPressed: () async {
                     UserCredential? creds = await signInWithGoogle();
 
-                    log(creds.toString());
+                    log("Google Id: $creds");
 
                     Map<String, dynamic> res = await loginPatient(
-                      creds!.user!.email ?? "",
+                      creds!.user!.email ?? "peeyush.kulgude777@gmail.com",
                       "12345678",
                     );
 
@@ -99,6 +99,9 @@ class _LoginScreenPatientState extends State<LoginScreenPatient> {
                       log(res['accessToken']);
 
                       PatientProfile prof = await viewProfile();
+
+                      log("Profile");
+                      log(prof.toString());
 
                       onUserLogin(
                         myUserId: prof.id,
@@ -148,7 +151,6 @@ class _LoginScreenPatientState extends State<LoginScreenPatient> {
                           print('Activity recognition permission is denied.');
                         }
                       }
-
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: ShowCustomSnackBar(

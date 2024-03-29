@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medezz/constants/colors.dart';
+import 'package:medezz/screens/patient/add_daily_data/screens/add_daily_data.dart';
 import 'package:medezz/screens/patient/chatbot/chatbot.dart';
 import 'package:medezz/screens/patient/gamification/plant_screen.dart';
 import 'package:medezz/screens/patient/home/home.dart';
@@ -33,7 +34,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     final List<Widget> widgetOptions = <Widget>[
       // const PatientFormScreen(),
-      const PlantScreen(),
+      const DataPage(),
       const HomeScreenPatient(),
       const NotificationForm(),
       const ChatBot(),
@@ -51,10 +52,10 @@ class _MainPageState extends State<MainPage> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.bubble_chart,
+              Icons.last_page_outlined,
               size: 35,
             ),
-            label: 'Patient Form',
+            label: 'Daily Log',
           ),
           BottomNavigationBarItem(
             icon: Icon(
