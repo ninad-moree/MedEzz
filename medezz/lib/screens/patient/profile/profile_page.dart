@@ -154,6 +154,7 @@ class _ProfileScreenPatientState extends State<ProfileScreenPatient> {
             ),
           );
         },
+        child: const Icon(Icons.fitness_center),
       ),
     );
   }
