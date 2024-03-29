@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medezz/api/fitness/screens/fitness_page.dart';
 import 'package:medezz/api/patient/profile/view_profile.dart';
 import 'package:medezz/screens/doctor_patient/doctor_patient.dart';
 import 'package:medezz/services/zego_login_services.dart';
@@ -118,6 +119,16 @@ class _ProfileScreenPatientState extends State<ProfileScreenPatient> {
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const FitnessPage(),
+            ),
+          );
+        },
       ),
     );
   }
