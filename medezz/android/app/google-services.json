@@ -12,7 +12,20 @@
           "package_name": "com.example.medezz"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "639178484796-pj9n6ncsut21u7soioce9nh894nh023d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.medezz",
+            "certificate_hash": "097ff60399fe7e6b772a73d64b1cb06ca3ccdb95"
+          }
+        },
+        {
+          "client_id": "639178484796-d8v1lm19e5f4i2skkh42mnh58imvr3to.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAFzOrKUyEB6UTvM-2IkDDFnvBVBTl29pE"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "639178484796-1msvc470ljcii7303kgc092sgsk6ea6r.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "639178484796-c1ttk9g5elmnhkl64jca0h8am86v9tqu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.medezz"
+              }
+            }
+          ]
         }
       }
     }
