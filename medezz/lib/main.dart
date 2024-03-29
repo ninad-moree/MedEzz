@@ -12,6 +12,7 @@ import 'screens/patient/notifications/Services/notification_services.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
+// checking
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   NotificationService().initNotification();
