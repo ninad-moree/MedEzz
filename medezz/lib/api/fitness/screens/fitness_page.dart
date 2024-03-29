@@ -10,7 +10,7 @@ class FitnessPage extends StatefulWidget {
 }
 
 class _FitnessPageState extends State<FitnessPage> {
-  final controller = HomeController();
+  final controller = FitnessController();
 
   @override
   Widget build(BuildContext context) {

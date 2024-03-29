@@ -7,7 +7,7 @@ import 'package:medezz/api/fitness/model/daily_log_datapoint.dart';
 import '../model/footsteps.dart';
 import '../repository/health_repository.dart';
 
-class HomeController {
+class FitnessController {
   final repository = HealthRepository();
   final ValueNotifier<List<FootSteps>> steps = ValueNotifier(<FootSteps>[]);
 
@@ -24,7 +24,6 @@ class HomeController {
         HealthDataType.ACTIVE_ENERGY_BURNED,
       ],
     );
-    log(calorieData.toString());
 
     int totalSteps = 0;
     if (steps.value.isNotEmpty) {
@@ -34,12 +33,17 @@ class HomeController {
     }
 
     double totalCalories = 0;
-    // if (calorieData.isNotEmpty) {
-    //   calorieData.forEach((element) {
-    //     totalCalories += element.value;
-    //   });
-    // }
+    if (calorieData.isNotEmpty) {
+      calorieData.forEach((element) {
+        totalCalories += double.parse(element.value.toString());
+      });
+    }
 
-    return DailyLogDatapoint(steps: totalSteps, caloriesBurnt: totalCalories);
+    return DailyLogDatapoint(
+      date: DateTime.now(),
+      stepsWalked: totalSteps,
+      caloriesBurned: totalCalories,
+      medicineTaken: false,
+    );
   }
 }

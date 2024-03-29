@@ -46,7 +46,7 @@ class _PatientFormPutState extends State<PatientFormPut> {
         iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: CustomColors.primaryColor,
         title: const Text(
-          'Patient Form',
+          'Daily Log',
           style: TextStyle(color: Colors.white),
         ),
       ),
@@ -115,8 +115,7 @@ class _PatientFormPutState extends State<PatientFormPut> {
                   return null;
                 },
                 onSaved: (value) {
-                  _healthCondition =
-                      value!.split(',').map((e) => e.trim()).toList();
+                  _healthCondition = value!.split(',').map((e) => e.trim()).toList();
                 },
               ),
               const SizedBox(height: 20),
@@ -143,8 +142,7 @@ class _PatientFormPutState extends State<PatientFormPut> {
                       );
 
                       if (res == 200 || res == 201) {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content: ShowCustomSnackBar(
                             title: "Patient Details Added",
                             label: "",
@@ -156,8 +154,7 @@ class _PatientFormPutState extends State<PatientFormPut> {
                           backgroundColor: Colors.transparent,
                         ));
                       } else {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content: ShowCustomSnackBar(
                             title: "Something Went Wrong",
                             label: "",
