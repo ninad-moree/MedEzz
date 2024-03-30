@@ -68,6 +68,45 @@ class _PatientAnalyticsState extends State<PatientAnalytics> {
     return data;
   }
 
+  List<ChartData> getScreenTime() {
+    List<ChartData> data = [];
+
+    for (int i = 0; i < widget.patientDetails.analytics.length; i++) {
+      data.add(ChartData(
+        x: i.toDouble(),
+        y: widget.patientDetails.analytics[i].screenTime.toDouble(),
+      ));
+    }
+
+    return data;
+  }
+
+  List<ChartData> getCallTime() {
+    List<ChartData> data = [];
+
+    for (int i = 0; i < widget.patientDetails.analytics.length; i++) {
+      data.add(ChartData(
+        x: i.toDouble(),
+        y: widget.patientDetails.analytics[i].callTime.toDouble(),
+      ));
+    }
+
+    return data;
+  }
+
+  List<ChartData> getMessageCount() {
+    List<ChartData> data = [];
+
+    for (int i = 0; i < widget.patientDetails.analytics.length; i++) {
+      data.add(ChartData(
+        x: i.toDouble(),
+        y: widget.patientDetails.analytics[i].messageCount.toDouble(),
+      ));
+    }
+
+    return data;
+  }
+
   List<ChartData2> getBooleanChartData() {
     int positiveCount = 0;
     int negativeCount = 0;
@@ -264,6 +303,75 @@ class _PatientAnalyticsState extends State<PatientAnalytics> {
                   ],
                 ),
               ),
+              const Text(
+                'Screen Time',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(
+                height: 300,
+                child: SfCartesianChart(
+                  primaryXAxis: const NumericAxis(),
+                  primaryYAxis: const NumericAxis(),
+                  series: <CartesianSeries>[
+                    LineSeries<ChartData, double>(
+                      dataSource: getScreenTime(),
+                      xValueMapper: (ChartData data, _) => data.x,
+                      yValueMapper: (ChartData data, _) => data.y,
+                      name: 'Calories Intake',
+                    )
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                'Call Time',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(
+                height: 300,
+                child: SfCartesianChart(
+                  primaryXAxis: const NumericAxis(),
+                  primaryYAxis: const NumericAxis(),
+                  series: <CartesianSeries>[
+                    LineSeries<ChartData, double>(
+                      dataSource: getCallTime(),
+                      xValueMapper: (ChartData data, _) => data.x,
+                      yValueMapper: (ChartData data, _) => data.y,
+                      name: 'Calories Intake',
+                    )
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                'Message Count',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(
+                height: 300,
+                child: SfCartesianChart(
+                  primaryXAxis: const NumericAxis(),
+                  primaryYAxis: const NumericAxis(),
+                  series: <CartesianSeries>[
+                    LineSeries<ChartData, double>(
+                      dataSource: getMessageCount(),
+                      xValueMapper: (ChartData data, _) => data.x,
+                      yValueMapper: (ChartData data, _) => data.y,
+                      name: 'Calories Intake',
+                    )
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
             ],
           ),
         ),
