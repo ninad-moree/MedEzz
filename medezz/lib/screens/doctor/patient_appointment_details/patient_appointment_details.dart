@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medezz/api/doctor/appointments_details/appointement_details.dart';
 import 'package:medezz/screens/doctor/chat/screens/doctor_side_chat.dart';
+import 'package:medezz/screens/doctor/patient_appointment_details/patient_analytics.dart';
 
 import '../../../api/doctor/profile/doctor_profile.dart';
 import '../../../constants/colors.dart';
@@ -126,6 +127,21 @@ class _PatientAppointmentDetailsState extends State<PatientAppointmentDetails> {
           'Patient Details',
           style: TextStyle(color: Colors.white),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PatientAnalytics(
+                    patientDetails: patientDetails,
+                  ),
+                ),
+              );
+            },
+            icon: const Icon(Icons.analytics),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
