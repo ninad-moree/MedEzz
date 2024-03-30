@@ -26,7 +26,7 @@ Future<int> addNotes(
   );
 
   if (response.statusCode == 200 || response.statusCode == 201) {
-    log("Add Patient Details");
+    log("Add Notes Details");
   }
 
   log(response.statusCode.toString());

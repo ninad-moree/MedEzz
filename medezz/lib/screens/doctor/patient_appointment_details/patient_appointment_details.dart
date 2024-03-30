@@ -11,12 +11,13 @@ class PatientAppointmentDetails extends StatefulWidget {
   final String patientId;
 
   @override
-  State<PatientAppointmentDetails> createState() => _PatientAppointmentDetailsState();
+  State<PatientAppointmentDetails> createState() =>
+      _PatientAppointmentDetailsState();
 }
 
 class _PatientAppointmentDetailsState extends State<PatientAppointmentDetails> {
-  List<Appointment> appointments = [
-    Appointment(
+  List<Appointment1> appointments = [
+    Appointment1(
       date: DateTime.now(),
       doctor: '',
       notes: '',
@@ -158,8 +159,8 @@ class _PatientAppointmentDetailsState extends State<PatientAppointmentDetails> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>
-                  DoctorSideChatPage(patient: patientDetails, doctorId: profile.id),
+              builder: (context) => DoctorSideChatPage(
+                  patient: patientDetails, doctorId: profile.id),
             ),
           );
         },
@@ -240,7 +241,7 @@ class _PatientAppointmentDetailsState extends State<PatientAppointmentDetails> {
   }
 
   Widget _buildAppointments() {
-    List<Appointment> filteredAppointments = patientDetails.appointments
+    List<Appointment1> filteredAppointments = patientDetails.appointments
         .where((appointment) => appointment.doctor == profile.id)
         .toList();
 
@@ -255,7 +256,9 @@ class _PatientAppointmentDetailsState extends State<PatientAppointmentDetails> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  isPastAppointment ? const Text("Prev") : const Text("Upcoming"),
+                  isPastAppointment
+                      ? const Text("Prev")
+                      : const Text("Upcoming"),
                   Text("Doctor: ${profile.username}"),
                   Text("Date: ${appointment.date}"),
                   appointment.notes == ""

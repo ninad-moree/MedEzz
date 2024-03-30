@@ -15,7 +15,7 @@ class Patient {
   Address address;
   List<String> healthConditions;
   List<Medication> medications;
-  List<Appointment> appointments;
+  List<Appointment1> appointments;
   List<Reminder> reminders;
   String user;
   List<TestResult> testResults;
@@ -58,8 +58,8 @@ class Patient {
       healthConditions: List<String>.from(json['healthConditions'] ?? []),
       medications: List<Medication>.from(
           json['medications']?.map((x) => Medication.fromJson(x)) ?? []),
-      appointments: List<Appointment>.from(
-          json['appointments']?.map((x) => Appointment.fromJson(x)) ?? []),
+      appointments: List<Appointment1>.from(
+          json['appointments']?.map((x) => Appointment1.fromJson(x)) ?? []),
       reminders: List<Reminder>.from(
           json['reminder']?.map((x) => Reminder.fromJson(x)) ?? []),
       user: json['user'] ?? '',
@@ -121,21 +121,30 @@ class Medication {
           : DateTime.now(),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'dosage': dosage,
+      'frequency': frequency,
+      'issuedOn': issuedOn.toIso8601String(),
+    };
+  }
 }
 
-class Appointment {
+class Appointment1 {
   DateTime date;
   String doctor;
   String notes;
 
-  Appointment({
+  Appointment1({
     required this.date,
     required this.doctor,
     required this.notes,
   });
 
-  factory Appointment.fromJson(Map<String, dynamic> json) {
-    return Appointment(
+  factory Appointment1.fromJson(Map<String, dynamic> json) {
+    return Appointment1(
       date:
           json['date'] != null ? DateTime.parse(json['date']) : DateTime.now(),
       doctor: json['doctor'] ?? '',
@@ -287,8 +296,8 @@ Future<Patient> viewPatientProfileDoctor(String id) async {
     log(response.statusCode.toString());
     log(response.body);
 
-    List<Appointment> appointments = [
-      Appointment(
+    List<Appointment1> appointments = [
+      Appointment1(
         date: DateTime.now(),
         doctor: '',
         notes: '',
