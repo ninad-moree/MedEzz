@@ -93,11 +93,12 @@ class DoctorPatient extends StatelessWidget {
                         bool? isLogin = prefs.getBool('isLoggedIn') ?? false;
 
                         if (isLogin) {
-                          Navigator.push(
+                          Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
                               builder: (context) => const MainPage(),
                             ),
+                            (route) => false,
                           );
                         } else {
                           Navigator.push(
