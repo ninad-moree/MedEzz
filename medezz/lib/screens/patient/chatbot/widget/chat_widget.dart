@@ -37,7 +37,7 @@ class _ChatbotWidgetState extends State<ChatbotWidget> {
       apiKey: ApiConstants.geminiAPI,
     );
     _chat = _model.startChat();
-    _sendChatMessage("Act as if you are a medical health chatbot.");
+    _sendInitMessage("Act as if you are a medical health chatbot.");
   }
 
   void _scrollDown() {
@@ -160,8 +160,7 @@ class _ChatbotWidgetState extends State<ChatbotWidget> {
     });
     try {
       ByteData catBytes = await rootBundle.load('assets/images/bell.png');
-      ByteData sconeBytes =
-          await rootBundle.load('assets/images/ambulance.png');
+      ByteData sconeBytes = await rootBundle.load('assets/images/ambulance.png');
       final content = [
         Content.multi([
           TextPart(message),
@@ -170,16 +169,10 @@ class _ChatbotWidgetState extends State<ChatbotWidget> {
           DataPart('image/jpeg', sconeBytes.buffer.asUint8List()),
         ])
       ];
-      _generatedContent.add((
-        image: Image.asset("assets/images/cat.jpg"),
-        text: message,
-        fromUser: true
-      ));
-      _generatedContent.add((
-        image: Image.asset("assets/images/scones.jpg"),
-        text: null,
-        fromUser: true
-      ));
+      _generatedContent
+          .add((image: Image.asset("assets/images/cat.jpg"), text: message, fromUser: true));
+      _generatedContent
+          .add((image: Image.asset("assets/images/scones.jpg"), text: null, fromUser: true));
 
       var response = await _visionModel.generateContent(content);
       var text = response.text;
@@ -214,7 +207,6 @@ class _ChatbotWidgetState extends State<ChatbotWidget> {
     });
 
     try {
-      _generatedContent.add((image: null, text: message, fromUser: true));
       final response = await _chat.sendMessage(
         Content.text(message),
       );
