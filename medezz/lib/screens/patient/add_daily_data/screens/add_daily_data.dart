@@ -44,7 +44,7 @@ class _DataPageState extends State<DataPage> {
         );
     setState(() {
       steps.text = datapoint.stepsWalked.toString();
-      caloriesBurnt.text = datapoint.caloriesBurned.toString();
+      caloriesBurnt.text = datapoint.caloriesBurned.toStringAsFixed(2);
     });
   }
 

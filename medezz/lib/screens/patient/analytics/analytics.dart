@@ -6,6 +6,7 @@ import '../../../api/patient/profile/view_patient_profile.dart';
 import '../../../constants/colors.dart';
 import 'widget/chart_data.dart';
 import 'widget/chart_data_2.dart';
+import 'widget/leaderboard_dialog_box.dart';
 
 class AnalyticsScreen extends StatefulWidget {
   const AnalyticsScreen({super.key});
@@ -198,16 +199,68 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
             children: [
               Center(
                 child: ElevatedButton(
+                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.green)),
                   onPressed: () {},
                   child: Text(
                     'Health Score: ${patientDetails.healthScore.toStringAsFixed(2)}',
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
                   ),
                 ),
               ),
+              const SizedBox(height: 10),
+              const Text(
+                'Steps Walked',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(
+                height: 300,
+                child: SfCartesianChart(
+                  primaryXAxis: const NumericAxis(),
+                  primaryYAxis: const NumericAxis(),
+                  series: <CartesianSeries>[
+                    LineSeries<ChartData, double>(
+                      dataSource: getSetpCount(),
+                      xValueMapper: (ChartData data, _) => data.x,
+                      yValueMapper: (ChartData data, _) => data.y,
+                      name: 'Calories Intake',
+                    )
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                'Medicine Taken',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(
+                height: 300,
+                child: SfCartesianChart(
+                  primaryXAxis: const CategoryAxis(),
+                  primaryYAxis: const NumericAxis(),
+                  series: <CartesianSeries>[
+                    BarSeries<ChartData2, String>(
+                      dataSource: getBooleanChartData(),
+
+                      xValueMapper: (ChartData2 data, _) => data.x,
+                      yValueMapper: (ChartData2 data, _) => data.y.toDouble(),
+
+                      // Customize appearance if needed
+                      dataLabelSettings: const DataLabelSettings(isVisible: true),
+                    )
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
               const Text(
                 'Calories Intake Graph',
                 style: TextStyle(
@@ -256,29 +309,6 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
               ),
               const SizedBox(height: 10),
               const Text(
-                'Steps Walked',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(
-                height: 300,
-                child: SfCartesianChart(
-                  primaryXAxis: const NumericAxis(),
-                  primaryYAxis: const NumericAxis(),
-                  series: <CartesianSeries>[
-                    LineSeries<ChartData, double>(
-                      dataSource: getSetpCount(),
-                      xValueMapper: (ChartData data, _) => data.x,
-                      yValueMapper: (ChartData data, _) => data.y,
-                      name: 'Calories Intake',
-                    )
-                  ],
-                ),
-              ),
-              const SizedBox(height: 10),
-              const Text(
                 'Water Intake',
                 style: TextStyle(
                   fontSize: 18,
@@ -301,34 +331,15 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                 ),
               ),
               const SizedBox(height: 10),
-              const Text(
-                'Medicine Taken',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(
-                height: 300,
-                child: SfCartesianChart(
-                  primaryXAxis: const CategoryAxis(),
-                  primaryYAxis: const NumericAxis(),
-                  series: <CartesianSeries>[
-                    BarSeries<ChartData2, String>(
-                      dataSource: getBooleanChartData(),
-
-                      xValueMapper: (ChartData2 data, _) => data.x,
-                      yValueMapper: (ChartData2 data, _) => data.y.toDouble(),
-
-                      // Customize appearance if needed
-                      dataLabelSettings: const DataLabelSettings(isVisible: true),
-                    )
-                  ],
-                ),
-              ),
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showLeaderBoard(context);
+        },
+        child: const Icon(Icons.leaderboard),
       ),
     );
   }

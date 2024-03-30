@@ -37,6 +37,7 @@ class _ChatbotWidgetState extends State<ChatbotWidget> {
       apiKey: ApiConstants.geminiAPI,
     );
     _chat = _model.startChat();
+    _sendChatMessage("Act as if you are a medical health chatbot.");
   }
 
   void _scrollDown() {
@@ -193,6 +194,30 @@ class _ChatbotWidgetState extends State<ChatbotWidget> {
           _scrollDown();
         });
       }
+    } catch (e) {
+      _showError(e.toString());
+      setState(() {
+        _loading = false;
+      });
+    } finally {
+      _textController.clear();
+      setState(() {
+        _loading = false;
+      });
+      _textFieldFocus.requestFocus();
+    }
+  }
+
+  Future<void> _sendInitMessage(String message) async {
+    setState(() {
+      _loading = true;
+    });
+
+    try {
+      _generatedContent.add((image: null, text: message, fromUser: true));
+      final response = await _chat.sendMessage(
+        Content.text(message),
+      );
     } catch (e) {
       _showError(e.toString());
       setState(() {
