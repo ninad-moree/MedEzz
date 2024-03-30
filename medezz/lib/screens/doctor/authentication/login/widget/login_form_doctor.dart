@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:medezz/api/doctor/authentication/login_doctor.dart';
 import 'package:medezz/api/doctor/profile/doctor_profile.dart';
+import 'package:medezz/screens/doctor/appointments/appointments.dart';
 import 'package:medezz/screens/doctor/authentication/signup/signup_screen_doctor.dart';
 import 'package:medezz/screens/doctor/main_page.dart';
 import 'package:medezz/services/zego_login_services.dart';
@@ -88,7 +89,7 @@ class LoginFormDoctor extends StatelessWidget {
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const MainPage(),
+                        builder: (context) => const AppointmentsScreen(),
                       ),
                       (route) => false,
                     );
