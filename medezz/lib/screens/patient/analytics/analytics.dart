@@ -88,6 +88,8 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
     streaks: {},
     maxStreaks: {},
     analyticsThresholds: {},
+    healthScore: 0,
+    engagementScore: 0,
   );
 
   @override
@@ -194,6 +196,18 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Health Score: ${patientDetails.healthScore.toStringAsFixed(2)}',
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
               const Text(
                 'Calories Intake Graph',
                 style: TextStyle(
@@ -307,8 +321,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                       yValueMapper: (ChartData2 data, _) => data.y.toDouble(),
 
                       // Customize appearance if needed
-                      dataLabelSettings:
-                          const DataLabelSettings(isVisible: true),
+                      dataLabelSettings: const DataLabelSettings(isVisible: true),
                     )
                   ],
                 ),

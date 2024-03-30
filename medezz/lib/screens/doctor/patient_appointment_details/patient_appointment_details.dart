@@ -88,6 +88,8 @@ class _PatientAppointmentDetailsState extends State<PatientAppointmentDetails> {
     streaks: {},
     maxStreaks: {},
     analyticsThresholds: {},
+    healthScore: 0,
+    engagementScore: 0,
   );
 
   late DoctorProfile profile = DoctorProfile(username: '', email: '', id: '');

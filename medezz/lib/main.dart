@@ -4,6 +4,7 @@ import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:medezz/api/patient/profile/view_profile.dart';
 import 'package:medezz/constants/api_constants.dart';
 import 'package:medezz/screens/onboarding/on_boarding.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 import 'package:zego_uikit_signaling_plugin/zego_uikit_signaling_plugin.dart';
 
@@ -73,6 +74,9 @@ class _MyAppState extends State<MyApp> {
       initialRoute: '/',
       routes: {'/': (context) => const OnBoardingScreen()},
       builder: (BuildContext context, Widget? child) {
+        SharedPreferences.getInstance().then((prefs) {
+          prefs.setString('sessionStartTime', DateTime.now().toIso8601String());
+        });
         return Stack(
           children: [
             child!,

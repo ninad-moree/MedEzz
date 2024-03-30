@@ -6,6 +6,7 @@ import 'package:medezz/api/fitness/model/daily_log_datapoint.dart';
 import 'package:medezz/api/fitness/screens/fitness_controller.dart';
 import 'package:medezz/screens/patient/add_daily_data/logic/send_data.dart';
 import 'package:medezz/screens/patient/gamification/plant_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/custom_snackbar.dart';
 
@@ -81,6 +82,13 @@ class _DataPageState extends State<DataPage> {
           ),
           ElevatedButton(
             onPressed: () async {
+              DateTime sessionStartTime = DateTime.now();
+              await SharedPreferences.getInstance().then((prefs) {
+                String? result = prefs.getString('sessionStartTime');
+                if (result != null) {
+                  sessionStartTime = DateTime.parse(result);
+                }
+              });
               http.Response response = await sendDailyDatapoint(
                 DailyLogDatapoint(
                   date: DateTime.now(),
@@ -91,6 +99,7 @@ class _DataPageState extends State<DataPage> {
                   weight: double.parse(weight.text),
                   sugarLevel: double.parse(bloodSugarLevel.text),
                   medicineTaken: medicineTaken,
+                  screenTime: DateTime.now().difference(sessionStartTime).inSeconds,
                 ),
               );
               if (response.statusCode == 200 || response.statusCode == 201) {
@@ -106,9 +115,7 @@ class _DataPageState extends State<DataPage> {
                   backgroundColor: Colors.transparent,
                 ));
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const PlantScreen()));
+                    context, MaterialPageRoute(builder: (context) => const PlantScreen()));
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(

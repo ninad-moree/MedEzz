@@ -95,6 +95,8 @@ class _PatientFormPutState extends State<PatientFormPut> {
     streaks: {},
     maxStreaks: {},
     analyticsThresholds: {},
+    healthScore: 0,
+    engagementScore: 0,
   );
 
   final _formKey = GlobalKey<FormState>();
