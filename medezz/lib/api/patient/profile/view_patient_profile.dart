@@ -29,8 +29,8 @@ Future<Patient> viewPatientProfile() async {
     log(response.statusCode.toString());
     log(response.body);
 
-    List<Appointment> appointments = [
-      Appointment(
+    List<Appointment1> appointments = [
+      Appointment1(
         date: DateTime.now(),
         doctor: '',
         notes: '',

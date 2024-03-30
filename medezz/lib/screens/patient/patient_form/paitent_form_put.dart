@@ -22,8 +22,8 @@ class PatientFormPut extends StatefulWidget {
 class _PatientFormPutState extends State<PatientFormPut> {
   late PatientProfile profile = PatientProfile(username: '', email: '', id: '');
 
-  List<Appointment> appointments = [
-    Appointment(
+  List<Appointment1> appointments = [
+    Appointment1(
       date: DateTime.now(),
       doctor: '',
       notes: '',

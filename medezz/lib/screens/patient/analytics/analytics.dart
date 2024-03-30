@@ -15,8 +15,8 @@ class AnalyticsScreen extends StatefulWidget {
 }
 
 class _AnalyticsScreenState extends State<AnalyticsScreen> {
-  List<Appointment> appointments = [
-    Appointment(
+  List<Appointment1> appointments = [
+    Appointment1(
       date: DateTime.now(),
       doctor: '',
       notes: '',
