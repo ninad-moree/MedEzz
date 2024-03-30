@@ -155,7 +155,11 @@ class _PatientAnalyticsState extends State<PatientAnalytics> {
                       onPressed: () {},
                       style: ButtonStyle(
                         backgroundColor:
-                            MaterialStateProperty.all(Colors.green),
+                            MaterialStateProperty.all(widget.patientDetails.healthScore < 3
+                        ? Colors.red
+                        : widget.patientDetails.healthScore < 6
+                            ? Colors.yellow
+                            : Colors.green),
                       ),
                       child: Text(
                         'Health Score: ${widget.patientDetails.healthScore.toStringAsFixed(1)}',
@@ -170,7 +174,11 @@ class _PatientAnalyticsState extends State<PatientAnalytics> {
                       onPressed: () {},
                       style: ButtonStyle(
                           backgroundColor:
-                              MaterialStateProperty.all(Colors.green)),
+                              MaterialStateProperty.all(widget.patientDetails.engagementScore < 3
+                        ? Colors.red
+                        : widget.patientDetails.engagementScore < 6
+                            ? Colors.yellow
+                            : Colors.green)),
                       child: Text(
                         'Engagement Score: ${widget.patientDetails.engagementScore.toStringAsFixed(1)}',
                         style: const TextStyle(
