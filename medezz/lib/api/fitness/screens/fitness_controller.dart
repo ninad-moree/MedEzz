@@ -1,4 +1,4 @@
-import 'dart:developer';
+// ignore_for_file: avoid_function_literals_in_foreach_calls
 
 import 'package:flutter/material.dart';
 import 'package:health/health.dart';
@@ -15,7 +15,8 @@ class FitnessController {
     steps.value = await repository.getFootSteep();
     DateTime now = DateTime.now();
 
-    List<HealthDataPoint> calorieData = await repository.health.getHealthDataFromTypes(
+    List<HealthDataPoint> calorieData =
+        await repository.health.getHealthDataFromTypes(
       now.subtract(
         Duration(hours: now.hour, minutes: now.minute, seconds: now.second),
       ),

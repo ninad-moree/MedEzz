@@ -4,13 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:medezz/api/patient/profile/check_profile_exist.dart';
 import 'package:medezz/api/fitness/screens/fitness_page.dart';
-import 'package:medezz/api/patient/profile/view_patient_profile.dart';
 import 'package:medezz/api/patient/profile/view_profile.dart';
 import 'package:medezz/screens/doctor_patient/doctor_patient.dart';
 import 'package:medezz/services/zego_login_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../api/doctor/appointments_details/appointement_details.dart';
 import '../../../constants/colors.dart';
 import '../patient_form/paitent_form_put.dart';
 import '../patient_form/patient_form.dart';

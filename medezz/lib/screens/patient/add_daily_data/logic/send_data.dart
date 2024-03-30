@@ -22,6 +22,5 @@ Future<http.Response> sendDailyDatapoint(DailyLogDatapoint datapoint) async {
   log(response.statusCode.toString());
   log(response.body);
 
-  Map<String, dynamic> responseBody = jsonDecode(response.body);
   return response;
 }

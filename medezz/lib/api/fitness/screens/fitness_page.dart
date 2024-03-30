@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
 import '../widgets/health_card.dart';
 import 'fitness_controller.dart';
 
@@ -32,7 +31,10 @@ class _FitnessPageState extends State<FitnessPage> {
           return GridView(
             padding: const EdgeInsets.all(15),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, childAspectRatio: 1, mainAxisSpacing: 15, crossAxisSpacing: 15),
+                crossAxisCount: 2,
+                childAspectRatio: 1,
+                mainAxisSpacing: 15,
+                crossAxisSpacing: 15),
             children: [
               for (final footSteps in value) HealthCard(footSteps: footSteps),
             ],

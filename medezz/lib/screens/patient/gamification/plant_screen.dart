@@ -25,6 +25,7 @@ class _PlantScreenState extends State<PlantScreen> {
   SMIInput<double>? _progress;
   String plantButtonText = "";
   int treeProgress = 0;
+  // ignore: unused_field
   final int _treeMaxProgress = 60;
   PatientProfile profile = PatientProfile(username: "", email: "", id: "");
 

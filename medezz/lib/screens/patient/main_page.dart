@@ -4,7 +4,6 @@ import 'package:medezz/constants/colors.dart';
 import 'package:medezz/screens/patient/add_daily_data/screens/add_daily_data.dart';
 import 'package:medezz/screens/patient/analytics/analytics.dart';
 import 'package:medezz/screens/patient/chatbot/chatbot.dart';
-import 'package:medezz/screens/patient/gamification/plant_screen.dart';
 import 'package:medezz/screens/patient/home/home.dart';
 import 'package:medezz/screens/patient/notifications/notification_form.dart';
 
