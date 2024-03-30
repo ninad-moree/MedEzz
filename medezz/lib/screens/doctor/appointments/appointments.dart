@@ -88,10 +88,12 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
               child: Text("No appointments"),
             );
           } else if (_state == States.loaded) {
-            return ListView.builder(
+            return ListView.separated(
+              separatorBuilder: (_, __) => const SizedBox(height: 10),
               itemCount: appointments.length,
               itemBuilder: (context, index) {
                 return Card(
+                  elevation: 10,
                   child: AppointmentListTile(
                     appointment: appointments[index],
                   ),
