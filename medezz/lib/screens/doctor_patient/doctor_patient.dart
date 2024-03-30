@@ -1,7 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:medezz/constants/colors.dart';
 import 'package:medezz/screens/doctor/authentication/login/login_screen_doctor.dart';
 import 'package:medezz/screens/patient/authentication/login/login_screen.dart';
+import 'package:medezz/screens/patient/main_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DoctorPatient extends StatelessWidget {
   const DoctorPatient({super.key});
@@ -83,13 +87,33 @@ class DoctorPatient extends StatelessWidget {
                     width: MediaQuery.of(context).size.width * 0.3,
                     height: 55,
                     child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const LoginScreenPatient(),
-                          ),
-                        );
+                      onPressed: () async {
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        bool? isLogin = prefs.getBool('isLoggedIn') ?? false;
+
+                        if (isLogin) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const MainPage(),
+                            ),
+                          );
+                        } else {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const LoginScreenPatient(),
+                            ),
+                          );
+                        }
+
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => const LoginScreenPatient(),
+                        //   ),
+                        // );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromRGBO(7, 82, 96, 1),

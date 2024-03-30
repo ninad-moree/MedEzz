@@ -128,6 +128,11 @@ class _ProfileScreenPatientState extends State<ProfileScreenPatient> {
                     onTap: () async {
                       _removeToken();
                       await GoogleSignIn().signOut();
+
+                      SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      prefs.setBool('isLoggedIn', false);
+
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(

@@ -156,6 +156,10 @@ class _LoginScreenPatientState extends State<LoginScreenPatient> {
                       if (statusCode == 200 || statusCode == 201) {
                         storeToken(res1['accessToken']);
 
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        prefs.setBool('isLoggedIn', true);
+
                         log('Access Token:');
                         log(res1['accessToken']);
 
