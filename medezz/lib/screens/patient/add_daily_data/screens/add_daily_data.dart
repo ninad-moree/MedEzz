@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:medezz/api/fitness/model/daily_log_datapoint.dart';
 import 'package:medezz/api/fitness/screens/fitness_controller.dart';
+import 'package:medezz/constants/colors.dart';
 import 'package:medezz/screens/patient/add_daily_data/logic/send_data.dart';
 import 'package:medezz/screens/patient/gamification/plant_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/custom_snackbar.dart';
+import '../../profile/profile_page.dart';
 
 class DataPage extends StatefulWidget {
   const DataPage({Key? key}) : super(key: key);
@@ -52,23 +54,36 @@ class _DataPageState extends State<DataPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Your Data'),
+        backgroundColor: CustomColors.primaryColor,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProfileScreenPatient(),
+              ),
+            );
+          },
+          icon: const Icon(
+            Icons.person,
+            color: Colors.white,
+            size: 40,
+          ),
+        ),
+        title: const Text(
+          "Add Streak",
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: [
           _buildDataTile('Steps', steps),
-          const Divider(),
           _buildDataTile('Calories Burnt', caloriesBurnt),
-          const Divider(),
           _buildDataTile('Calorie Intake', calorieIntake),
-          const Divider(),
           _buildDataTile('Water Intake', waterIntake),
-          const Divider(),
           _buildDataTile('Weight', weight),
-          const Divider(),
           _buildDataTile('Blood Sugar Level', bloodSugarLevel),
-          const Divider(),
           ListTile(
             title: const Text("Medication Taken"),
             trailing: Checkbox(
@@ -76,7 +91,6 @@ class _DataPageState extends State<DataPage> {
               onChanged: (value) => setState(() => medicineTaken = value!),
             ),
           ),
-          const Divider(),
           const SizedBox(
             height: 30,
           ),
@@ -140,12 +154,20 @@ class _DataPageState extends State<DataPage> {
   }
 
   Widget _buildDataTile(String label, TextEditingController controller) {
-    return ListTile(
-      title: Text(label),
-      trailing: SizedBox(
-        width: 100.0,
-        child: TextField(
-          controller: controller,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ListTile(
+            title: Text(label),
+            trailing: SizedBox(
+              width: 100.0,
+              child: TextField(
+                controller: controller,
+              ),
+            ),
+          ),
         ),
       ),
     );

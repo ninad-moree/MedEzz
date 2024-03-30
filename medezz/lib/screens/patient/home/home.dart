@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../api/patient/doctors/fetchdoctors.dart';
 import '../../../constants/colors.dart';
 import '../../../constants/images.dart';
@@ -126,9 +125,7 @@ class _HomeScreenPatientState extends State<HomeScreenPatient> {
           crossAxisSpacing: 20,
           mainAxisSpacing: 20,
         ),
-        children: docCat
-            .map((catData) => DoctorCategoryItem(doctorCat: catData))
-            .toList(),
+        children: docCat.map((catData) => DoctorCategoryItem(doctorCat: catData)).toList(),
       ),
       // body: doctorList.isEmpty
       //     ? const Center(child: Text('No Available Doctors'))

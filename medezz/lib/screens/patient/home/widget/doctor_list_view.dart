@@ -17,8 +17,7 @@ class DoctorListView extends StatelessWidget {
     return doctorList.isEmpty
         ? const Center(child: Text('No Available Doctors'))
         : ListView.separated(
-            separatorBuilder: (BuildContext context, int index) =>
-                const SizedBox(height: 10),
+            separatorBuilder: (BuildContext context, int index) => const SizedBox(height: 10),
             itemCount: doctorList.length,
             itemBuilder: (context, index) {
               Doctors doc = doctorList[index];
@@ -55,7 +54,6 @@ class DoctorListView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(doc.name.trim()),
-                            Text(doc.email.trim()),
                             Text(doc.specialization.trim()),
                             Text(
                               doc.address.trim(),
@@ -80,8 +78,7 @@ class DoctorListView extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) =>
-                                      DoctorDetailPage(doctor: doc),
+                                  builder: (context) => DoctorDetailPage(doctor: doc),
                                 ),
                               );
                             },
@@ -94,7 +91,8 @@ class DoctorListView extends StatelessWidget {
                               ),
                               child: const Center(
                                 child: Text(
-                                  'View Profile',
+                                  'View',
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.normal,
