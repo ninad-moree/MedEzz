@@ -9,7 +9,6 @@ import 'package:rive/rive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../api/patient/profile/view_patient_profile.dart';
-import '../../../api/patient/profile/view_profile.dart';
 
 class PlantScreen extends StatefulWidget {
   const PlantScreen({Key? key}) : super(key: key);
