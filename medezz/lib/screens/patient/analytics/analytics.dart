@@ -199,7 +199,13 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
             children: [
               Center(
                 child: ElevatedButton(
-                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.green)),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(patientDetails.healthScore < 3
+                        ? Colors.red
+                        : patientDetails.healthScore < 6
+                            ? Colors.yellow
+                            : Colors.green),
+                  ),
                   onPressed: () {},
                   child: Text(
                     'Health Score: ${patientDetails.healthScore.toStringAsFixed(2)}',
