@@ -23,6 +23,8 @@ class Patient {
   Map<String, int> streaks;
   Map<String, int> maxStreaks;
   Map<String, int> analyticsThresholds;
+  double healthScore;
+  double engagementScore;
 
   Patient({
     required this.id,
@@ -43,6 +45,8 @@ class Patient {
     required this.streaks,
     required this.maxStreaks,
     required this.analyticsThresholds,
+    required this.healthScore,
+    required this.engagementScore,
   });
 
   factory Patient.fromJson(Map<String, dynamic> json) {
@@ -71,6 +75,8 @@ class Patient {
       maxStreaks: Map<String, int>.from(json['maxStreaks'] ?? {}),
       analyticsThresholds:
           Map<String, int>.from(json['analytics_thresholds'] ?? {}),
+      healthScore: json['health_score']?.toDouble() ?? 0.0,
+      engagementScore: json['engagement_score']?.toDouble() ?? 0.0,
     );
   }
 }
@@ -362,6 +368,8 @@ Future<Patient> viewPatientProfileDoctor(String id) async {
       streaks: {},
       maxStreaks: {},
       analyticsThresholds: {},
+      healthScore: 0.0,
+      engagementScore: 0.0,
     );
   }
 }

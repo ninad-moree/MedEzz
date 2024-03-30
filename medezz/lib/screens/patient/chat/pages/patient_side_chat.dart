@@ -24,6 +24,7 @@ class _PatientSideChatPageState extends State<PatientSideChatPage> {
   TextEditingController controller = TextEditingController();
   late PatientProfile patientProfile = PatientProfile(username: '', email: '', id: '');
   List<Message> messages = [];
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -34,6 +35,7 @@ class _PatientSideChatPageState extends State<PatientSideChatPage> {
   @override
   void dispose() {
     channel.sink.close();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -63,6 +65,11 @@ class _PatientSideChatPageState extends State<PatientSideChatPage> {
         setState(() {
           messages.add(Message.fromJson(jsonDecode(message)));
         });
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
       });
     });
   }
@@ -96,6 +103,13 @@ class _PatientSideChatPageState extends State<PatientSideChatPage> {
       log(response.statusCode.toString());
       log(response.body);
     }
+    Future.delayed(const Duration(seconds: 1), () {
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
+    });
   }
 
   void sendMessage() {
@@ -109,6 +123,11 @@ class _PatientSideChatPageState extends State<PatientSideChatPage> {
         }),
       );
       controller.clear();
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
     }
   }
 
@@ -122,6 +141,7 @@ class _PatientSideChatPageState extends State<PatientSideChatPage> {
         children: <Widget>[
           Expanded(
             child: ListView.builder(
+              controller: _scrollController,
               itemCount: messages.length,
               itemBuilder: (context, index) {
                 return MessageBubble(message: messages[index], me: patientProfile.id);

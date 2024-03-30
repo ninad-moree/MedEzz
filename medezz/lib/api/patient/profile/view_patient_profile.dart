@@ -104,6 +104,8 @@ Future<Patient> viewPatientProfile() async {
       streaks: {},
       maxStreaks: {},
       analyticsThresholds: {},
+      healthScore: 0,
+      engagementScore: 0,
     );
   }
 }

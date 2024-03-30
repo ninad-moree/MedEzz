@@ -7,6 +7,7 @@ class DailyLogDatapoint {
   double? weight = 0;
   double? sugarLevel = 0;
   bool medicineTaken;
+  int? screenTime = 0;
 
   DailyLogDatapoint({
     required this.date,
@@ -17,6 +18,7 @@ class DailyLogDatapoint {
     this.waterIntake,
     this.weight,
     this.sugarLevel,
+    this.screenTime,
   });
 
   factory DailyLogDatapoint.fromJson(Map<String, dynamic> json) {
@@ -29,6 +31,7 @@ class DailyLogDatapoint {
       weight: json['weight'],
       sugarLevel: json['sugarLevel'],
       medicineTaken: json['medicineTaken'],
+      screenTime: json['screenTime'],
     );
   }
 
@@ -42,6 +45,7 @@ class DailyLogDatapoint {
       'weight': weight,
       'sugarLevel': sugarLevel,
       'medicineTaken': medicineTaken,
+      'screenTime': screenTime,
     };
   }
 }
