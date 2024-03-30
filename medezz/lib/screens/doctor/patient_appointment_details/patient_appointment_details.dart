@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:medezz/api/doctor/appointments_details/appointement_details.dart';
 import 'package:medezz/screens/doctor/chat/screens/doctor_side_chat.dart';
 import 'package:medezz/screens/doctor/patient_appointment_details/patient_analytics.dart';
@@ -189,7 +190,7 @@ class _PatientAppointmentDetailsState extends State<PatientAppointmentDetails> {
 
   Widget _buildSectionTitle(String title) {
     return Text(
-      title,
+      "$title :",
       style: const TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.bold,
@@ -199,63 +200,94 @@ class _PatientAppointmentDetailsState extends State<PatientAppointmentDetails> {
   }
 
   Widget _buildBasicInfo() {
-    return Card(
-      elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Name: ${patientDetails.firstName} ${patientDetails.lastName}',
-            ),
-            const SizedBox(height: 10),
-            Text('Age: ${patientDetails.age}'),
-            const SizedBox(height: 10),
-            Text('Gender: ${patientDetails.gender}'),
-            const SizedBox(height: 10),
-            Text('Contact Number: ${patientDetails.contactNumber}'),
-            const SizedBox(height: 10),
-            Text('Email: ${patientDetails.email}'),
-          ],
+    return SizedBox(
+      width: double.infinity,
+      child: Card(
+        elevation: 2,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Name: ${patientDetails.firstName} ${patientDetails.lastName}',
+              ),
+              const SizedBox(height: 10),
+              Text('Age: ${patientDetails.age}'),
+              const SizedBox(height: 10),
+              Text('Gender: ${patientDetails.gender}'),
+              const SizedBox(height: 10),
+              Text('Contact Number: ${patientDetails.contactNumber}'),
+              const SizedBox(height: 10),
+              Text('Email: ${patientDetails.email}'),
+            ],
+          ),
         ),
       ),
     );
   }
 
   Widget _buildHealthConditions() {
-    return Card(
-      elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: patientDetails.healthConditions.map((condition) {
-            return Text('- $condition');
-          }).toList(),
-        ),
-      ),
-    );
+    return patientDetails.healthConditions.isEmpty
+        ? const Card(
+            elevation: 2,
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                'No results available',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ),
+          )
+        : Card(
+            elevation: 2,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: patientDetails.healthConditions.map((condition) {
+                  String capitalizedCondition =
+                      condition.substring(0, 1).toUpperCase() +
+                          condition.substring(1);
+                  return Text(
+                    '• $capitalizedCondition',
+                    style: const TextStyle(fontSize: 15),
+                  );
+                }).toList(),
+              ),
+            ),
+          );
   }
 
   Widget _buildMedications() {
-    return Card(
-      elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: patientDetails.medications.map((medication) {
-            return ListTile(
-              title: Text('${medication.name} (${medication.dosage})'),
-              subtitle: Text(
-                'Frequency: ${medication.frequency}\nIssued on: ${medication.issuedOn}',
+    return patientDetails.medications.isEmpty
+        ? const Card(
+            elevation: 2,
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                'No results available',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
-            );
-          }).toList(),
-        ),
-      ),
-    );
+            ),
+          )
+        : Card(
+            elevation: 2,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: patientDetails.medications.map((medication) {
+                  return ListTile(
+                    title: Text('${medication.name} (${medication.dosage})'),
+                    subtitle: Text(
+                      'Frequency: ${medication.frequency}\nIssued on: ${DateFormat('dd/MM/yyyy').format(medication.issuedOn)}',
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+          );
   }
 
   Widget _buildAppointments() {
@@ -263,110 +295,162 @@ class _PatientAppointmentDetailsState extends State<PatientAppointmentDetails> {
         .where((appointment) => appointment.doctor == profile.id)
         .toList();
 
-    return Card(
-      elevation: 2,
-      child: Column(
-        children: filteredAppointments.map((appointment) {
-          bool isPastAppointment = appointment.date.isBefore(DateTime.now());
-          return Padding(
-            padding: const EdgeInsets.all(10),
-            child: SizedBox(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  isPastAppointment
-                      ? const Text("Prev")
-                      : const Text("Upcoming"),
-                  Text("Doctor: ${profile.username}"),
-                  Text("Date: ${appointment.date}"),
-                  appointment.notes == ""
-                      ? const Text("No Previous Notes")
-                      : Text("Notes: ${appointment.notes}"),
-                ],
+    return patientDetails.appointments.isEmpty
+        ? const Card(
+            elevation: 2,
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                'No results available',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
             ),
+          )
+        : Card(
+            elevation: 2,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: filteredAppointments.map((appointment) {
+                bool isPastAppointment =
+                    appointment.date.isBefore(DateTime.now());
+                return Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: SizedBox(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        isPastAppointment
+                            ? const Text("Prev")
+                            : const Text("Upcoming"),
+                        Text("Doctor: ${profile.username}"),
+                        // Text("Date: ${appointment.date}"),
+                        Text(
+                            "Date: ${DateFormat('dd/MM/yyyy').format(appointment.date)}"),
+                        Text(
+                            "Time: ${DateFormat('hh:mm').format(appointment.date)}"),
+                        appointment.notes == ""
+                            ? const Text("No Previous Notes")
+                            : Text("Notes: ${appointment.notes}"),
+                      ],
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
           );
-        }).toList(),
-      ),
-    );
   }
 
   Widget _buildReminders() {
-    return Card(
-      elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: patientDetails.reminders.map((reminder) {
-            return ListTile(
-              title: Text('Medicine: ${reminder.medicine}'),
-              subtitle: Text(
-                'Timing: ${reminder.timing.join(", ")}\nStart Date: ${reminder.startDate}\nEnd Date: ${reminder.endDate}',
+    return patientDetails.reminders.isEmpty
+        ? const Card(
+            elevation: 2,
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                'No results available',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
-            );
-          }).toList(),
-        ),
-      ),
-    );
+            ),
+          )
+        : Card(
+            elevation: 2,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: patientDetails.reminders.map((reminder) {
+                  return ListTile(
+                    title: Text('Medicine: ${reminder.medicine}'),
+                    subtitle: Text(
+                      'Timing: ${reminder.timing.join(", ")}\nStart Date: ${DateFormat('dd/MM/yyyy').format(reminder.startDate)}\nEnd Date: ${DateFormat('dd/MM/yyyy').format(reminder.endDate)}',
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+          );
   }
 
   Widget _buildTestResults() {
-    return Card(
-      elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: patientDetails.testResults.map((result) {
-            return ListTile(
-              title: Text('Test Name: ${result.testName}'),
-              subtitle: Text(
-                'Test Date: ${result.testDate}\nTest Result: ${result.testResult}',
+    return patientDetails.testResults.isEmpty
+        ? const Card(
+            elevation: 2,
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                'No results available',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
-            );
-          }).toList(),
-        ),
-      ),
-    );
+            ),
+          )
+        : Card(
+            elevation: 2,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: patientDetails.testResults.map((result) {
+                  return ListTile(
+                    title: Text('Test Name: ${result.testName}'),
+                    subtitle: Text(
+                      'Test Date: ${DateFormat('dd/MM/yyyy').format(result.testDate)}\nTest Result: ${result.testResult}',
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+          );
   }
 
   Widget _buildAnalyticsData() {
-    return Card(
-      elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: patientDetails.analytics.map((data) {
-            return ListTile(
-              title: Text('Date: ${data.date}'),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Heart Rate: ${data.heartRate}'),
-                  Text('Blood Pressure: ${data.bloodPressure}'),
-                  Text('Weight: ${data.weight}'),
-                  Text('Sugar Level: ${data.sugarLevel}'),
-                  Text('Temperature: ${data.temperature}'),
-                  Text('Oxygen Level: ${data.oxygenLevel}'),
-                  Text('Steps Walked: ${data.stepsWalked}'),
-                  Text('Calories Burned: ${data.caloriesBurned}'),
-                  Text('Sleep Duration: ${data.sleepDuration}'),
-                  Text('Water Intake: ${data.waterIntake}'),
-                  Text('Calories Intake: ${data.caloriesIntake}'),
-                  Text('Call Time: ${data.callTime}'),
-                  Text('Video Call Time: ${data.videoCallTime}'),
-                  Text('Screen Time: ${data.screenTime}'),
-                  Text('Message Count: ${data.messageCount}'),
-                  Text('Medicine Taken: ${data.medicineTaken}'),
-                  Text('Medicine Missed: ${data.medicineMissed}'),
-                ],
+    return patientDetails.analytics.isEmpty
+        ? const Card(
+            elevation: 2,
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                'No results available',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
-            );
-          }).toList(),
-        ),
-      ),
-    );
+            ),
+          )
+        : Card(
+            elevation: 2,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: patientDetails.analytics.map((data) {
+                  return ListTile(
+                    title: Text(
+                      'Date: ${DateFormat('dd/MM/yyyy').format(data.date)}',
+                    ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Heart Rate: ${data.heartRate}'),
+                        Text('Blood Pressure: ${data.bloodPressure}'),
+                        Text('Weight: ${data.weight}'),
+                        Text('Sugar Level: ${data.sugarLevel}'),
+                        Text('Temperature: ${data.temperature}'),
+                        Text('Oxygen Level: ${data.oxygenLevel}'),
+                        Text('Steps Walked: ${data.stepsWalked}'),
+                        Text('Calories Burned: ${data.caloriesBurned}'),
+                        Text('Sleep Duration: ${data.sleepDuration}'),
+                        Text('Water Intake: ${data.waterIntake}'),
+                        Text('Calories Intake: ${data.caloriesIntake}'),
+                        Text('Call Time: ${data.callTime}'),
+                        Text('Video Call Time: ${data.videoCallTime}'),
+                        Text('Screen Time: ${data.screenTime}'),
+                        Text('Message Count: ${data.messageCount}'),
+                        Text('Medicine Taken: ${data.medicineTaken}'),
+                        Text('Medicine Missed: ${data.medicineMissed}'),
+                      ],
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+          );
   }
 }
