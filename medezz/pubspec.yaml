@@ -30,6 +30,10 @@ dependencies:
   zego_uikit_prebuilt_call: ^3.18.0
   zego_uikit_signaling_plugin: ^2.7.1
   zego_uikit: ^2.15.1
+
+  # GRAPHS
+  syncfusion_flutter_charts: ^25.1.37
+  flutter_charts: 0.5.2
   
   # FIREBASE
   firebase_core: ^2.25.4
