@@ -1,13 +1,16 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:medezz/api/patient/profile/check_profile_exist.dart';
 import 'package:medezz/api/fitness/screens/fitness_page.dart';
+import 'package:medezz/api/patient/profile/view_patient_profile.dart';
 import 'package:medezz/api/patient/profile/view_profile.dart';
 import 'package:medezz/screens/doctor_patient/doctor_patient.dart';
 import 'package:medezz/services/zego_login_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../api/doctor/appointments_details/appointement_details.dart';
 import '../../../constants/colors.dart';
 import '../patient_form/paitent_form_put.dart';
 import '../patient_form/patient_form.dart';
@@ -23,10 +26,93 @@ class ProfileScreenPatient extends StatefulWidget {
 class _ProfileScreenPatientState extends State<ProfileScreenPatient> {
   late PatientProfile profile = PatientProfile(username: '', email: '', id: '');
 
+  List<Appointment> appointments = [
+    Appointment(
+      date: DateTime.now(),
+      doctor: '',
+      notes: '',
+    ),
+  ];
+
+  List<Medication> medications = [
+    Medication(name: '', dosage: '', frequency: '', issuedOn: DateTime.now()),
+  ];
+
+  List<Reminder> remainders = [
+    Reminder(
+      medicine: '',
+      timing: [''],
+      startDate: DateTime.now(),
+      endDate: DateTime.now(),
+      declinedOn: [DateTime.now()],
+    )
+  ];
+
+  List<TestResult> testResult = [
+    TestResult(testName: '', testDate: DateTime.now(), testResult: ''),
+  ];
+
+  List<AnalyticsData> analData = [
+    AnalyticsData(
+      date: DateTime.now(),
+      heartRate: 0,
+      bloodPressure: '',
+      weight: 0.0,
+      sugarLevel: 0.0,
+      temperature: 0.0,
+      oxygenLevel: 0.0,
+      stepsWalked: 0,
+      caloriesBurned: 0,
+      sleepDuration: 0,
+      waterIntake: 0,
+      caloriesIntake: 0,
+      callTime: 0,
+      videoCallTime: 0,
+      screenTime: 0,
+      messageCount: 0,
+      medicineTaken: false,
+      medicineMissed: 0,
+    ),
+  ];
+
+  late Patient patientDetails = Patient(
+    id: '',
+    firstName: '',
+    lastName: '',
+    age: 0,
+    gender: 'Male',
+    contactNumber: '',
+    email: '',
+    address: Address(
+      street: '',
+      city: '',
+      state: '',
+      zipCode: '',
+    ),
+    healthConditions: [],
+    medications: medications,
+    appointments: appointments,
+    reminders: remainders,
+    user: '',
+    testResults: testResult,
+    analytics: analData,
+    streaks: {},
+    maxStreaks: {},
+    analyticsThresholds: {},
+  );
+
   @override
   void initState() {
     super.initState();
     loadProfile();
+    loadPatientDetailsProfile();
+  }
+
+  Future<void> loadPatientDetailsProfile() async {
+    Patient pat = await viewPatientProfile();
+    setState(() {
+      patientDetails = pat;
+    });
   }
 
   Future<void> loadProfile() async {
@@ -124,8 +210,9 @@ class _ProfileScreenPatientState extends State<ProfileScreenPatient> {
                     style: TextStyle(color: Colors.black),
                   ),
                   GestureDetector(
-                    onTap: () {
+                    onTap: () async {
                       _removeToken();
+                      await GoogleSignIn().signOut();
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
