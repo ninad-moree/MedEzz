@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:medezz/constants/colors.dart';
 import 'package:medezz/screens/patient/add_daily_data/screens/add_daily_data.dart';
+import 'package:medezz/screens/patient/analytics/analytics.dart';
 import 'package:medezz/screens/patient/chatbot/chatbot.dart';
-import 'package:medezz/screens/patient/gamification/plant_screen.dart';
 import 'package:medezz/screens/patient/home/home.dart';
 import 'package:medezz/screens/patient/notifications/notification_form.dart';
 
 class MainPage extends StatefulWidget {
-  const MainPage({super.key, this.index = 0});
+  const MainPage({super.key, this.index = 2});
 
   final int index;
 
@@ -17,7 +17,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  int _selectedIndex = 1;
+  int _selectedIndex = 2;
 
   @override
   void initState() {
@@ -35,6 +35,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     final List<Widget> widgetOptions = <Widget>[
       // const PatientFormScreen(),
+      const AnalyticsScreen(),
       const DataPage(),
       const HomeScreenPatient(),
       const NotificationForm(),
@@ -53,8 +54,16 @@ class _MainPageState extends State<MainPage> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
+              // FontAwesomeIcons.fire,
+              Icons.analytics,
+              size: 30,
+            ),
+            label: 'Analytics',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
               FontAwesomeIcons.fire,
-              size: 35,
+              size: 30,
             ),
             label: 'Streak',
           ),

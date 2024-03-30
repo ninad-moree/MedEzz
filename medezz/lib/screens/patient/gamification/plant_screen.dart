@@ -8,7 +8,7 @@ import 'package:medezz/constants/colors.dart';
 import 'package:rive/rive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../api/patient/profile/view_patient_profile.dart';
+import '../../../api/patient/profile/view_profile.dart';
 
 class PlantScreen extends StatefulWidget {
   const PlantScreen({Key? key}) : super(key: key);
@@ -25,6 +25,7 @@ class _PlantScreenState extends State<PlantScreen> {
   SMIInput<double>? _progress;
   String plantButtonText = "";
   int treeProgress = 0;
+  // ignore: unused_field
   final int _treeMaxProgress = 60;
   PatientProfile profile = PatientProfile(username: "", email: "", id: "");
 
@@ -70,14 +71,23 @@ class _PlantScreenState extends State<PlantScreen> {
       log("View Patient Profile Success");
       log(response.body);
 
-      int medicineStreak = int.parse(jsonDecode(response.body)["streaks"]["medicine"].toString());
-      int waterStreak = int.parse(jsonDecode(response.body)["streaks"]["water"].toString());
-      int stepsStreak = int.parse(jsonDecode(response.body)["streaks"]["steps"].toString());
-      int calorieStreak = int.parse(jsonDecode(response.body)["streaks"]["calories"].toString());
-      int sleepStreak = int.parse(jsonDecode(response.body)["streaks"]["sleep"].toString());
+      int medicineStreak = int.parse(
+          jsonDecode(response.body)["streaks"]["medicine"].toString());
+      int waterStreak =
+          int.parse(jsonDecode(response.body)["streaks"]["water"].toString());
+      int stepsStreak =
+          int.parse(jsonDecode(response.body)["streaks"]["steps"].toString());
+      int calorieStreak = int.parse(
+          jsonDecode(response.body)["streaks"]["calories"].toString());
+      int sleepStreak =
+          int.parse(jsonDecode(response.body)["streaks"]["sleep"].toString());
 
       setState(() {
-        treeProgress = medicineStreak + waterStreak + stepsStreak + calorieStreak + sleepStreak;
+        treeProgress = medicineStreak +
+            waterStreak +
+            stepsStreak +
+            calorieStreak +
+            sleepStreak;
         Future.delayed(const Duration(seconds: 1), () {
           _progress?.value = treeProgress.toDouble() * 7;
         });

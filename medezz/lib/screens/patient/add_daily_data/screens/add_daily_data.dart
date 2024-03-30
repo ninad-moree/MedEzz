@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:medezz/api/fitness/model/daily_log_datapoint.dart';
 import 'package:medezz/api/fitness/screens/fitness_controller.dart';
@@ -70,7 +69,7 @@ class _DataPageState extends State<DataPage> {
           _buildDataTile('Blood Sugar Level', bloodSugarLevel),
           const Divider(),
           ListTile(
-            title: Text("Medication Taken"),
+            title: const Text("Medication Taken"),
             trailing: Checkbox(
               value: medicineTaken,
               onChanged: (value) => setState(() => medicineTaken = value!),
@@ -107,7 +106,9 @@ class _DataPageState extends State<DataPage> {
                   backgroundColor: Colors.transparent,
                 ));
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => const PlantScreen()));
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const PlantScreen()));
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(

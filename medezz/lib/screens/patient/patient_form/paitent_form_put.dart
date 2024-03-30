@@ -5,7 +5,9 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../api/doctor/appointments_details/appointement_details.dart';
 import '../../../api/patient/profile/put_patient_details.dart';
+import '../../../api/patient/profile/view_patient_profile.dart';
 import '../../../api/patient/profile/view_profile.dart';
 import '../../../constants/colors.dart';
 import '../../../widgets/custom_snackbar.dart';
@@ -20,6 +22,81 @@ class PatientFormPut extends StatefulWidget {
 class _PatientFormPutState extends State<PatientFormPut> {
   late PatientProfile profile = PatientProfile(username: '', email: '', id: '');
 
+  List<Appointment> appointments = [
+    Appointment(
+      date: DateTime.now(),
+      doctor: '',
+      notes: '',
+    ),
+  ];
+
+  List<Medication> medications = [
+    Medication(name: '', dosage: '', frequency: '', issuedOn: DateTime.now()),
+  ];
+
+  List<Reminder> remainders = [
+    Reminder(
+      medicine: '',
+      timing: [''],
+      startDate: DateTime.now(),
+      endDate: DateTime.now(),
+      declinedOn: [DateTime.now()],
+    )
+  ];
+
+  List<TestResult> testResult = [
+    TestResult(testName: '', testDate: DateTime.now(), testResult: ''),
+  ];
+
+  List<AnalyticsData> analData = [
+    AnalyticsData(
+      date: DateTime.now(),
+      heartRate: 0,
+      bloodPressure: '',
+      weight: 0.0,
+      sugarLevel: 0.0,
+      temperature: 0.0,
+      oxygenLevel: 0.0,
+      stepsWalked: 0,
+      caloriesBurned: 0,
+      sleepDuration: 0,
+      waterIntake: 0,
+      caloriesIntake: 0,
+      callTime: 0,
+      videoCallTime: 0,
+      screenTime: 0,
+      messageCount: 0,
+      medicineTaken: false,
+      medicineMissed: 0,
+    ),
+  ];
+
+  late Patient patientDetails = Patient(
+    id: '',
+    firstName: '',
+    lastName: '',
+    age: 0,
+    gender: 'Male',
+    contactNumber: '',
+    email: '',
+    address: Address(
+      street: '',
+      city: '',
+      state: '',
+      zipCode: '',
+    ),
+    healthConditions: [],
+    medications: medications,
+    appointments: appointments,
+    reminders: remainders,
+    user: '',
+    testResults: testResult,
+    analytics: analData,
+    streaks: {},
+    maxStreaks: {},
+    analyticsThresholds: {},
+  );
+
   final _formKey = GlobalKey<FormState>();
 
   late int _age;
@@ -30,6 +107,14 @@ class _PatientFormPutState extends State<PatientFormPut> {
   void initState() {
     super.initState();
     loadProfile();
+    loadPatientDetailsProfile();
+  }
+
+  Future<void> loadPatientDetailsProfile() async {
+    Patient pat = await viewPatientProfile();
+    setState(() {
+      patientDetails = pat;
+    });
   }
 
   Future<void> loadProfile() async {
@@ -46,7 +131,7 @@ class _PatientFormPutState extends State<PatientFormPut> {
         iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: CustomColors.primaryColor,
         title: const Text(
-          'Daily Log',
+          'Patient Form',
           style: TextStyle(color: Colors.white),
         ),
       ),
@@ -115,7 +200,8 @@ class _PatientFormPutState extends State<PatientFormPut> {
                   return null;
                 },
                 onSaved: (value) {
-                  _healthCondition = value!.split(',').map((e) => e.trim()).toList();
+                  _healthCondition =
+                      value!.split(',').map((e) => e.trim()).toList();
                 },
               ),
               const SizedBox(height: 20),
@@ -135,14 +221,16 @@ class _PatientFormPutState extends State<PatientFormPut> {
                       log('Health Condition: $_healthCondition');
 
                       int res = await putPatientDetails(
-                        profile.id,
+                        // profile.id,
+                        patientDetails.id,
                         _age,
                         _number,
                         _healthCondition,
                       );
 
                       if (res == 200 || res == 201) {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
                           content: ShowCustomSnackBar(
                             title: "Patient Details Added",
                             label: "",
@@ -154,7 +242,8 @@ class _PatientFormPutState extends State<PatientFormPut> {
                           backgroundColor: Colors.transparent,
                         ));
                       } else {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
                           content: ShowCustomSnackBar(
                             title: "Something Went Wrong",
                             label: "",

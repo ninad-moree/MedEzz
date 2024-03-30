@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -37,24 +39,83 @@ class _LoginScreenPatientState extends State<LoginScreenPatient> {
     super.dispose();
   }
 
+  // Future<UserCredential?> signInWithGoogle() async {
+  //   try {
+  //     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+  //     final GoogleSignInAuthentication? googleAuth =
+  //         await googleUser?.authentication;
+
+  //     final credential = GoogleAuthProvider.credential(
+  //       accessToken: googleAuth?.accessToken,
+  //       idToken: googleAuth?.idToken,
+  //     );
+
+  //     return await FirebaseAuth.instance.signInWithCredential(credential);
+  //   } on Exception catch (e) {
+  //     log('exception->$e');
+  //   }
+  //   return null;
+  // }
+
   Future<UserCredential?> signInWithGoogle() async {
     try {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      // Trigger Authentication Flow (display the pop up showing emails)
+      final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
 
-      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication? googleAuth =
+          await userAccount?.authentication;
 
-      final credential = GoogleAuthProvider.credential(
+      // Create a new credential
+      final credentials = GoogleAuthProvider.credential(
         accessToken: googleAuth?.accessToken,
         idToken: googleAuth?.idToken,
       );
 
-      return await FirebaseAuth.instance.signInWithCredential(credential);
-    } on Exception catch (e) {
-      // TODO
-      print('exception->$e');
+      // UserCredential userCredential =
+      //     await FirebaseAuth.instance.signInWithCredential(credentials);
+
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credentials);
+
+      return userCredential;
+    } catch (e) {
+      log("Something Went Wrong: $e");
+      return null;
     }
-    return null;
   }
+
+  // Future<UserCredential?> signInWithGoogle() async {
+  //   try {
+  //     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+  //     if (googleUser != null) {
+  //       final GoogleSignInAuthentication googleAuth =
+  //           await googleUser.authentication;
+
+  //       if (googleAuth != null) {
+  //         final credential = GoogleAuthProvider.credential(
+  //           accessToken: googleAuth.accessToken,
+  //           idToken: googleAuth.idToken,
+  //         );
+
+  //         return await FirebaseAuth.instance.signInWithCredential(credential);
+  //       } else {
+  //         log('Google authentication is null');
+  //       }
+  //     } else {
+  //       log('Google user is null');
+  //     }
+  //   } on PlatformException catch (e) {
+  //     // Handle specific Google Sign-In errors
+  //     log('Google Sign-In failed with error: ${e.message}');
+  //   } catch (e) {
+  //     // Handle other exceptions
+  //     log('Exception: $e');
+  //   }
+  //   return null;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -84,86 +145,178 @@ class _LoginScreenPatientState extends State<LoginScreenPatient> {
                   onPressed: () async {
                     UserCredential? creds = await signInWithGoogle();
 
-                    log("Google Id: $creds");
+                    if (creds != null) {
+                      String email =
+                          creds.user!.email ?? "peeyush.kulgude777@gmail.com";
+                      Map<String, dynamic> res1 =
+                          await loginPatient(email, "12345678");
+                      log("Google Id: $res1");
 
-                    Map<String, dynamic> res = await loginPatient(
-                      creds!.user!.email ?? "peeyush.kulgude777@gmail.com",
-                      "12345678",
-                    );
+                      int statusCode = res1['statusCode'];
+                      if (statusCode == 200 || statusCode == 201) {
+                        storeToken(res1['accessToken']);
 
-                    int statusCode = res['statusCode'];
-                    if (statusCode == 200 || statusCode == 201) {
-                      storeToken(res['accessToken']);
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        prefs.setBool('isLoggedIn', true);
 
-                      log('Access Token:');
-                      log(res['accessToken']);
+                        log('Access Token:');
+                        log(res1['accessToken']);
 
-                      PatientProfile prof = await viewProfile();
+                        PatientProfile prof = await viewProfile();
 
-                      log("Profile");
-                      log(prof.toString());
+                        log("Profile");
+                        log(prof.toString());
 
-                      onUserLogin(
-                        myUserId: prof.id,
-                        myUserName: prof.username,
-                        context: context,
-                      );
+                        onUserLogin(
+                          myUserId: prof.id,
+                          myUserName: prof.username,
+                          context: context,
+                        );
 
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const MainPage(),
-                        ),
-                        (route) => false,
-                      );
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const MainPage(),
+                          ),
+                          (route) => false,
+                        );
 
-                      var status = await Permission.activityRecognition.status;
-                      var status1 = await Permission.sensorsAlways.status;
+                        var status =
+                            await Permission.activityRecognition.status;
+                        var status1 = await Permission.sensorsAlways.status;
 
-                      if (status.isGranted) {
-                        // Permission is already granted
-                        print('Activity recognition permission is granted.');
-                      } else {
-                        // Permission is not granted, request it
-                        var result = await Permission.activityRecognition.request();
-
-                        if (result.isGranted) {
-                          // Permission granted
-                          print('Activity recognition permission is granted.');
+                        if (status.isGranted) {
+                          // Permission is already granted
+                          log('Activity recognition permission is granted.');
                         } else {
-                          // Permission denied
-                          print('Activity recognition permission is denied.');
+                          // Permission is not granted, request it
+                          var result =
+                              await Permission.activityRecognition.request();
+
+                          if (result.isGranted) {
+                            // Permission granted
+                            log('Activity recognition permission is granted.');
+                          } else {
+                            // Permission denied
+                            log('Activity recognition permission is denied.');
+                          }
                         }
-                      }
 
-                      if (status1.isGranted) {
-                        // Permission is already granted
-                        print('Activity recognition permission is granted.');
-                      } else {
-                        // Permission is not granted, request it
-                        var result = await Permission.sensorsAlways.request();
-
-                        if (result.isGranted) {
-                          // Permission granted
-                          print('Activity recognition permission is granted.');
+                        if (status1.isGranted) {
+                          // Permission is already granted
+                          log('Activity recognition permission is granted.');
                         } else {
-                          // Permission denied
-                          print('Activity recognition permission is denied.');
+                          // Permission is not granted, request it
+                          var result = await Permission.sensorsAlways.request();
+
+                          if (result.isGranted) {
+                            // Permission granted
+                            log('Activity recognition permission is granted.');
+                          } else {
+                            // Permission denied
+                            log('Activity recognition permission is denied.');
+                          }
                         }
+                      } else {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: ShowCustomSnackBar(
+                            title: "Something Went Wrong",
+                            label: 'Wrong Information Provided. Try Again',
+                            color: Colors.red,
+                            icon: Icons.warning_rounded,
+                          ),
+                          behavior: SnackBarBehavior.floating,
+                          elevation: 0,
+                          backgroundColor: Colors.transparent,
+                        ));
                       }
                     } else {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: ShowCustomSnackBar(
-                          title: "Something Went Wrong",
-                          label: 'Wrong Information Provided. Try Again',
-                          color: Colors.red,
-                          icon: Icons.warning_rounded,
-                        ),
-                        behavior: SnackBarBehavior.floating,
-                        elevation: 0,
-                        backgroundColor: Colors.transparent,
-                      ));
+                      log('User credentials or user is null');
                     }
+
+                    // log("Google Id: $creds");
+
+                    // Map<String, dynamic> res = await loginPatient(
+                    //   creds!.user!.email ?? "peeyush.kulgude777@gmail.com",
+                    //   "12345678",
+                    // );
+
+                    // int statusCode = res['statusCode'];
+                    // if (statusCode == 200 || statusCode == 201) {
+                    //   storeToken(res['accessToken']);
+
+                    //   log('Access Token:');
+                    //   log(res['accessToken']);
+
+                    //   PatientProfile prof = await viewProfile();
+
+                    //   log("Profile");
+                    //   log(prof.toString());
+
+                    //   onUserLogin(
+                    //     myUserId: prof.id,
+                    //     myUserName: prof.username,
+                    //     context: context,
+                    //   );
+
+                    //   Navigator.pushAndRemoveUntil(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //       builder: (context) => const MainPage(),
+                    //     ),
+                    //     (route) => false,
+                    //   );
+
+                    //   var status = await Permission.activityRecognition.status;
+                    //   var status1 = await Permission.sensorsAlways.status;
+
+                    //   if (status.isGranted) {
+                    //     // Permission is already granted
+                    //     log('Activity recognition permission is granted.');
+                    //   } else {
+                    //     // Permission is not granted, request it
+                    //     var result =
+                    //         await Permission.activityRecognition.request();
+
+                    //     if (result.isGranted) {
+                    //       // Permission granted
+                    //       log('Activity recognition permission is granted.');
+                    //     } else {
+                    //       // Permission denied
+                    //       log('Activity recognition permission is denied.');
+                    //     }
+                    //   }
+
+                    //   if (status1.isGranted) {
+                    //     // Permission is already granted
+                    //     log('Activity recognition permission is granted.');
+                    //   } else {
+                    //     // Permission is not granted, request it
+                    //     var result = await Permission.sensorsAlways.request();
+
+                    //     if (result.isGranted) {
+                    //       // Permission granted
+                    //       log('Activity recognition permission is granted.');
+                    //     } else {
+                    //       // Permission denied
+                    //       log('Activity recognition permission is denied.');
+                    //     }
+                    //   }
+                    // } else {
+                    //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    //     content: ShowCustomSnackBar(
+                    //       title: "Something Went Wrong",
+                    //       label: 'Wrong Information Provided. Try Again',
+                    //       color: Colors.red,
+                    //       icon: Icons.warning_rounded,
+                    //     ),
+                    //     behavior: SnackBarBehavior.floating,
+                    //     elevation: 0,
+                    //     backgroundColor: Colors.transparent,
+                    //   ));
+                    // }
                   },
                   child: const Text("Google Sign In"),
                 ),

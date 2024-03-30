@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:medezz/api/patient/profile/check_profile_exist.dart';
 import 'package:medezz/api/fitness/screens/fitness_page.dart';
 import 'package:medezz/api/patient/profile/view_profile.dart';
@@ -124,8 +125,14 @@ class _ProfileScreenPatientState extends State<ProfileScreenPatient> {
                     style: TextStyle(color: Colors.black),
                   ),
                   GestureDetector(
-                    onTap: () {
+                    onTap: () async {
                       _removeToken();
+                      await GoogleSignIn().signOut();
+
+                      SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      prefs.setBool('isLoggedIn', false);
+
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
