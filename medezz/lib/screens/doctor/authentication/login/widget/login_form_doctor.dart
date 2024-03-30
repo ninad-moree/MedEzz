@@ -6,7 +6,6 @@ import 'package:medezz/api/doctor/authentication/login_doctor.dart';
 import 'package:medezz/api/doctor/profile/doctor_profile.dart';
 import 'package:medezz/screens/doctor/appointments/appointments.dart';
 import 'package:medezz/screens/doctor/authentication/signup/signup_screen_doctor.dart';
-import 'package:medezz/screens/doctor/main_page.dart';
 import 'package:medezz/services/zego_login_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

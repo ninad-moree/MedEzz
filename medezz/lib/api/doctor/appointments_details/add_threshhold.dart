@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_collection_literals, unnecessary_new, unnecessary_this
+
 import 'dart:convert';
 import 'dart:developer';
 
