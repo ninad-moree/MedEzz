@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medezz/api/doctor/appointments_details/appointement_details.dart';
+import 'package:medezz/screens/doctor/chat/screens/doctor_side_chat.dart';
 
 import '../../../api/doctor/profile/doctor_profile.dart';
 import '../../../constants/colors.dart';
@@ -10,8 +11,7 @@ class PatientAppointmentDetails extends StatefulWidget {
   final String patientId;
 
   @override
-  State<PatientAppointmentDetails> createState() =>
-      _PatientAppointmentDetailsState();
+  State<PatientAppointmentDetails> createState() => _PatientAppointmentDetailsState();
 }
 
 class _PatientAppointmentDetailsState extends State<PatientAppointmentDetails> {
@@ -153,6 +153,18 @@ class _PatientAppointmentDetailsState extends State<PatientAppointmentDetails> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  DoctorSideChatPage(patient: patientDetails, doctorId: profile.id),
+            ),
+          );
+        },
+        child: const Icon(Icons.chat),
+      ),
     );
   }
 
@@ -243,9 +255,7 @@ class _PatientAppointmentDetailsState extends State<PatientAppointmentDetails> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  isPastAppointment
-                      ? const Text("Prev")
-                      : const Text("Upcoming"),
+                  isPastAppointment ? const Text("Prev") : const Text("Upcoming"),
                   Text("Doctor: ${profile.username}"),
                   Text("Date: ${appointment.date}"),
                   appointment.notes == ""
