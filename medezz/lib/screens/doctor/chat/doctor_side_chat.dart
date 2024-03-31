@@ -3,26 +3,26 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:medezz/api/patient/doctors/fetchdoctors.dart';
+import 'package:medezz/api/doctor/appointments_details/appointement_details.dart';
 import 'package:medezz/screens/patient/chat/model/message.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../../api/patient/profile/view_profile.dart';
 import 'package:web_socket_channel/io.dart';
 
-import '../widgets/message_bubble.dart';
+import '../../patient/chat/widgets/message_bubble.dart';
 
-class PatientSideChatPage extends StatefulWidget {
-  const PatientSideChatPage({super.key, required this.doctor});
-  final Doctors doctor;
+class DoctorSideChatPage extends StatefulWidget {
+  const DoctorSideChatPage(
+      {super.key, required this.patient, required this.doctorId});
+  final Patient patient;
+  final String doctorId;
 
   @override
-  State<PatientSideChatPage> createState() => _PatientSideChatPageState();
+  State<DoctorSideChatPage> createState() => _DoctorSideChatPageState();
 }
 
-class _PatientSideChatPageState extends State<PatientSideChatPage> {
+class _DoctorSideChatPageState extends State<DoctorSideChatPage> {
   late IOWebSocketChannel channel;
   TextEditingController controller = TextEditingController();
-  late PatientProfile patientProfile = PatientProfile(username: '', email: '', id: '');
   List<Message> messages = [];
   final ScrollController _scrollController = ScrollController();
 
@@ -40,25 +40,21 @@ class _PatientSideChatPageState extends State<PatientSideChatPage> {
   }
 
   Future<void> loadProfile() async {
-    PatientProfile prof = await viewProfile();
-    setState(() {
-      patientProfile = prof;
-    });
     await getPreviousMessages();
     setState(() {
       channel = IOWebSocketChannel.connect(
-          'ws://healthlink-backend.onrender.com/?sender=${patientProfile.id}&receiver=${widget.doctor.id}');
+          'ws://healthlink-backend.onrender.com/?sender=${widget.doctorId}&receiver=${widget.patient.user}');
     });
     Future.delayed(const Duration(seconds: 2), () {
       log('init');
-      log("Patient ID: ${patientProfile.id}");
-      log("Doctor ID: ${widget.doctor.id}");
+      log("Patient ID: ${widget.patient.user}");
+      log("Doctor ID: ${widget.doctorId}");
       channel.sink.add(
         jsonEncode({
           'type': 'init',
           'message': controller.text,
-          'senderId': patientProfile.id,
-          'receiverId': widget.doctor.id,
+          'senderId': widget.doctorId,
+          'receiverId': widget.patient.user,
         }),
       );
       channel.stream.listen((message) {
@@ -76,15 +72,19 @@ class _PatientSideChatPageState extends State<PatientSideChatPage> {
 
   Future<void> getPreviousMessages() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? token = prefs.getString('token');
+    String? docToken = prefs.getString('docToken');
 
     final http.Response response = await http.get(
-      Uri.parse("https://healthlink-backend.onrender.com/chat/${widget.doctor.id}"),
+      Uri.parse(
+          "https://healthlink-backend.onrender.com/chat/${widget.patient.user}"),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer $token',
+        'Authorization': 'Bearer $docToken',
       },
     );
+
+    log("------------User------------");
+    log(widget.patient.user);
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       final Map<String, dynamic> jsonResponse = json.decode(response.body);
@@ -118,10 +118,11 @@ class _PatientSideChatPageState extends State<PatientSideChatPage> {
         jsonEncode({
           'type': 'chat',
           'message': controller.text,
-          'senderId': patientProfile.id,
-          'receiverId': widget.doctor.id,
+          'senderId': widget.doctorId,
+          'receiverId': widget.patient.user,
         }),
       );
+      controller.clear();
       controller.clear();
       _scrollController.animateTo(
         _scrollController.position.maxScrollExtent,
@@ -135,7 +136,7 @@ class _PatientSideChatPageState extends State<PatientSideChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.doctor.name),
+        title: Text('${widget.patient.firstName} ${widget.patient.lastName}'),
       ),
       body: Column(
         children: <Widget>[
@@ -144,7 +145,8 @@ class _PatientSideChatPageState extends State<PatientSideChatPage> {
               controller: _scrollController,
               itemCount: messages.length,
               itemBuilder: (context, index) {
-                return MessageBubble(message: messages[index], me: patientProfile.id);
+                return MessageBubble(
+                    message: messages[index], me: widget.doctorId);
               },
             ),
           ),
@@ -155,12 +157,13 @@ class _PatientSideChatPageState extends State<PatientSideChatPage> {
                 Expanded(
                   child: TextField(
                     controller: controller,
-                    decoration: const InputDecoration(labelText: 'Send a message'),
+                    decoration:
+                        const InputDecoration(labelText: 'Send a message'),
                   ),
                 ),
                 IconButton(
                   icon: const Icon(Icons.send),
-                  onPressed: sendMessage,
+                  onPressed: () => sendMessage(),
                 ),
               ],
             ),

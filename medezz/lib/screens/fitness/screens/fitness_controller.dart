@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:health/health.dart';
-import 'package:medezz/api/fitness/model/daily_log_datapoint.dart';
 
+import '../model/daily_log_datapoint.dart';
 import '../model/footsteps.dart';
 import '../repository/health_repository.dart';
 

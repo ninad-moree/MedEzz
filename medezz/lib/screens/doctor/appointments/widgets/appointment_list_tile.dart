@@ -8,12 +8,12 @@ import 'package:medezz/api/doctor/appointments_details/add_notes.dart';
 import 'package:medezz/api/doctor/appointments_details/reschudle_appointments.dart';
 
 import '../../../../constants/colors.dart';
-import '../../../../screens/doctor/patient_appointment_details/patient_appointment_details.dart';
+import '../../patient_appointment_details/patient_appointment_details.dart';
 import '../../../../widgets/custom_snackbar.dart';
-import '../../appointments_details/add_medication.dart';
-import '../../appointments_details/add_threshhold.dart';
-import '../../appointments_details/appointement_details.dart';
-import '../../model/appointment.dart';
+import '../../../../api/doctor/appointments_details/add_medication.dart';
+import '../../../../api/doctor/appointments_details/add_threshhold.dart';
+import '../../../../api/doctor/appointments_details/appointement_details.dart';
+import '../../../../api/doctor/model/appointment.dart';
 
 class AppointmentListTile extends StatefulWidget {
   final Appointment appointment;

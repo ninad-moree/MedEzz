@@ -2,8 +2,9 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:http/http.dart' as http;
-import 'package:medezz/api/fitness/model/daily_log_datapoint.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../screens/fitness/model/daily_log_datapoint.dart';
 
 Future<http.Response> sendDailyDatapoint(DailyLogDatapoint datapoint) async {
   Map<String, dynamic> requestBody = datapoint.toJson();

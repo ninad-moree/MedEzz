@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
@@ -160,7 +162,8 @@ class _ChatbotWidgetState extends State<ChatbotWidget> {
     });
     try {
       ByteData catBytes = await rootBundle.load('assets/images/bell.png');
-      ByteData sconeBytes = await rootBundle.load('assets/images/ambulance.png');
+      ByteData sconeBytes =
+          await rootBundle.load('assets/images/ambulance.png');
       final content = [
         Content.multi([
           TextPart(message),
@@ -169,10 +172,16 @@ class _ChatbotWidgetState extends State<ChatbotWidget> {
           DataPart('image/jpeg', sconeBytes.buffer.asUint8List()),
         ])
       ];
-      _generatedContent
-          .add((image: Image.asset("assets/images/cat.jpg"), text: message, fromUser: true));
-      _generatedContent
-          .add((image: Image.asset("assets/images/scones.jpg"), text: null, fromUser: true));
+      _generatedContent.add((
+        image: Image.asset("assets/images/cat.jpg"),
+        text: message,
+        fromUser: true
+      ));
+      _generatedContent.add((
+        image: Image.asset("assets/images/scones.jpg"),
+        text: null,
+        fromUser: true
+      ));
 
       var response = await _visionModel.generateContent(content);
       var text = response.text;

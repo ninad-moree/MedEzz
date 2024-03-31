@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:medezz/api/doctor/appointments/widgets/appointment_list_tile.dart';
+import 'package:medezz/screens/doctor/appointments/widgets/appointment_list_tile.dart';
 import 'package:medezz/screens/doctor/profile/doctor_profile.dart';
 import 'package:http/http.dart' as http;
-import '../../../api/doctor/appointments/logic/get_appointments.dart';
+import '../../../api/doctor/appointments/get_appointments.dart';
 import '../../../api/doctor/model/appointment.dart';
 import '../../../constants/colors.dart';
 

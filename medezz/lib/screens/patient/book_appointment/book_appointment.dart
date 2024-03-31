@@ -4,9 +4,9 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:medezz/screens/patient/book_appointment/logic/book_appointment.dart';
+import 'package:medezz/api/patient/appointment/book_appointment.dart';
 
-import '../../../../widgets/custom_snackbar.dart';
+import '../../../widgets/custom_snackbar.dart';
 
 class BookAppointmentPage extends StatefulWidget {
   const BookAppointmentPage({required this.doctorId, super.key});

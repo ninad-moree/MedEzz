@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:medezz/constants/colors.dart';
-import 'package:medezz/screens/patient/add_daily_data/screens/add_daily_data.dart';
+import 'package:medezz/screens/patient/add_daily_data/add_daily_data.dart';
 import 'package:medezz/screens/patient/analytics/analytics.dart';
 import 'package:medezz/screens/patient/chatbot/chatbot.dart';
 import 'package:medezz/screens/patient/home/home.dart';

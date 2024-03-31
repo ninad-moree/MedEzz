@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:medezz/api/doctor/appointments_details/appointement_details.dart';
-import 'package:medezz/screens/doctor/chat/screens/doctor_side_chat.dart';
+import 'package:medezz/screens/doctor/chat/doctor_side_chat.dart';
 import 'package:medezz/screens/doctor/patient_appointment_details/patient_analytics.dart';
 
 import '../../../api/doctor/profile/doctor_profile.dart';

@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:medezz/api/patient/doctors/fetchdoctors.dart';
-import 'package:medezz/screens/patient/chat/pages/patient_side_chat.dart';
+import 'package:medezz/screens/patient/chat/patient_side_chat.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 
 import '../../../../constants/colors.dart';
-import '../../book_appointment/pages/book_appointment.dart';
+import '../../book_appointment/book_appointment.dart';
 
 class CallButton extends StatelessWidget {
   const CallButton({super.key, required this.doctor});
@@ -210,7 +210,8 @@ class CallButton extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: ((context) => BookAppointmentPage(doctorId: doctor.id))));
+                      builder: ((context) =>
+                          BookAppointmentPage(doctorId: doctor.id))));
             },
             icon: const Icon(
               Iconsax.calendar,
