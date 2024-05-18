@@ -22,8 +22,7 @@ class PatientSideChatPage extends StatefulWidget {
 class _PatientSideChatPageState extends State<PatientSideChatPage> {
   late IOWebSocketChannel channel;
   TextEditingController controller = TextEditingController();
-  late PatientProfile patientProfile =
-      PatientProfile(username: '', email: '', id: '');
+  late PatientProfile patientProfile = PatientProfile(username: '', email: '', id: '');
   List<Message> messages = [];
   final ScrollController _scrollController = ScrollController();
 
@@ -47,8 +46,7 @@ class _PatientSideChatPageState extends State<PatientSideChatPage> {
     });
     await getPreviousMessages();
     setState(() {
-      channel = IOWebSocketChannel.connect(
-          'ws://healthlink-backend.onrender.com/?sender=${patientProfile.id}&receiver=${widget.doctor.id}');
+      channel = IOWebSocketChannel.connect('ws://healthlink-backend.onrender.com/?sender=${patientProfile.id}&receiver=${widget.doctor.id}');
     });
     Future.delayed(const Duration(seconds: 2), () {
       log('init');
@@ -80,8 +78,7 @@ class _PatientSideChatPageState extends State<PatientSideChatPage> {
     String? token = prefs.getString('token');
 
     final http.Response response = await http.get(
-      Uri.parse(
-          "https://healthlink-backend.onrender.com/chat/${widget.doctor.id}"),
+      Uri.parse("https://healthlink-backend.onrender.com/chat/${widget.doctor.id}"),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $token',
@@ -127,7 +124,7 @@ class _PatientSideChatPageState extends State<PatientSideChatPage> {
       controller.clear();
       _scrollController.animateTo(
         _scrollController.position.maxScrollExtent,
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
         curve: Curves.easeOut,
       );
     }
@@ -146,8 +143,7 @@ class _PatientSideChatPageState extends State<PatientSideChatPage> {
               controller: _scrollController,
               itemCount: messages.length,
               itemBuilder: (context, index) {
-                return MessageBubble(
-                    message: messages[index], me: patientProfile.id);
+                return MessageBubble(message: messages[index], me: patientProfile.id);
               },
             ),
           ),
@@ -158,8 +154,7 @@ class _PatientSideChatPageState extends State<PatientSideChatPage> {
                 Expanded(
                   child: TextField(
                     controller: controller,
-                    decoration:
-                        const InputDecoration(labelText: 'Send a message'),
+                    decoration: const InputDecoration(labelText: 'Send a message'),
                   ),
                 ),
                 IconButton(

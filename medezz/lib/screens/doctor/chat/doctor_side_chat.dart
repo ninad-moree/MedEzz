@@ -123,7 +123,7 @@ class _DoctorSideChatPageState extends State<DoctorSideChatPage> {
       controller.clear();
       _scrollController.animateTo(
         _scrollController.position.maxScrollExtent,
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
         curve: Curves.easeOut,
       );
     }
