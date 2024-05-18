@@ -32,9 +32,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
     http.Response response = await getAppointments();
     if (response.statusCode == 200 || response.statusCode == 201) {
       setState(() {
-        appointments = (jsonDecode(response.body) as List)
-            .map((e) => Appointment.fromJson(e))
-            .toList();
+        appointments = (jsonDecode(response.body) as List).map((e) => Appointment.fromJson(e)).toList();
         if (appointments.isEmpty) {
           _state = States.noAppointments;
         } else {

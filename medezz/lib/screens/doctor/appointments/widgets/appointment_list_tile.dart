@@ -7,19 +7,18 @@ import 'package:intl/intl.dart';
 import 'package:medezz/api/doctor/appointments_details/add_notes.dart';
 import 'package:medezz/api/doctor/appointments_details/reschudle_appointments.dart';
 
+import '../../../../api/doctor/model/appointment.dart';
 import '../../../../constants/colors.dart';
 import '../../patient_appointment_details/patient_appointment_details.dart';
 import '../../../../widgets/custom_snackbar.dart';
 import '../../../../api/doctor/appointments_details/add_medication.dart';
 import '../../../../api/doctor/appointments_details/add_threshhold.dart';
 import '../../../../api/doctor/appointments_details/appointement_details.dart';
-import '../../../../api/doctor/model/appointment.dart';
 
 class AppointmentListTile extends StatefulWidget {
   final Appointment appointment;
 
-  const AppointmentListTile({Key? key, required this.appointment})
-      : super(key: key);
+  const AppointmentListTile({Key? key, required this.appointment}) : super(key: key);
 
   @override
   State<AppointmentListTile> createState() => _AppointmentListTileState();
@@ -80,8 +79,7 @@ class _AppointmentListTileState extends State<AppointmentListTile> {
                     GestureDetector(
                       onTap: () async {
                         log(widget.appointment.appointmentId);
-                        final TextEditingController note =
-                            TextEditingController();
+                        final TextEditingController note = TextEditingController();
 
                         showDialog(
                           context: context,
@@ -103,8 +101,7 @@ class _AppointmentListTileState extends State<AppointmentListTile> {
                                     ),
                                     const SizedBox(height: 30),
                                     Container(
-                                      margin: const EdgeInsets.symmetric(
-                                          horizontal: 20),
+                                      margin: const EdgeInsets.symmetric(horizontal: 20),
                                       padding: const EdgeInsets.all(8),
                                       decoration: BoxDecoration(
                                         border: Border.all(color: Colors.white),
@@ -114,12 +111,10 @@ class _AppointmentListTileState extends State<AppointmentListTile> {
                                       child: TextFormField(
                                         controller: note,
                                         maxLines: 5,
-                                        style: const TextStyle(
-                                            color: Colors.black),
+                                        style: const TextStyle(color: Colors.black),
                                         decoration: const InputDecoration(
                                           hintText: "Add Your Note Here.",
-                                          hintStyle:
-                                              TextStyle(color: Colors.grey),
+                                          hintStyle: TextStyle(color: Colors.grey),
                                           border: InputBorder.none,
                                         ),
                                       ),
@@ -135,8 +130,7 @@ class _AppointmentListTileState extends State<AppointmentListTile> {
                                         );
 
                                         if (res == 200 || res == 201) {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(const SnackBar(
+                                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                                             content: ShowCustomSnackBar(
                                               title: "Note Added Successfully",
                                               label: '',
@@ -148,8 +142,7 @@ class _AppointmentListTileState extends State<AppointmentListTile> {
                                             backgroundColor: Colors.transparent,
                                           ));
                                         } else {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(const SnackBar(
+                                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                                             content: ShowCustomSnackBar(
                                               title: "Something Went Wrong",
                                               label: 'Please Try Again Later',
@@ -163,8 +156,7 @@ class _AppointmentListTileState extends State<AppointmentListTile> {
                                         }
                                         Navigator.pop(context);
                                       },
-                                      style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.white),
+                                      style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
                                       child: const Text(
                                         "Submit",
                                         style: TextStyle(color: Colors.black),
@@ -214,23 +206,17 @@ class _AppointmentListTileState extends State<AppointmentListTile> {
                                   children: [
                                     const Text(
                                       'Add Medication',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20.0,
-                                          color: CustomColors.primaryColor),
+                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: CustomColors.primaryColor),
                                     ),
                                     const SizedBox(height: 10),
                                     TextFormField(
-                                      decoration: const InputDecoration(
-                                          labelText: 'Medication Name'),
+                                      decoration: const InputDecoration(labelText: 'Medication Name'),
                                     ),
                                     TextFormField(
-                                      decoration: const InputDecoration(
-                                          labelText: 'Dosage'),
+                                      decoration: const InputDecoration(labelText: 'Dosage'),
                                     ),
                                     TextFormField(
-                                      decoration: const InputDecoration(
-                                          labelText: 'Frequency'),
+                                      decoration: const InputDecoration(labelText: 'Frequency'),
                                     ),
                                     const SizedBox(height: 10),
                                     ElevatedButton(
@@ -242,23 +228,16 @@ class _AppointmentListTileState extends State<AppointmentListTile> {
                                           issuedOn: DateTime.now(),
                                         );
 
-                                        List<Medication> medicationList = [
-                                          newMedication
-                                        ];
+                                        List<Medication> medicationList = [newMedication];
 
-                                        int statusCode = await addMedication(
-                                            widget.appointment.patientId,
-                                            medicationList);
+                                        int statusCode = await addMedication(widget.appointment.patientId, medicationList);
 
-                                        if (statusCode == 200 ||
-                                            statusCode == 201) {
+                                        if (statusCode == 200 || statusCode == 201) {
                                           log("Medication added successfully.");
 
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(const SnackBar(
+                                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                                             content: ShowCustomSnackBar(
-                                              title:
-                                                  "Medications Added Successfully",
+                                              title: "Medications Added Successfully",
                                               label: '',
                                               color: Colors.green,
                                               icon: Icons.done_outlined,
@@ -272,8 +251,7 @@ class _AppointmentListTileState extends State<AppointmentListTile> {
                                         } else {
                                           log("Failed to add medication. Status code: $statusCode");
 
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(const SnackBar(
+                                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                                             content: ShowCustomSnackBar(
                                               title: "Something Went Wrong",
                                               label: 'Please Try Again Later',
@@ -288,9 +266,7 @@ class _AppointmentListTileState extends State<AppointmentListTile> {
                                           Navigator.of(context).pop();
                                         }
                                       },
-                                      style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              CustomColors.primaryColor),
+                                      style: ElevatedButton.styleFrom(backgroundColor: CustomColors.primaryColor),
                                       child: const Text(
                                         'Save',
                                         style: TextStyle(color: Colors.white),
@@ -333,8 +309,7 @@ class _AppointmentListTileState extends State<AppointmentListTile> {
                             return AlertDialog(
                               title: const Text(
                                 'Select a Date',
-                                style:
-                                    TextStyle(color: CustomColors.primaryColor),
+                                style: TextStyle(color: CustomColors.primaryColor),
                               ),
                               content: Column(
                                 mainAxisSize: MainAxisSize.min,
@@ -345,13 +320,11 @@ class _AppointmentListTileState extends State<AppointmentListTile> {
                                     width: 130,
                                     child: ElevatedButton(
                                       onPressed: () async {
-                                        final DateTime? pickedDate =
-                                            await showDatePicker(
+                                        final DateTime? pickedDate = await showDatePicker(
                                           context: context,
                                           initialDate: selectedDate,
                                           firstDate: DateTime.now(),
-                                          lastDate:
-                                              DateTime(DateTime.now().year + 5),
+                                          lastDate: DateTime(DateTime.now().year + 5),
                                         );
                                         if (pickedDate != null) {
                                           setState(() {
@@ -416,14 +389,10 @@ class _AppointmentListTileState extends State<AppointmentListTile> {
                       onTap: () async {
                         AnalyticsThresholds thresholds = AnalyticsThresholds();
 
-                        late TextEditingController water =
-                            TextEditingController();
-                        late TextEditingController steps =
-                            TextEditingController();
-                        late TextEditingController sleep =
-                            TextEditingController();
-                        late TextEditingController calories =
-                            TextEditingController();
+                        late TextEditingController water = TextEditingController();
+                        late TextEditingController steps = TextEditingController();
+                        late TextEditingController sleep = TextEditingController();
+                        late TextEditingController calories = TextEditingController();
 
                         showDialog(
                           context: context,
@@ -443,16 +412,14 @@ class _AppointmentListTileState extends State<AppointmentListTile> {
                                     onChanged: (value) {
                                       thresholds.water = int.parse(value);
                                     },
-                                    decoration: const InputDecoration(
-                                        labelText: 'Water '),
+                                    decoration: const InputDecoration(labelText: 'Water '),
                                   ),
                                   TextFormField(
                                     controller: steps,
                                     onChanged: (value) {
                                       thresholds.steps = int.parse(value);
                                     },
-                                    decoration: const InputDecoration(
-                                        labelText: 'Steps '),
+                                    decoration: const InputDecoration(labelText: 'Steps '),
                                   ),
                                   TextFormField(
                                     controller: sleep,
@@ -482,9 +449,7 @@ class _AppointmentListTileState extends State<AppointmentListTile> {
                                   child: const Text('Cancel'),
                                 ),
                                 ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor:
-                                          CustomColors.primaryColor),
+                                  style: ElevatedButton.styleFrom(backgroundColor: CustomColors.primaryColor),
                                   onPressed: () async {
                                     // Save the thresholds or perform any other action
                                     int res = await addThreshold(
@@ -496,8 +461,7 @@ class _AppointmentListTileState extends State<AppointmentListTile> {
                                     );
 
                                     if (res == 200 || res == 201) {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(const SnackBar(
+                                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                                         content: ShowCustomSnackBar(
                                           title: "Threshold Set Successfully",
                                           label: '',
@@ -509,8 +473,7 @@ class _AppointmentListTileState extends State<AppointmentListTile> {
                                         backgroundColor: Colors.transparent,
                                       ));
                                     } else {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(const SnackBar(
+                                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                                         content: ShowCustomSnackBar(
                                           title: "Something Went Wrong",
                                           label: 'Please Try Again Later',
