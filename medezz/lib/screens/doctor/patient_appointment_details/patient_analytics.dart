@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:medezz/api/doctor/appointments_details/appointement_details.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
+import '../../../api/doctor/appointments_details/appointement_details.dart';
 import '../../../constants/colors.dart';
 import '../../patient/analytics/widget/chart_data.dart';
 import '../../patient/analytics/widget/chart_data_2.dart';
@@ -154,12 +154,11 @@ class _PatientAnalyticsState extends State<PatientAnalytics> {
                     ElevatedButton(
                       onPressed: () {},
                       style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(widget.patientDetails.healthScore < 3
-                        ? Colors.red
-                        : widget.patientDetails.healthScore < 6
-                            ? Colors.yellow
-                            : Colors.green),
+                        backgroundColor: MaterialStateProperty.all(widget.patientDetails.healthScore < 3
+                            ? Colors.red
+                            : widget.patientDetails.healthScore < 6
+                                ? Colors.yellow
+                                : Colors.green),
                       ),
                       child: Text(
                         'Health Score: ${widget.patientDetails.healthScore.toStringAsFixed(1)}',
@@ -173,12 +172,12 @@ class _PatientAnalyticsState extends State<PatientAnalytics> {
                     ElevatedButton(
                       onPressed: () {},
                       style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(widget.patientDetails.engagementScore < 3
-                        ? Colors.red
-                        : widget.patientDetails.engagementScore < 6
-                            ? Colors.yellow
-                            : Colors.green)),
+                        backgroundColor: MaterialStateProperty.all(widget.patientDetails.engagementScore < 3
+                            ? Colors.red
+                            : widget.patientDetails.engagementScore < 6
+                                ? Colors.yellow
+                                : Colors.green),
+                      ),
                       child: Text(
                         'Engagement Score: ${widget.patientDetails.engagementScore.toStringAsFixed(1)}',
                         style: const TextStyle(
@@ -194,10 +193,7 @@ class _PatientAnalyticsState extends State<PatientAnalytics> {
               const SizedBox(height: 10),
               const Text(
                 'Steps Walked',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               SizedBox(
                 height: 300,
@@ -217,10 +213,7 @@ class _PatientAnalyticsState extends State<PatientAnalytics> {
               const SizedBox(height: 10),
               const Text(
                 'Medicine Taken',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               SizedBox(
                 height: 300,
@@ -230,13 +223,9 @@ class _PatientAnalyticsState extends State<PatientAnalytics> {
                   series: <CartesianSeries>[
                     BarSeries<ChartData2, String>(
                       dataSource: getBooleanChartData(),
-
                       xValueMapper: (ChartData2 data, _) => data.x,
                       yValueMapper: (ChartData2 data, _) => data.y.toDouble(),
-
-                      // Customize appearance if needed
-                      dataLabelSettings:
-                          const DataLabelSettings(isVisible: true),
+                      dataLabelSettings: const DataLabelSettings(isVisible: true),
                     )
                   ],
                 ),
@@ -244,10 +233,7 @@ class _PatientAnalyticsState extends State<PatientAnalytics> {
               const SizedBox(height: 10),
               const Text(
                 'Calories Intake Graph',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 10),
               SizedBox(
@@ -268,10 +254,7 @@ class _PatientAnalyticsState extends State<PatientAnalytics> {
               const SizedBox(height: 10),
               const Text(
                 'Calories Burned Graph',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               SizedBox(
                 height: 300,
@@ -291,10 +274,7 @@ class _PatientAnalyticsState extends State<PatientAnalytics> {
               const SizedBox(height: 10),
               const Text(
                 'Water Intake',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               SizedBox(
                 height: 300,
@@ -313,10 +293,7 @@ class _PatientAnalyticsState extends State<PatientAnalytics> {
               ),
               const Text(
                 'Screen Time',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               SizedBox(
                 height: 300,
@@ -336,10 +313,7 @@ class _PatientAnalyticsState extends State<PatientAnalytics> {
               const SizedBox(height: 10),
               const Text(
                 'Call Time',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               SizedBox(
                 height: 300,
@@ -359,10 +333,7 @@ class _PatientAnalyticsState extends State<PatientAnalytics> {
               const SizedBox(height: 10),
               const Text(
                 'Message Count',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               SizedBox(
                 height: 300,

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:medezz/api/doctor/profile/doctor_profile.dart';
-import 'package:medezz/screens/doctor_patient/doctor_patient.dart';
-import 'package:medezz/services/zego_login_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../api/doctor/profile/doctor_profile.dart';
 import '../../../constants/colors.dart';
+import '../../../services/zego_login_services.dart';
+import '../../doctor_patient/doctor_patient.dart';
 import '../../patient/profile/widget/info_tile.dart';
 
 class ProfileScreenDoctor extends StatefulWidget {

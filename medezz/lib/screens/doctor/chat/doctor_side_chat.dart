@@ -3,16 +3,15 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:medezz/api/doctor/appointments_details/appointement_details.dart';
-import 'package:medezz/screens/patient/chat/model/message.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:web_socket_channel/io.dart';
 
+import '../../../api/doctor/appointments_details/appointement_details.dart';
+import '../../patient/chat/model/message.dart';
 import '../../patient/chat/widgets/message_bubble.dart';
 
 class DoctorSideChatPage extends StatefulWidget {
-  const DoctorSideChatPage(
-      {super.key, required this.patient, required this.doctorId});
+  const DoctorSideChatPage({super.key, required this.patient, required this.doctorId});
   final Patient patient;
   final String doctorId;
 
@@ -42,8 +41,7 @@ class _DoctorSideChatPageState extends State<DoctorSideChatPage> {
   Future<void> loadProfile() async {
     await getPreviousMessages();
     setState(() {
-      channel = IOWebSocketChannel.connect(
-          'ws://healthlink-backend.onrender.com/?sender=${widget.doctorId}&receiver=${widget.patient.user}');
+      channel = IOWebSocketChannel.connect('ws://healthlink-backend.onrender.com/?sender=${widget.doctorId}&receiver=${widget.patient.user}');
     });
     Future.delayed(const Duration(seconds: 2), () {
       log('init');
@@ -75,8 +73,7 @@ class _DoctorSideChatPageState extends State<DoctorSideChatPage> {
     String? docToken = prefs.getString('docToken');
 
     final http.Response response = await http.get(
-      Uri.parse(
-          "https://healthlink-backend.onrender.com/chat/${widget.patient.user}"),
+      Uri.parse("https://healthlink-backend.onrender.com/chat/${widget.patient.user}"),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $docToken',
@@ -145,8 +142,7 @@ class _DoctorSideChatPageState extends State<DoctorSideChatPage> {
               controller: _scrollController,
               itemCount: messages.length,
               itemBuilder: (context, index) {
-                return MessageBubble(
-                    message: messages[index], me: widget.doctorId);
+                return MessageBubble(message: messages[index], me: widget.doctorId);
               },
             ),
           ),
@@ -157,8 +153,7 @@ class _DoctorSideChatPageState extends State<DoctorSideChatPage> {
                 Expanded(
                   child: TextField(
                     controller: controller,
-                    decoration:
-                        const InputDecoration(labelText: 'Send a message'),
+                    decoration: const InputDecoration(labelText: 'Send a message'),
                   ),
                 ),
                 IconButton(

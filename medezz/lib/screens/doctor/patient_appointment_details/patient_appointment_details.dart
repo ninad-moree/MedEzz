@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:medezz/api/doctor/appointments_details/appointement_details.dart';
-import 'package:medezz/screens/doctor/chat/doctor_side_chat.dart';
-import 'package:medezz/screens/doctor/patient_appointment_details/patient_analytics.dart';
 
+import '../../../api/doctor/appointments_details/appointement_details.dart';
 import '../../../api/doctor/profile/doctor_profile.dart';
 import '../../../constants/colors.dart';
+import '../chat/doctor_side_chat.dart';
+import 'patient_analytics.dart';
 
 class PatientAppointmentDetails extends StatefulWidget {
   const PatientAppointmentDetails({super.key, required this.patientId});
@@ -13,36 +13,19 @@ class PatientAppointmentDetails extends StatefulWidget {
   final String patientId;
 
   @override
-  State<PatientAppointmentDetails> createState() =>
-      _PatientAppointmentDetailsState();
+  State<PatientAppointmentDetails> createState() => _PatientAppointmentDetailsState();
 }
 
 class _PatientAppointmentDetailsState extends State<PatientAppointmentDetails> {
-  List<Appointment1> appointments = [
-    Appointment1(
-      date: DateTime.now(),
-      doctor: '',
-      notes: '',
-    ),
-  ];
+  List<Appointment1> appointments = [Appointment1(date: DateTime.now(), doctor: '', notes: '')];
 
-  List<Medication> medications = [
-    Medication(name: '', dosage: '', frequency: '', issuedOn: DateTime.now()),
-  ];
+  List<Medication> medications = [Medication(name: '', dosage: '', frequency: '', issuedOn: DateTime.now())];
 
   List<Reminder> remainders = [
-    Reminder(
-      medicine: '',
-      timing: [''],
-      startDate: DateTime.now(),
-      endDate: DateTime.now(),
-      declinedOn: [DateTime.now()],
-    )
+    Reminder(medicine: '', timing: [''], startDate: DateTime.now(), endDate: DateTime.now(), declinedOn: [DateTime.now()])
   ];
 
-  List<TestResult> testResult = [
-    TestResult(testName: '', testDate: DateTime.now(), testResult: ''),
-  ];
+  List<TestResult> testResult = [TestResult(testName: '', testDate: DateTime.now(), testResult: '')];
 
   List<AnalyticsData> analData = [
     AnalyticsData(
@@ -75,12 +58,7 @@ class _PatientAppointmentDetailsState extends State<PatientAppointmentDetails> {
     gender: 'Male',
     contactNumber: '',
     email: '',
-    address: Address(
-      street: '',
-      city: '',
-      state: '',
-      zipCode: '',
-    ),
+    address: Address(street: '', city: '', state: '', zipCode: ''),
     healthConditions: [],
     medications: medications,
     appointments: appointments,
@@ -178,8 +156,7 @@ class _PatientAppointmentDetailsState extends State<PatientAppointmentDetails> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => DoctorSideChatPage(
-                  patient: patientDetails, doctorId: profile.id),
+              builder: (context) => DoctorSideChatPage(patient: patientDetails, doctorId: profile.id),
             ),
           );
         },
@@ -209,9 +186,7 @@ class _PatientAppointmentDetailsState extends State<PatientAppointmentDetails> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Name: ${patientDetails.firstName} ${patientDetails.lastName}',
-              ),
+              Text('Name: ${patientDetails.firstName} ${patientDetails.lastName}'),
               const SizedBox(height: 10),
               Text('Age: ${patientDetails.age}'),
               const SizedBox(height: 10),
@@ -246,9 +221,7 @@ class _PatientAppointmentDetailsState extends State<PatientAppointmentDetails> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: patientDetails.healthConditions.map((condition) {
-                  String capitalizedCondition =
-                      condition.substring(0, 1).toUpperCase() +
-                          condition.substring(1);
+                  String capitalizedCondition = condition.substring(0, 1).toUpperCase() + condition.substring(1);
                   return Text(
                     '• $capitalizedCondition',
                     style: const TextStyle(fontSize: 15),
@@ -291,9 +264,7 @@ class _PatientAppointmentDetailsState extends State<PatientAppointmentDetails> {
   }
 
   Widget _buildAppointments() {
-    List<Appointment1> filteredAppointments = patientDetails.appointments
-        .where((appointment) => appointment.doctor == profile.id)
-        .toList();
+    List<Appointment1> filteredAppointments = patientDetails.appointments.where((appointment) => appointment.doctor == profile.id).toList();
 
     return patientDetails.appointments.isEmpty
         ? const Card(
@@ -311,26 +282,19 @@ class _PatientAppointmentDetailsState extends State<PatientAppointmentDetails> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: filteredAppointments.map((appointment) {
-                bool isPastAppointment =
-                    appointment.date.isBefore(DateTime.now());
+                bool isPastAppointment = appointment.date.isBefore(DateTime.now());
                 return Padding(
                   padding: const EdgeInsets.all(10),
                   child: SizedBox(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        isPastAppointment
-                            ? const Text("Prev")
-                            : const Text("Upcoming"),
+                        isPastAppointment ? const Text("Prev") : const Text("Upcoming"),
                         Text("Doctor: ${profile.username}"),
                         // Text("Date: ${appointment.date}"),
-                        Text(
-                            "Date: ${DateFormat('dd/MM/yyyy').format(appointment.date)}"),
-                        Text(
-                            "Time: ${DateFormat('hh:mm').format(appointment.date)}"),
-                        appointment.notes == ""
-                            ? const Text("No Previous Notes")
-                            : Text("Notes: ${appointment.notes}"),
+                        Text("Date: ${DateFormat('dd/MM/yyyy').format(appointment.date)}"),
+                        Text("Time: ${DateFormat('hh:mm').format(appointment.date)}"),
+                        appointment.notes == "" ? const Text("No Previous Notes") : Text("Notes: ${appointment.notes}"),
                       ],
                     ),
                   ),
