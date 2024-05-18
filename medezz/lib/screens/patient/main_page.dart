@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:medezz/constants/colors.dart';
-import 'package:medezz/screens/patient/add_daily_data/add_daily_data.dart';
-import 'package:medezz/screens/patient/analytics/analytics.dart';
-import 'package:medezz/screens/patient/chatbot/chatbot.dart';
-import 'package:medezz/screens/patient/home/home.dart';
-import 'package:medezz/screens/patient/notifications/notification_form.dart';
+
+import '../../constants/colors.dart';
+import 'add_daily_data/add_daily_data.dart';
+import 'analytics/analytics.dart';
+import 'chatbot/chatbot.dart';
+import 'home/home.dart';
+import 'notifications/notification_form.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key, this.index = 2});
@@ -34,7 +35,6 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> widgetOptions = <Widget>[
-      // const PatientFormScreen(),
       const AnalyticsScreen(),
       const DataPage(),
       const HomeScreenPatient(),

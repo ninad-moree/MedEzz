@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:medezz/screens/doctor_patient/doctor_patient.dart';
 
+import '../doctor_patient/doctor_patient.dart';
 import 'widget/on_boarding_content.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -141,9 +141,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       width: (index == currentIndex) ? 20 : 10,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5.0),
-                        color: (index == currentIndex)
-                            ? (const Color.fromARGB(255, 27, 89, 101))
-                            : (Colors.grey),
+                        color: (index == currentIndex) ? (const Color.fromARGB(255, 27, 89, 101)) : (Colors.grey),
                       ),
                     ),
                   ),
