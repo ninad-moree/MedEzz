@@ -109,8 +109,3 @@ Future<Patient> viewPatientProfile() async {
     );
   }
 }
-
-
-/*
-  {"streaks":{"medicine":0,"water":0,"steps":0,"sleep":0,"calories":0},"maxStreaks":{"medicine":0,"water":0,"steps":0,"sleep":0,"calories":0},"analytics_thresholds":{"water":4,"steps":3000,"sleep":8,"calories":2000},"_id":"660756e7d9964c9f35f6f2b8","firstName":"Ninad123","lastName":"Morw123","age":21,"gender":"Male","contactNumber":"7841987199","email":"kageyama69183@gmail.com","healthConditions":["Fever","Cold"],"user":"66075609d9964c9f35f6f2a6","medications":[],"appointments":[],"reminder":[],"test_results":[],"analytics":[],"__v":0}
-*/

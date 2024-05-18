@@ -4,8 +4,7 @@ import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future<int> addNotes(
-    String notes, String appointmentId, String patientId) async {
+Future<int> addNotes(String notes, String appointmentId, String patientId) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString('token');
 

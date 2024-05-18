@@ -53,39 +53,23 @@ class _MainPageState extends State<MainPage> {
         unselectedLabelStyle: const TextStyle(color: Colors.grey),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(
-              // FontAwesomeIcons.fire,
-              Icons.analytics,
-              size: 30,
-            ),
+            icon: Icon(Icons.analytics, size: 30),
             label: 'Analytics',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              FontAwesomeIcons.fire,
-              size: 30,
-            ),
+            icon: Icon(FontAwesomeIcons.fire, size: 30),
             label: 'Streak',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              size: 35,
-            ),
+            icon: Icon(Icons.home, size: 35),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.notifications,
-              size: 35,
-            ),
+            icon: Icon(Icons.notifications, size: 35),
             label: 'Notification',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.chat,
-              size: 35,
-            ),
+            icon: Icon(Icons.chat, size: 35),
             label: 'Chatbot',
           ),
         ],

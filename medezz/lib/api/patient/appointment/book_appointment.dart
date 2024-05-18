@@ -4,12 +4,7 @@ import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future<dynamic> bookAppointment(
-  String doctorId,
-  DateTime time,
-  int duration,
-  bool isOnline,
-) async {
+Future<dynamic> bookAppointment(String doctorId, DateTime time, int duration, bool isOnline) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString('token');
 

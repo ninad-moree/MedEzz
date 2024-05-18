@@ -60,21 +60,15 @@ class Patient {
       email: json['email'] ?? '',
       address: Address.fromJson(json['address'] ?? {}),
       healthConditions: List<String>.from(json['healthConditions'] ?? []),
-      medications: List<Medication>.from(
-          json['medications']?.map((x) => Medication.fromJson(x)) ?? []),
-      appointments: List<Appointment1>.from(
-          json['appointments']?.map((x) => Appointment1.fromJson(x)) ?? []),
-      reminders: List<Reminder>.from(
-          json['reminder']?.map((x) => Reminder.fromJson(x)) ?? []),
+      medications: List<Medication>.from(json['medications']?.map((x) => Medication.fromJson(x)) ?? []),
+      appointments: List<Appointment1>.from(json['appointments']?.map((x) => Appointment1.fromJson(x)) ?? []),
+      reminders: List<Reminder>.from(json['reminder']?.map((x) => Reminder.fromJson(x)) ?? []),
       user: json['user'] ?? '',
-      testResults: List<TestResult>.from(
-          json['test_results']?.map((x) => TestResult.fromJson(x)) ?? []),
-      analytics: List<AnalyticsData>.from(
-          json['analytics']?.map((x) => AnalyticsData.fromJson(x)) ?? []),
+      testResults: List<TestResult>.from(json['test_results']?.map((x) => TestResult.fromJson(x)) ?? []),
+      analytics: List<AnalyticsData>.from(json['analytics']?.map((x) => AnalyticsData.fromJson(x)) ?? []),
       streaks: Map<String, int>.from(json['streaks'] ?? {}),
       maxStreaks: Map<String, int>.from(json['maxStreaks'] ?? {}),
-      analyticsThresholds:
-          Map<String, int>.from(json['analytics_thresholds'] ?? {}),
+      analyticsThresholds: Map<String, int>.from(json['analytics_thresholds'] ?? {}),
       healthScore: json['health_score']?.toDouble() ?? 0.0,
       engagementScore: json['engagement_score']?.toDouble() ?? 0.0,
     );
@@ -122,9 +116,7 @@ class Medication {
       name: json['name'] ?? '',
       dosage: json['dosage'] ?? '',
       frequency: json['frequency'] ?? '',
-      issuedOn: json['issuedOn'] != null
-          ? DateTime.parse(json['issuedOn'])
-          : DateTime.now(),
+      issuedOn: json['issuedOn'] != null ? DateTime.parse(json['issuedOn']) : DateTime.now(),
     );
   }
 
@@ -151,8 +143,7 @@ class Appointment1 {
 
   factory Appointment1.fromJson(Map<String, dynamic> json) {
     return Appointment1(
-      date:
-          json['date'] != null ? DateTime.parse(json['date']) : DateTime.now(),
+      date: json['date'] != null ? DateTime.parse(json['date']) : DateTime.now(),
       doctor: json['doctor'] ?? '',
       notes: json['notes'] ?? '',
     );
@@ -178,14 +169,9 @@ class Reminder {
     return Reminder(
       medicine: json['medicine'] ?? '',
       timing: List<String>.from(json['timing'] ?? []),
-      startDate: json['startDate'] != null
-          ? DateTime.parse(json['startDate'])
-          : DateTime.now(),
-      endDate: json['endDate'] != null
-          ? DateTime.parse(json['endDate'])
-          : DateTime.now(),
-      declinedOn: List<DateTime>.from(
-          json['declinedOn']?.map((x) => DateTime.parse(x)) ?? []),
+      startDate: json['startDate'] != null ? DateTime.parse(json['startDate']) : DateTime.now(),
+      endDate: json['endDate'] != null ? DateTime.parse(json['endDate']) : DateTime.now(),
+      declinedOn: List<DateTime>.from(json['declinedOn']?.map((x) => DateTime.parse(x)) ?? []),
     );
   }
 }
@@ -204,9 +190,7 @@ class TestResult {
   factory TestResult.fromJson(Map<String, dynamic> json) {
     return TestResult(
       testName: json['test_name'] ?? '',
-      testDate: json['test_date'] != null
-          ? DateTime.parse(json['test_date'])
-          : DateTime.now(),
+      testDate: json['test_date'] != null ? DateTime.parse(json['test_date']) : DateTime.now(),
       testResult: json['test_result'] ?? '',
     );
   }
@@ -255,8 +239,7 @@ class AnalyticsData {
 
   factory AnalyticsData.fromJson(Map<String, dynamic> json) {
     return AnalyticsData(
-      date:
-          json['date'] != null ? DateTime.parse(json['date']) : DateTime.now(),
+      date: json['date'] != null ? DateTime.parse(json['date']) : DateTime.now(),
       heartRate: json['heartRate'] ?? 0,
       bloodPressure: json['bloodPressure'] ?? '',
       weight: json['weight']?.toDouble() ?? 0.0,
@@ -361,12 +344,7 @@ Future<Patient> viewPatientProfileDoctor(String id) async {
       gender: 'Male',
       contactNumber: '',
       email: '',
-      address: Address(
-        street: '',
-        city: '',
-        state: '',
-        zipCode: '',
-      ),
+      address: Address(street: '', city: '', state: '', zipCode: ''),
       healthConditions: [],
       medications: medications,
       appointments: appointments,

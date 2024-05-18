@@ -4,8 +4,7 @@ import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future<int> rescheduleAppointment(
-    DateTime newdate, String appointmentId, String patientId) async {
+Future<int> rescheduleAppointment(DateTime newdate, String appointmentId, String patientId) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString('token');
 

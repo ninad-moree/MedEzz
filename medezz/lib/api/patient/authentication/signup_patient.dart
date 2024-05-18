@@ -3,8 +3,7 @@ import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 
-Future<dynamic> signUpPatient(
-    String username, String email, String password) async {
+Future<dynamic> signUpPatient(String username, String email, String password) async {
   Map<String, dynamic> requestBody = {
     'username': username,
     'email': email,

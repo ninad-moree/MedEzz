@@ -38,8 +38,7 @@ class AnalyticsThresholds {
   }
 }
 
-Future<int> addThreshold(String patientId, dynamic water, dynamic calories,
-    dynamic steps, dynamic sleep) async {
+Future<int> addThreshold(String patientId, dynamic water, dynamic calories, dynamic steps, dynamic sleep) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString('token');
 
