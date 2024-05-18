@@ -22,13 +22,7 @@ class PatientFormPut extends StatefulWidget {
 class _PatientFormPutState extends State<PatientFormPut> {
   late PatientProfile profile = PatientProfile(username: '', email: '', id: '');
 
-  List<Appointment1> appointments = [
-    Appointment1(
-      date: DateTime.now(),
-      doctor: '',
-      notes: '',
-    ),
-  ];
+  List<Appointment1> appointments = [Appointment1(date: DateTime.now(), doctor: '', notes: '')];
 
   List<Medication> medications = [
     Medication(name: '', dosage: '', frequency: '', issuedOn: DateTime.now()),
@@ -79,12 +73,7 @@ class _PatientFormPutState extends State<PatientFormPut> {
     gender: 'Male',
     contactNumber: '',
     email: '',
-    address: Address(
-      street: '',
-      city: '',
-      state: '',
-      zipCode: '',
-    ),
+    address: Address(street: '', city: '', state: '', zipCode: ''),
     healthConditions: [],
     medications: medications,
     appointments: appointments,
@@ -192,9 +181,6 @@ class _PatientFormPutState extends State<PatientFormPut> {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
-                // decoration: const InputDecoration(
-                //   labelText: "Health Condition ( ',' separated)",
-                // ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter your health condition';
@@ -202,8 +188,7 @@ class _PatientFormPutState extends State<PatientFormPut> {
                   return null;
                 },
                 onSaved: (value) {
-                  _healthCondition =
-                      value!.split(',').map((e) => e.trim()).toList();
+                  _healthCondition = value!.split(',').map((e) => e.trim()).toList();
                 },
               ),
               const SizedBox(height: 20),
@@ -231,8 +216,7 @@ class _PatientFormPutState extends State<PatientFormPut> {
                       );
 
                       if (res == 200 || res == 201) {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content: ShowCustomSnackBar(
                             title: "Patient Details Added",
                             label: "",
@@ -244,8 +228,7 @@ class _PatientFormPutState extends State<PatientFormPut> {
                           backgroundColor: Colors.transparent,
                         ));
                       } else {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content: ShowCustomSnackBar(
                             title: "Something Went Wrong",
                             label: "",

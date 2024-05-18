@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:medezz/constants/api_constants.dart';
-import 'package:medezz/screens/patient/chatbot/widget/chat_widget.dart';
 
+import '../../../constants/api_constants.dart';
 import '../../../constants/colors.dart';
+import 'widget/chat_widget.dart';
 
 class ChatBot extends StatefulWidget {
   const ChatBot({super.key});

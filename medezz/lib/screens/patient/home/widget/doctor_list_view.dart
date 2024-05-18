@@ -40,8 +40,6 @@ class DoctorListView extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      // IMAGE
-                      // const Icon(Icons.person, size: 60),
                       const Image(
                         image: AssetImage("assets/images/doctors/doc3.png"),
                         width: 100,

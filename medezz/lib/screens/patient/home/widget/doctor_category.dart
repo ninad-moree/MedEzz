@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:medezz/constants/colors.dart';
-import 'package:medezz/model/doctor_category_model.dart';
-import 'package:medezz/screens/patient/doctor_screen/doctor_screen.dart';
+
+import '../../../../constants/colors.dart';
+import '../../../../model/doctor_category_model.dart';
+import '../../doctor_screen/doctor_screen.dart';
 
 class DoctorCategoryItem extends StatelessWidget {
   final DoctorCategoryModel doctorCat;
@@ -42,7 +43,7 @@ class DoctorCategoryItem extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(
-              width: 90, // adjust width as needed
+              width: 90,
               height: 90,
               child: Image(image: doctorCat.image, fit: BoxFit.cover),
             ),

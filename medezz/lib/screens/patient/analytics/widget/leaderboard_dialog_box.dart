@@ -34,10 +34,7 @@ showLeaderBoard(BuildContext context) async {
                         ? const Icon(FontAwesomeIcons.medal, color: Colors.grey, size: 20)
                         : index == 2
                             ? const Icon(FontAwesomeIcons.medal, color: Colors.brown, size: 20)
-                            : const SizedBox(
-                                height: 20,
-                                width: 20,
-                              ),
+                            : const SizedBox(height: 20, width: 20),
                 title: Text("${patients[index].firstName} ${patients[index].lastName}"),
                 subtitle: Text(patients[index].healthScore.toStringAsFixed(2)),
               );

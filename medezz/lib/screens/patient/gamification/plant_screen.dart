@@ -34,8 +34,6 @@ class _PlantScreenState extends State<PlantScreen> {
     super.initState();
     viewPersonProfile();
     plantButtonText = "Plant";
-    // Load the animation file from the bundle, note that you could also
-    // download this. The RiveFile just expects a list of bytes.
     rootBundle.load('assets/tree_demo.riv').then(
       (data) async {
         final file = RiveFile.import(data);
@@ -71,23 +69,14 @@ class _PlantScreenState extends State<PlantScreen> {
       log("View Patient Profile Success");
       log(response.body);
 
-      int medicineStreak = int.parse(
-          jsonDecode(response.body)["streaks"]["medicine"].toString());
-      int waterStreak =
-          int.parse(jsonDecode(response.body)["streaks"]["water"].toString());
-      int stepsStreak =
-          int.parse(jsonDecode(response.body)["streaks"]["steps"].toString());
-      int calorieStreak = int.parse(
-          jsonDecode(response.body)["streaks"]["calories"].toString());
-      int sleepStreak =
-          int.parse(jsonDecode(response.body)["streaks"]["sleep"].toString());
+      int medicineStreak = int.parse(jsonDecode(response.body)["streaks"]["medicine"].toString());
+      int waterStreak = int.parse(jsonDecode(response.body)["streaks"]["water"].toString());
+      int stepsStreak = int.parse(jsonDecode(response.body)["streaks"]["steps"].toString());
+      int calorieStreak = int.parse(jsonDecode(response.body)["streaks"]["calories"].toString());
+      int sleepStreak = int.parse(jsonDecode(response.body)["streaks"]["sleep"].toString());
 
       setState(() {
-        treeProgress = medicineStreak +
-            waterStreak +
-            stepsStreak +
-            calorieStreak +
-            sleepStreak;
+        treeProgress = medicineStreak + waterStreak + stepsStreak + calorieStreak + sleepStreak;
         Future.delayed(const Duration(seconds: 1), () {
           _progress?.value = treeProgress.toDouble() * 7;
         });

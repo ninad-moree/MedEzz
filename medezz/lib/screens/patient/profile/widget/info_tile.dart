@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:medezz/constants/colors.dart';
+
+import '../../../../constants/colors.dart';
 
 class InfoTile extends StatelessWidget {
   const InfoTile({
@@ -16,10 +17,7 @@ class InfoTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(
-        vertical: 10,
-        horizontal: 10,
-      ),
+      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       height: 60,
       width: double.infinity,
       color: Colors.grey,
@@ -36,10 +34,7 @@ class InfoTile extends StatelessWidget {
             Expanded(
               child: Text(
                 content,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
-                ),
+                style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w400),
               ),
             ),
             Icon(icon, color: CustomColors.primaryColor),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../api/patient/doctors/fetchdoctors.dart';
 import '../../../constants/colors.dart';
 import '../../../constants/images.dart';
@@ -106,16 +107,9 @@ class _HomeScreenPatientState extends State<HomeScreenPatient> {
               ),
             );
           },
-          icon: const Icon(
-            Icons.person,
-            color: Colors.white,
-            size: 40,
-          ),
+          icon: const Icon(Icons.person, color: Colors.white, size: 40),
         ),
-        title: const Text(
-          'Doctors',
-          style: TextStyle(color: Colors.white),
-        ),
+        title: const Text('Doctors', style: TextStyle(color: Colors.white)),
       ),
       body: GridView(
         padding: const EdgeInsets.all(25),
@@ -127,9 +121,6 @@ class _HomeScreenPatientState extends State<HomeScreenPatient> {
         ),
         children: docCat.map((catData) => DoctorCategoryItem(doctorCat: catData)).toList(),
       ),
-      // body: doctorList.isEmpty
-      //     ? const Center(child: Text('No Available Doctors'))
-      //     : DoctorListView(doctorList: doctorList),
     );
   }
 }

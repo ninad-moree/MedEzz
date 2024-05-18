@@ -3,12 +3,12 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:medezz/api/patient/doctors/fetchdoctors.dart';
-import 'package:medezz/screens/patient/chat/patient_side_chat.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 
+import '../../../../api/patient/doctors/fetchdoctors.dart';
 import '../../../../constants/colors.dart';
 import '../../book_appointment/book_appointment.dart';
+import '../../chat/patient_side_chat.dart';
 
 class CallButton extends StatelessWidget {
   const CallButton({super.key, required this.doctor});
@@ -41,7 +41,6 @@ class CallButton extends StatelessWidget {
             callID: callId,
             isVideoCall: isVideoCall,
             invitees: singleInvitee,
-            // resourceID: 'zego_call_2',
             resourceID: 'medezzCall',
             iconSize: const Size(40, 40),
             buttonSize: const Size(50, 50),
@@ -165,9 +164,7 @@ class CallButton extends StatelessWidget {
               ],
             ),
           ],
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(22)),
-          ),
+          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(22))),
           backgroundColor: Colors.black,
         ),
       );
@@ -207,11 +204,7 @@ class CallButton extends StatelessWidget {
           ),
           child: IconButton(
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: ((context) =>
-                          BookAppointmentPage(doctorId: doctor.id))));
+              Navigator.push(context, MaterialPageRoute(builder: ((context) => BookAppointmentPage(doctorId: doctor.id))));
             },
             icon: const Icon(
               Iconsax.calendar,

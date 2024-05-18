@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:medezz/api/patient/profile/check_profile_exist.dart';
-import 'package:medezz/screens/fitness/screens/fitness_page.dart';
 import 'package:medezz/api/patient/profile/view_profile.dart';
 import 'package:medezz/screens/doctor_patient/doctor_patient.dart';
+import 'package:medezz/screens/fitness/screens/fitness_page.dart';
 import 'package:medezz/services/zego_login_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -107,10 +107,7 @@ class _ProfileScreenPatientState extends State<ProfileScreenPatient> {
             ),
           ),
           Container(
-            margin: const EdgeInsets.symmetric(
-              vertical: 10,
-              horizontal: 10,
-            ),
+            margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             height: 60,
             width: double.infinity,
             color: Colors.grey,
@@ -129,8 +126,7 @@ class _ProfileScreenPatientState extends State<ProfileScreenPatient> {
                       _removeToken();
                       await GoogleSignIn().signOut();
 
-                      SharedPreferences prefs =
-                          await SharedPreferences.getInstance();
+                      SharedPreferences prefs = await SharedPreferences.getInstance();
                       prefs.setBool('isLoggedIn', false);
 
                       Navigator.pushAndRemoveUntil(

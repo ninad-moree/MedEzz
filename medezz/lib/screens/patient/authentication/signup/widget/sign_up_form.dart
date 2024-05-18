@@ -64,12 +64,7 @@ class _SignupFormPatientState extends State<SignupFormPatient> {
                 borderRadius: BorderRadius.circular(8.0),
               ),
               suffixIcon: IconButton(
-                onPressed: () {
-                  // log("pressed");
-                  // setState(() {
-                  //   isObscured = !isObscured;
-                  // });
-                },
+                onPressed: () {},
                 icon: Icon(
                   isObscured == true ? Iconsax.eye_slash : Iconsax.eye,
                 ),

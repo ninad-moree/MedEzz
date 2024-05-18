@@ -20,10 +20,6 @@ class _DoctorDetailPageState extends State<DoctorDetailPage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        // appBar: AppBar(
-        //   iconTheme: const IconThemeData(color: Colors.white),
-        //   backgroundColor: CustomColors.primaryColor,
-        // ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.only(bottom: 32),
           child: Column(

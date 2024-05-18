@@ -134,15 +134,9 @@ class _NotificationFormState extends State<NotificationForm> {
 
               // Frequency
               Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 15,
-                  vertical: 10,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.black,
-                    width: 1.0,
-                  ),
+                  border: Border.all(color: Colors.black, width: 1.0),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: Row(
@@ -164,9 +158,7 @@ class _NotificationFormState extends State<NotificationForm> {
                         width: 40,
                         padding: const EdgeInsets.all(8.0),
                         decoration: BoxDecoration(
-                          color: _selectedDays.contains(index)
-                              ? CustomColors.primaryColor
-                              : Colors.white,
+                          color: _selectedDays.contains(index) ? CustomColors.primaryColor : Colors.white,
                           shape: BoxShape.circle,
                         ),
                         child: Center(
@@ -174,9 +166,7 @@ class _NotificationFormState extends State<NotificationForm> {
                             _frequencyOptions[index],
                             style: TextStyle(
                               // color: Colors.white,
-                              color: _selectedDays.contains(index)
-                                  ? Colors.white
-                                  : CustomColors.primaryColor,
+                              color: _selectedDays.contains(index) ? Colors.white : CustomColors.primaryColor,
                               fontWeight: FontWeight.bold,
                             ),
                           ),

@@ -70,9 +70,7 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
                 const Text('Select Date:'),
                 ElevatedButton(
                   onPressed: () => _selectDate(context),
-                  child: Text(showDateTime
-                      ? DateFormat('dd / MM / yyyy').format(_selectedDate)
-                      : 'Select Date'),
+                  child: Text(showDateTime ? DateFormat('dd / MM / yyyy').format(_selectedDate) : 'Select Date'),
                 ),
               ],
             ),
@@ -85,9 +83,7 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
                 const Text('Select Time:'),
                 ElevatedButton(
                   onPressed: () => _selectTime(context),
-                  child: Text(showDateTime
-                      ? "${_selectedTime.hour} : ${_selectedTime.minute}"
-                      : 'Select Time'),
+                  child: Text(showDateTime ? "${_selectedTime.hour} : ${_selectedTime.minute}" : 'Select Time'),
                 ),
               ],
             ),
@@ -133,13 +129,11 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () async {
-                _selectedDate = _selectedDate.add(Duration(
-                    hours: _selectedTime.hour, minutes: _selectedTime.minute));
+                _selectedDate = _selectedDate.add(Duration(hours: _selectedTime.hour, minutes: _selectedTime.minute));
                 log('Date: $_selectedDate');
                 log('Duration: $_durationInMinutes minutes');
                 log('Is Online: $_isOnline');
-                int response = await bookAppointment(widget.doctorId,
-                    _selectedDate, _durationInMinutes, _isOnline);
+                int response = await bookAppointment(widget.doctorId, _selectedDate, _durationInMinutes, _isOnline);
                 if (response == 200 || response == 201) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(

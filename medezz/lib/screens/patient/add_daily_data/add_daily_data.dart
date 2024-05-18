@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:medezz/screens/fitness/screens/fitness_controller.dart';
-import 'package:medezz/constants/colors.dart';
 import 'package:medezz/api/patient/analytics/send_data.dart';
+import 'package:medezz/constants/colors.dart';
+import 'package:medezz/screens/fitness/screens/fitness_controller.dart';
 import 'package:medezz/screens/patient/gamification/plant_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -91,9 +91,7 @@ class _DataPageState extends State<DataPage> {
               onChanged: (value) => setState(() => medicineTaken = value!),
             ),
           ),
-          const SizedBox(
-            height: 30,
-          ),
+          const SizedBox(height: 30),
           ElevatedButton(
             onPressed: () async {
               DateTime sessionStartTime = DateTime.now();
@@ -113,8 +111,7 @@ class _DataPageState extends State<DataPage> {
                   weight: double.parse(weight.text),
                   sugarLevel: double.parse(bloodSugarLevel.text),
                   medicineTaken: medicineTaken,
-                  screenTime:
-                      DateTime.now().difference(sessionStartTime).inSeconds,
+                  screenTime: DateTime.now().difference(sessionStartTime).inSeconds,
                 ),
               );
               if (response.statusCode == 200 || response.statusCode == 201) {
@@ -129,10 +126,7 @@ class _DataPageState extends State<DataPage> {
                   elevation: 0,
                   backgroundColor: Colors.transparent,
                 ));
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const PlantScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const PlantScreen()));
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(

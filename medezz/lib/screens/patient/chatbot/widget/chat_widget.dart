@@ -23,8 +23,7 @@ class _ChatbotWidgetState extends State<ChatbotWidget> {
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _textController = TextEditingController();
   final FocusNode _textFieldFocus = FocusNode();
-  final List<({Image? image, String? text, bool fromUser})> _generatedContent =
-      <({Image? image, String? text, bool fromUser})>[];
+  final List<({Image? image, String? text, bool fromUser})> _generatedContent = <({Image? image, String? text, bool fromUser})>[];
   bool _loading = false;
 
   @override
@@ -60,20 +59,12 @@ class _ChatbotWidgetState extends State<ChatbotWidget> {
       contentPadding: const EdgeInsets.all(15),
       hintText: 'Enter a prompt...',
       border: OutlineInputBorder(
-        borderRadius: const BorderRadius.all(
-          Radius.circular(14),
-        ),
-        borderSide: BorderSide(
-          color: Theme.of(context).colorScheme.secondary,
-        ),
+        borderRadius: const BorderRadius.all(Radius.circular(14)),
+        borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: const BorderRadius.all(
-          Radius.circular(14),
-        ),
-        borderSide: BorderSide(
-          color: Theme.of(context).colorScheme.secondary,
-        ),
+        borderRadius: const BorderRadius.all(Radius.circular(14)),
+        borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary),
       ),
     );
 
@@ -131,9 +122,7 @@ class _ChatbotWidgetState extends State<ChatbotWidget> {
                       : null,
                   icon: Icon(
                     Icons.image,
-                    color: _loading
-                        ? Theme.of(context).colorScheme.secondary
-                        : Theme.of(context).colorScheme.primary,
+                    color: _loading ? Theme.of(context).colorScheme.secondary : Theme.of(context).colorScheme.primary,
                   ),
                 ),
                 if (!_loading)
@@ -162,26 +151,16 @@ class _ChatbotWidgetState extends State<ChatbotWidget> {
     });
     try {
       ByteData catBytes = await rootBundle.load('assets/images/bell.png');
-      ByteData sconeBytes =
-          await rootBundle.load('assets/images/ambulance.png');
+      ByteData sconeBytes = await rootBundle.load('assets/images/ambulance.png');
       final content = [
         Content.multi([
           TextPart(message),
-          // The only accepted mime types are image/*.
           DataPart('image/jpeg', catBytes.buffer.asUint8List()),
           DataPart('image/jpeg', sconeBytes.buffer.asUint8List()),
         ])
       ];
-      _generatedContent.add((
-        image: Image.asset("assets/images/cat.jpg"),
-        text: message,
-        fromUser: true
-      ));
-      _generatedContent.add((
-        image: Image.asset("assets/images/scones.jpg"),
-        text: null,
-        fromUser: true
-      ));
+      _generatedContent.add((image: Image.asset("assets/images/cat.jpg"), text: message, fromUser: true));
+      _generatedContent.add((image: Image.asset("assets/images/scones.jpg"), text: null, fromUser: true));
 
       var response = await _visionModel.generateContent(content);
       var text = response.text;

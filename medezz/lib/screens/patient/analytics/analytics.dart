@@ -17,30 +17,16 @@ class AnalyticsScreen extends StatefulWidget {
 
 class _AnalyticsScreenState extends State<AnalyticsScreen> {
   List<Appointment1> appointments = [
-    Appointment1(
-      date: DateTime.now(),
-      doctor: '',
-      notes: '',
-    ),
+    Appointment1(date: DateTime.now(), doctor: '', notes: ''),
   ];
 
-  List<Medication> medications = [
-    Medication(name: '', dosage: '', frequency: '', issuedOn: DateTime.now()),
-  ];
+  List<Medication> medications = [Medication(name: '', dosage: '', frequency: '', issuedOn: DateTime.now())];
 
   List<Reminder> remainders = [
-    Reminder(
-      medicine: '',
-      timing: [''],
-      startDate: DateTime.now(),
-      endDate: DateTime.now(),
-      declinedOn: [DateTime.now()],
-    )
+    Reminder(medicine: '', timing: [''], startDate: DateTime.now(), endDate: DateTime.now(), declinedOn: [DateTime.now()])
   ];
 
-  List<TestResult> testResult = [
-    TestResult(testName: '', testDate: DateTime.now(), testResult: ''),
-  ];
+  List<TestResult> testResult = [TestResult(testName: '', testDate: DateTime.now(), testResult: '')];
 
   List<AnalyticsData> analData = [
     AnalyticsData(
@@ -73,12 +59,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
     gender: 'Male',
     contactNumber: '',
     email: '',
-    address: Address(
-      street: '',
-      city: '',
-      state: '',
-      zipCode: '',
-    ),
+    address: Address(street: '', city: '', state: '', zipCode: ''),
     healthConditions: [],
     medications: medications,
     appointments: appointments,
@@ -220,10 +201,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
               const SizedBox(height: 10),
               const Text(
                 'Steps Walked',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               SizedBox(
                 height: 300,
@@ -243,10 +221,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
               const SizedBox(height: 10),
               const Text(
                 'Medicine Taken',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               SizedBox(
                 height: 300,
@@ -256,11 +231,8 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                   series: <CartesianSeries>[
                     BarSeries<ChartData2, String>(
                       dataSource: getBooleanChartData(),
-
                       xValueMapper: (ChartData2 data, _) => data.x,
                       yValueMapper: (ChartData2 data, _) => data.y.toDouble(),
-
-                      // Customize appearance if needed
                       dataLabelSettings: const DataLabelSettings(isVisible: true),
                     )
                   ],
@@ -269,10 +241,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
               const SizedBox(height: 10),
               const Text(
                 'Calories Intake Graph',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 10),
               SizedBox(
@@ -293,10 +262,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
               const SizedBox(height: 10),
               const Text(
                 'Calories Burned Graph',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               SizedBox(
                 height: 300,
@@ -316,10 +282,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
               const SizedBox(height: 10),
               const Text(
                 'Water Intake',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               SizedBox(
                 height: 300,

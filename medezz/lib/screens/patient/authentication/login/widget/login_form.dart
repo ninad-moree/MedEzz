@@ -25,11 +25,6 @@ class LoginFormPatient extends StatelessWidget {
       prefs.setString('token', token);
     }
 
-    // void storePatientId(String id) async {
-    //   SharedPreferences prefs = await SharedPreferences.getInstance();
-    //   prefs.setString('patientId', id);
-    // }
-
     return Form(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 32),
@@ -65,29 +60,6 @@ class LoginFormPatient extends StatelessWidget {
             ),
 
             const SizedBox(height: 8),
-
-            // REMEMBER ME, FORGET PASSWORD
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: [
-            //     // REMEMBER ME
-            //     Row(
-            //       children: [
-            //         Checkbox(
-            //           value: false,
-            //           onChanged: (value) {},
-            //         ),
-            //         const Text("Remember Me"),
-            //       ],
-            //     ),
-
-            //     // FORGET PASSWORD
-            //     TextButton(
-            //       onPressed: () {}, // to forgot pwd screen
-            //       child: const Text("Forgot Password"),
-            //     ),
-            //   ],
-            // ),
             const SizedBox(height: 32),
 
             // SIGN IN BUTTON

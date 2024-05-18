@@ -85,13 +85,10 @@ class _PatientFormScreenState extends State<PatientFormScreen> {
                   const SizedBox(width: 16),
                   Expanded(
                     child: TextFormField(
-                      // decoration: const InputDecoration(labelText: 'Last Name'),
                       decoration: InputDecoration(
                         labelText: "Last Name",
                         prefixIcon: const Icon(Iconsax.user_edit),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -111,9 +108,7 @@ class _PatientFormScreenState extends State<PatientFormScreen> {
                 decoration: InputDecoration(
                   labelText: "Gender",
                   prefixIcon: const Icon(Iconsax.user_edit),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -150,9 +145,7 @@ class _PatientFormScreenState extends State<PatientFormScreen> {
                 decoration: InputDecoration(
                   labelText: "Number",
                   prefixIcon: const Icon(Iconsax.user_edit),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
                 ),
                 keyboardType: TextInputType.phone,
                 validator: (value) {
@@ -174,9 +167,6 @@ class _PatientFormScreenState extends State<PatientFormScreen> {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
-                // decoration: const InputDecoration(
-                //   labelText: "Health Condition ( ',' separated)",
-                // ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter your health condition';
@@ -254,59 +244,6 @@ class _PatientFormScreenState extends State<PatientFormScreen> {
                   ),
                 ),
               ),
-              // ElevatedButton(
-              //   onPressed: () async {
-              //     if (_formKey.currentState!.validate()) {
-              //       _formKey.currentState!.save();
-              //       // Handle form submission here
-              //       log('Form submitted!');
-              //       log('First Name: $_firstName');
-              //       log('Last Name: $_lastName');
-              //       log('Gender: $_gender');
-              //       log('Age: $_age');
-              //       log('Number: $_number');
-              //       log('Email: ${profile.email}');
-              //       log('Health Condition: $_healthCondition');
-
-              //       int res = await addPatientDetails(
-              //         _firstName,
-              //         _lastName,
-              //         _gender,
-              //         _age,
-              //         _number,
-              //         profile.email,
-              //         _healthCondition,
-              //       );
-
-              //       if (res == 200 || res == 201) {
-              //         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              //           content: ShowCustomSnackBar(
-              //             title: "Patient Details Added",
-              //             label: "",
-              //             color: Colors.green,
-              //             icon: Icons.done_outlined,
-              //           ),
-              //           behavior: SnackBarBehavior.floating,
-              //           elevation: 0,
-              //           backgroundColor: Colors.transparent,
-              //         ));
-              //       } else {
-              //         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              //           content: ShowCustomSnackBar(
-              //             title: "Something Went Wrong",
-              //             label: "",
-              //             color: Colors.red,
-              //             icon: Icons.warning_rounded,
-              //           ),
-              //           behavior: SnackBarBehavior.floating,
-              //           elevation: 0,
-              //           backgroundColor: Colors.transparent,
-              //         ));
-              //       }
-              //     }
-              //   },
-              //   child: const Text('Submit'),
-              // ),
             ],
           ),
         ),

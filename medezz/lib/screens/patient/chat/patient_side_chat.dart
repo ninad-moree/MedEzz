@@ -3,12 +3,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:medezz/api/patient/doctors/fetchdoctors.dart';
-import 'package:medezz/screens/patient/chat/model/message.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../api/patient/profile/view_profile.dart';
 import 'package:web_socket_channel/io.dart';
 
+import '../../../api/patient/doctors/fetchdoctors.dart';
+import '../../../api/patient/profile/view_profile.dart';
+import 'model/message.dart';
 import 'widgets/message_bubble.dart';
 
 class PatientSideChatPage extends StatefulWidget {
