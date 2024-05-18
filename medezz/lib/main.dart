@@ -1,14 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
-import 'package:medezz/api/patient/profile/view_profile.dart';
-import 'package:medezz/constants/api_constants.dart';
-import 'package:medezz/screens/onboarding/on_boarding.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 import 'package:zego_uikit_signaling_plugin/zego_uikit_signaling_plugin.dart';
 
+import 'api/patient/profile/view_profile.dart';
+import 'constants/api_constants.dart';
 import 'firebase_options.dart';
+import 'screens/onboarding/on_boarding.dart';
 import 'screens/patient/notifications/Services/notification_services.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
@@ -31,8 +31,6 @@ void main() async {
   });
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
-  // runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -48,8 +46,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late PatientProfile patientProfile =
-      PatientProfile(username: '', email: '', id: '');
+  late PatientProfile patientProfile = PatientProfile(username: '', email: '', id: '');
 
   @override
   void initState() {
@@ -65,12 +62,9 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         useMaterial3: true,
         scaffoldBackgroundColor: const Color.fromRGBO(241, 250, 251, 1),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color.fromARGB(255, 241, 250, 251),
-        ),
+        appBarTheme: const AppBarTheme(backgroundColor: Color.fromARGB(255, 241, 250, 251)),
         colorSchemeSeed: const Color.fromRGBO(7, 82, 96, 1),
       ),
-      // home: const OnBoardingScreen(),
       initialRoute: '/',
       routes: {'/': (context) => const OnBoardingScreen()},
       builder: (BuildContext context, Widget? child) {
@@ -80,8 +74,6 @@ class _MyAppState extends State<MyApp> {
         return Stack(
           children: [
             child!,
-
-            //  support minimizing
             ZegoUIKitPrebuiltCallMiniOverlayPage(
               contextQuery: () {
                 return widget.navigatorKey.currentState!.context;
