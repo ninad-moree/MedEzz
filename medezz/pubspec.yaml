@@ -59,12 +59,10 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/audio/
     - assets/icons/
     - assets/images/
     - assets/icon_small.png
     - assets/icon.png
-    - assets/user.png
     - assets/
     - assets/images/doctors/
     - assets/images/doctor_categories/
