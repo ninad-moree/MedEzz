@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:medezz/api/patient/doctors/fetchdoctors.dart';
+
+import '../api/patient/doctors/fetchdoctors.dart';
 
 class DoctorCategoryModel {
   final List<Doctors> doctorList;
