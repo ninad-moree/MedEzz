@@ -88,8 +88,7 @@ class DoctorPatient extends StatelessWidget {
                     height: 55,
                     child: ElevatedButton(
                       onPressed: () async {
-                        SharedPreferences prefs =
-                            await SharedPreferences.getInstance();
+                        SharedPreferences prefs = await SharedPreferences.getInstance();
                         bool? isLogin = prefs.getBool('isLoggedIn') ?? false;
 
                         if (isLogin) {
@@ -108,13 +107,6 @@ class DoctorPatient extends StatelessWidget {
                             ),
                           );
                         }
-
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => const LoginScreenPatient(),
-                        //   ),
-                        // );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromRGBO(7, 82, 96, 1),
