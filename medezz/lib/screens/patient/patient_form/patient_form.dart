@@ -185,7 +185,6 @@ class _PatientFormScreenState extends State<PatientFormScreen> {
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
-                      // Handle form submission here
                       log('Form submitted!');
                       log('First Name: $_firstName');
                       log('Last Name: $_lastName');

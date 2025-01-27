@@ -25,7 +25,6 @@ class AppointmentListTile extends StatefulWidget {
 }
 
 class _AppointmentListTileState extends State<AppointmentListTile> {
-  // DateTime _selectedDate = DateTime.now();
   DateTime selectedDate = DateTime.now();
 
   @override
@@ -196,7 +195,6 @@ class _AppointmentListTileState extends State<AppointmentListTile> {
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
-                            // return const AddMedicationDialog();
                             return Dialog(
                               child: Container(
                                 padding: const EdgeInsets.all(16.0),
@@ -314,7 +312,6 @@ class _AppointmentListTileState extends State<AppointmentListTile> {
                               content: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
-                                  // const Text('Please select a date:'),
                                   const SizedBox(height: 20),
                                   SizedBox(
                                     width: 130,
@@ -451,7 +448,6 @@ class _AppointmentListTileState extends State<AppointmentListTile> {
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(backgroundColor: CustomColors.primaryColor),
                                   onPressed: () async {
-                                    // Save the thresholds or perform any other action
                                     int res = await addThreshold(
                                       widget.appointment.patientId,
                                       thresholds.water,

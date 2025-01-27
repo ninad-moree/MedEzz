@@ -155,14 +155,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     height: 50,
                     width: 140,
                     child: TextButton(
-                      // onPressed: widget.showSignInScreen,
                       onPressed: () {
-                        // Navigator.pushReplacement(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => const LoginScreen(),
-                        //   ),
-                        // );
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
@@ -234,14 +227,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           height: 50,
                           width: 140,
                           child: FilledButton(
-                            // onPressed: widget.showSignInScreen,
                             onPressed: () {
-                              // Navigator.pushReplacement(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) => const LoginScreen(),
-                              //   ),
-                              // );
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(

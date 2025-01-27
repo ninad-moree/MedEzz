@@ -165,7 +165,6 @@ class _NotificationFormState extends State<NotificationForm> {
                           child: Text(
                             _frequencyOptions[index],
                             style: TextStyle(
-                              // color: Colors.white,
                               color: _selectedDays.contains(index) ? Colors.white : CustomColors.primaryColor,
                               fontWeight: FontWeight.bold,
                             ),

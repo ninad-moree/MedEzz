@@ -99,7 +99,6 @@ class _DoctorDetailPageState extends State<DoctorDetailPage> {
                         ],
                       ),
                     ),
-                    // const SizedBox(height: 32),
                   ],
                 ),
               ),
@@ -118,7 +117,6 @@ class _DoctorDetailPageState extends State<DoctorDetailPage> {
       child: Stack(
         children: [
           Positioned(
-            // right: 0,
             left: 90,
             bottom: 0,
             child: SizedBox(

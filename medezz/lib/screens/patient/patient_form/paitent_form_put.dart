@@ -199,7 +199,6 @@ class _PatientFormPutState extends State<PatientFormPut> {
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
-                      // Handle form submission here
                       log('Form submitted!');
 
                       log('Age: $_age');
@@ -208,7 +207,6 @@ class _PatientFormPutState extends State<PatientFormPut> {
                       log('Health Condition: $_healthCondition');
 
                       int res = await putPatientDetails(
-                        // profile.id,
                         patientDetails.id,
                         _age,
                         _number,

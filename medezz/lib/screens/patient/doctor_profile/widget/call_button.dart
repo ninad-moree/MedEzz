@@ -171,7 +171,6 @@ class CallButton extends StatelessWidget {
     }
 
     return Row(
-      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Container(
