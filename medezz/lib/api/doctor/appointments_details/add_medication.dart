@@ -12,8 +12,7 @@ Future<int> addMedication(String patientId, List<Medication> medication) async {
   Map<String, dynamic> requestBody = {'medications': medication};
 
   final http.Response response = await http.post(
-    Uri.parse(
-        "https://healthlink-backend.onrender.com/patient/$patientId/medication"),
+    Uri.parse("https://healthlink-backend.onrender.com/patient/$patientId/medication"),
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $token',

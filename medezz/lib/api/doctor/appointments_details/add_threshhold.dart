@@ -50,8 +50,7 @@ Future<int> addThreshold(String patientId, dynamic water, dynamic calories, dyna
   };
 
   final http.Response response = await http.post(
-    Uri.parse(
-        "https://healthlink-backend.onrender.com/doctor/analytics_thresholds/$patientId"),
+    Uri.parse("https://healthlink-backend.onrender.com/doctor/analytics_thresholds/$patientId"),
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $token',

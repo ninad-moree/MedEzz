@@ -15,8 +15,7 @@ Future<int> addNotes(String notes, String appointmentId, String patientId) async
   };
 
   final http.Response response = await http.post(
-    Uri.parse(
-        "https://healthlink-backend.onrender.com/doctor/appointment-notes"),
+    Uri.parse("https://healthlink-backend.onrender.com/doctor/appointment-notes"),
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $token',

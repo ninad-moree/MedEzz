@@ -15,9 +15,7 @@ Future<int> rescheduleAppointment(DateTime newdate, String appointmentId, String
   };
 
   final http.Response response = await http.put(
-    Uri.parse(
-      "https://healthlink-backend.onrender.com/doctor/appointmentUpdate",
-    ),
+    Uri.parse("https://healthlink-backend.onrender.com/doctor/appointmentUpdate"),
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $token',
