@@ -8,17 +8,17 @@ class NotificationService {
   Future<void> initNotification() async {
     AndroidInitializationSettings initializationSettingsAndroid = const AndroidInitializationSettings('icon_small');
 
-    var initializationSettingsIOS = DarwinInitializationSettings(
+    var initializationSettingsIOS = const DarwinInitializationSettings(
       requestAlertPermission: true,
       requestBadgePermission: true,
       requestSoundPermission: true,
-      onDidReceiveLocalNotification: (int id, String? title, String? body, String? payload) async {},
+      // onDidReceiveLocalNotification: (int id, String? title, String? body, String? payload) async {},
     );
 
     var initializationSettings = InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
 
     await notificationsPlugin.initialize(
-      initializationSettings,
+      settings: initializationSettings,
       onDidReceiveNotificationResponse: (NotificationResponse notificationResponse) async {},
     );
   }
@@ -42,10 +42,10 @@ class NotificationService {
       schedule.difference(DateTime.now()),
       () async {
         await notificationsPlugin.show(
-          id,
-          title ?? 'Medication Reminder',
-          "It's time to take $medicationName!",
-          await notificationDetails(),
+          id: id,
+          title: title ?? 'Medication Reminder',
+          body: "It's time to take $medicationName!",
+          notificationDetails: await notificationDetails(),
           payload: payLoad,
         );
       },
